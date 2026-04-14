@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, type Easing } from "framer-motion";
 import AuroraBackground from "./AuroraBackground";
 import PhoneMockup from "./PhoneMockup";
 import Navbar from "./Navbar";
@@ -12,7 +12,7 @@ const fadeInUp = {
   initial: { opacity: 0, y: 40 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, margin: "-100px" },
-  transition: { duration: 0.8, ease: "easeOut" },
+  transition: { duration: 0.8, ease: "easeOut" as Easing },
 };
 
 const LandingPage = () => {
