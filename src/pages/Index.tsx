@@ -1,16 +1,17 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import HeroVideo from "@/components/HeroVideo";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
-    </div>
+    <main>
+      <HeroVideo />
+      <section className="relative z-10 bg-background py-32 px-6">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl font-bold text-foreground mb-4">Continue Below</h2>
+          <p className="text-muted-foreground">The rest of your content lives here.</p>
+        </div>
+      </section>
+    </main>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;
