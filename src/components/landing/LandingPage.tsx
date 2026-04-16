@@ -156,34 +156,34 @@ const LandingPage = () => {
           {/* Star field */}
           <StarField scrollProgress={starProgress} />
 
-          {/* Centered phone */}
-          <motion.div
-            className="relative z-10"
-            style={{
-              x: useTransform(phoneX, (v) => `${v}%`),
-              y: useTransform(phoneY, (v) => `${v}%`),
-              rotateY: phoneRotateY,
-              rotateX: phoneRotateX,
-              scale: phoneScale,
-              transformPerspective: 1200,
-            }}
-          >
-            <div className="absolute -inset-20 bg-primary/15 rounded-full blur-[100px]" />
-            <PhoneMockup className="relative z-10 w-[220px] md:w-[260px] lg:w-[280px]">
-              <div className="relative w-full h-full">
-                {screens.map((src, i) => (
-                  <motion.img
-                    key={i}
+          {/* Individual phones — each slides up/out, new enters from bottom */}
+          {screens.map((src, i) => {
+            const pt = phoneTransforms[i];
+            return (
+              <motion.div
+                key={i}
+                className="absolute z-10"
+                style={{
+                  y: useTransform(pt.y, (v) => `${v}vh`),
+                  opacity: pt.opacity,
+                  rotateY: pt.rotateY,
+                  rotateX: pt.rotateX,
+                  scale: pt.scale,
+                  transformPerspective: 1200,
+                }}
+              >
+                <div className="absolute -inset-20 bg-primary/15 rounded-full blur-[100px]" />
+                <PhoneMockup className="relative z-10 w-[220px] md:w-[260px] lg:w-[280px]">
+                  <img
                     src={src}
-                    style={{ opacity: screenOpacities[i] }}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="w-full h-full object-cover"
                     alt=""
                     loading={i === 0 ? undefined : "lazy"}
                   />
-                ))}
-              </div>
-            </PhoneMockup>
-          </motion.div>
+                </PhoneMockup>
+              </motion.div>
+            );
+          })}
 
           {/* Secondary phones — appear during step 3-4 */}
           <motion.div
