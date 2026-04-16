@@ -64,32 +64,29 @@ const LandingPage = () => {
   const auroraHue = useTransform(scrollYProgress, [0, 0.5, 1], [246, 280, 246]);
   const auroraScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.3, 1]);
 
-  // Per-phone Y position and opacity: enter from bottom (100%), sit at center (0%), exit to top (-100%)
+  // Per-phone Y position and opacity: enter from bottom, center, exit to top
   const stepSize = 1 / heroSteps.length;
   const phoneTransforms = heroSteps.map((_, i) => {
     const start = i * stepSize;
-    const enterEnd = start + stepSize * 0.15;
-    const exitStart = start + stepSize * 0.85;
+    const enterEnd = start + stepSize * 0.3;   // 30% of step to enter
+    const exitStart = start + stepSize * 0.7;  // 70% starts exit
     const end = (i + 1) * stepSize;
 
-    // Y: 120vh bottom → 0 center → -120vh top
-    const y = i === 0
-      ? (i === heroSteps.length - 1
-        ? useTransform(scrollYProgress, [start], [0])
-        : useTransform(scrollYProgress, [start, exitStart, end], [0, 0, -120]))
-      : i === heroSteps.length - 1
-        ? useTransform(scrollYProgress, [start, enterEnd], [120, 0])
-        : useTransform(scrollYProgress, [start, enterEnd, exitStart, end], [120, 0, 0, -120]);
+    let y, opacity;
+    if (i === 0) {
+      // First phone: starts centered, exits up
+      y = useTransform(scrollYProgress, [start, exitStart, end], [0, 0, -120]);
+      opacity = useTransform(scrollYProgress, [start, exitStart, end], [1, 1, 0]);
+    } else if (i === heroSteps.length - 1) {
+      // Last phone: enters from bottom, stays centered
+      y = useTransform(scrollYProgress, [start, enterEnd, end], [120, 0, 0]);
+      opacity = useTransform(scrollYProgress, [start, enterEnd, end], [0, 1, 1]);
+    } else {
+      // Middle phones: enter from bottom → center → exit up
+      y = useTransform(scrollYProgress, [start, enterEnd, exitStart, end], [120, 0, 0, -120]);
+      opacity = useTransform(scrollYProgress, [start, enterEnd, exitStart, end], [0, 1, 1, 0]);
+    }
 
-    const opacity = i === 0
-      ? (i === heroSteps.length - 1
-        ? useTransform(scrollYProgress, [start], [1])
-        : useTransform(scrollYProgress, [start, exitStart, end], [1, 1, 0]))
-      : i === heroSteps.length - 1
-        ? useTransform(scrollYProgress, [start, enterEnd], [0, 1])
-        : useTransform(scrollYProgress, [start, enterEnd, exitStart, end], [0, 1, 1, 0]);
-
-    // Each phone gets its own perspective from keyframes
     const kf = phoneKeyframes[i];
     const rotateY = kf[2];
     const rotateX = kf[3];
