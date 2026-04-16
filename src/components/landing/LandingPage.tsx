@@ -64,22 +64,38 @@ const LandingPage = () => {
   const auroraHue = useTransform(scrollYProgress, [0, 0.5, 1], [246, 280, 246]);
   const auroraScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.3, 1]);
 
-  // Build phone transforms from keyframes
-  const progressPoints = heroSteps.map((_, i) => i / (heroSteps.length - 1));
-  const phoneX = useTransform(scrollYProgress, progressPoints, phoneKeyframes.map((k) => k[0]));
-  const phoneY = useTransform(scrollYProgress, progressPoints, phoneKeyframes.map((k) => k[1]));
-  const phoneRotateY = useTransform(scrollYProgress, progressPoints, phoneKeyframes.map((k) => k[2]));
-  const phoneRotateX = useTransform(scrollYProgress, progressPoints, phoneKeyframes.map((k) => k[3]));
-  const phoneScale = useTransform(scrollYProgress, progressPoints, phoneKeyframes.map((k) => k[4]));
+  // Per-phone Y position and opacity: enter from bottom (100%), sit at center (0%), exit to top (-100%)
+  const stepSize = 1 / heroSteps.length;
+  const phoneTransforms = heroSteps.map((_, i) => {
+    const start = i * stepSize;
+    const enterEnd = start + stepSize * 0.15;
+    const exitStart = start + stepSize * 0.85;
+    const end = (i + 1) * stepSize;
 
-  // Screen opacities - each visible during its step
-  const screenOpacities = screens.map((_, i) => {
-    const start = i / heroSteps.length;
-    const peak = (i + 0.5) / heroSteps.length;
-    const end = (i + 1) / heroSteps.length;
-    if (i === 0) return useTransform(scrollYProgress, [0, peak, end], [1, 1, 0]);
-    if (i === screens.length - 1) return useTransform(scrollYProgress, [start, peak], [0, 1]);
-    return useTransform(scrollYProgress, [start, start + 0.03, end - 0.03, end], [0, 1, 1, 0]);
+    // Y: 120vh bottom → 0 center → -120vh top
+    const y = i === 0
+      ? (i === heroSteps.length - 1
+        ? useTransform(scrollYProgress, [start], [0])
+        : useTransform(scrollYProgress, [start, exitStart, end], [0, 0, -120]))
+      : i === heroSteps.length - 1
+        ? useTransform(scrollYProgress, [start, enterEnd], [120, 0])
+        : useTransform(scrollYProgress, [start, enterEnd, exitStart, end], [120, 0, 0, -120]);
+
+    const opacity = i === 0
+      ? (i === heroSteps.length - 1
+        ? useTransform(scrollYProgress, [start], [1])
+        : useTransform(scrollYProgress, [start, exitStart, end], [1, 1, 0]))
+      : i === heroSteps.length - 1
+        ? useTransform(scrollYProgress, [start, enterEnd], [0, 1])
+        : useTransform(scrollYProgress, [start, enterEnd, exitStart, end], [0, 1, 1, 0]);
+
+    // Each phone gets its own perspective from keyframes
+    const kf = phoneKeyframes[i];
+    const rotateY = kf[2];
+    const rotateX = kf[3];
+    const scale = kf[4];
+
+    return { y, opacity, rotateY, rotateX, scale };
   });
 
   // Text opacities and Y per step
@@ -140,34 +156,34 @@ const LandingPage = () => {
           {/* Star field */}
           <StarField scrollProgress={starProgress} />
 
-          {/* Centered phone */}
-          <motion.div
-            className="relative z-10"
-            style={{
-              x: useTransform(phoneX, (v) => `${v}%`),
-              y: useTransform(phoneY, (v) => `${v}%`),
-              rotateY: phoneRotateY,
-              rotateX: phoneRotateX,
-              scale: phoneScale,
-              transformPerspective: 1200,
-            }}
-          >
-            <div className="absolute -inset-20 bg-primary/15 rounded-full blur-[100px]" />
-            <PhoneMockup className="relative z-10 w-[220px] md:w-[260px] lg:w-[280px]">
-              <div className="relative w-full h-full">
-                {screens.map((src, i) => (
-                  <motion.img
-                    key={i}
+          {/* Individual phones — each slides up/out, new enters from bottom */}
+          {screens.map((src, i) => {
+            const pt = phoneTransforms[i];
+            return (
+              <motion.div
+                key={i}
+                className="absolute z-10"
+                style={{
+                  y: useTransform(pt.y, (v) => `${v}vh`),
+                  opacity: pt.opacity,
+                  rotateY: pt.rotateY,
+                  rotateX: pt.rotateX,
+                  scale: pt.scale,
+                  transformPerspective: 1200,
+                }}
+              >
+                <div className="absolute -inset-20 bg-primary/15 rounded-full blur-[100px]" />
+                <PhoneMockup className="relative z-10 w-[220px] md:w-[260px] lg:w-[280px]">
+                  <img
                     src={src}
-                    style={{ opacity: screenOpacities[i] }}
-                    className="absolute inset-0 w-full h-full object-cover"
+                    className="w-full h-full object-cover"
                     alt=""
                     loading={i === 0 ? undefined : "lazy"}
                   />
-                ))}
-              </div>
-            </PhoneMockup>
-          </motion.div>
+                </PhoneMockup>
+              </motion.div>
+            );
+          })}
 
           {/* Secondary phones — appear during step 3-4 */}
           <motion.div
