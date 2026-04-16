@@ -2,11 +2,15 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, type Easing } from "framer-motion";
 import AuroraBackground from "./AuroraBackground";
 import PhoneMockup from "./PhoneMockup";
+import StarField from "./StarField";
 import Navbar from "./Navbar";
 import screenDashboard from "@/assets/screen-dashboard.jpg";
 import screenEditor from "@/assets/screen-editor.jpg";
 import screenStudio from "@/assets/screen-studio.jpg";
 import screenAudit from "@/assets/screen-audit.jpg";
+import screenTrends from "@/assets/screen-trends.jpg";
+import screenBrand from "@/assets/screen-brand.jpg";
+import screenAnalytics from "@/assets/screen-analytics.jpg";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 40 },
@@ -15,49 +19,102 @@ const fadeInUp = {
   transition: { duration: 0.8, ease: "easeOut" as Easing },
 };
 
+const screens = [
+  screenDashboard,
+  screenTrends,
+  screenEditor,
+  screenStudio,
+  screenBrand,
+  screenAudit,
+  screenAnalytics,
+];
+
+const heroSteps = [
+  { subtitle: "AI Creative Director", title: "Tu Director Creativo de IA" },
+  { subtitle: "Growth Engine", title: "Ángulos de Venta en Segundos" },
+  { subtitle: "Smart Ad Editor", title: "Editor Studio en Tiempo Real" },
+  { subtitle: "AI Visuals", title: "Fondos de Estudio por IA" },
+  { subtitle: "Brand DNA", title: "ADN de Marca Automático" },
+  { subtitle: "Marketing Brain", title: "Auditoría Instantánea de URLs" },
+  { subtitle: "Analytics", title: "Métricas de Alto Rendimiento" },
+];
+
+// Phone position/perspective per step: [x%, y%, rotateY, rotateX, scale]
+const phoneKeyframes = [
+  [0, 0, 0, 0, 1],        // center
+  [15, -2, -12, 3, 0.95],  // right tilt
+  [-10, 3, 8, -2, 1.05],   // left slight
+  [0, -5, -20, 5, 0.9],    // dramatic right perspective
+  [20, 0, 15, 0, 1],       // right
+  [-15, 5, -10, -3, 0.95], // left tilt
+  [0, 0, 0, 0, 1.05],      // center big
+];
+
 const LandingPage = () => {
-  const featuresRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
-    target: featuresRef,
+    target: heroRef,
     offset: ["start start", "end end"],
   });
 
-  // Phone transforms for features section
-  const phoneX = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], [0, 80, 0, -80, 0]);
-  const phoneRotateY = useTransform(scrollYProgress, [0, 0.25, 0.5, 0.75, 1], [0, -15, 0, 15, 0]);
-  const phoneScale = useTransform(scrollYProgress, [0, 0.12, 0.25, 0.37, 0.5, 0.62, 0.75, 0.87, 1], [0.95, 1, 1, 0.88, 0.88, 1.05, 1.05, 1, 1]);
+  // Star field rotation
+  const starProgress = scrollYProgress;
 
-  // Screen opacities
-  const s1O = useTransform(scrollYProgress, [0, 0.05, 0.2, 0.25], [1, 1, 1, 0]);
-  const s2O = useTransform(scrollYProgress, [0.2, 0.3, 0.45, 0.5], [0, 1, 1, 0]);
-  const s3O = useTransform(scrollYProgress, [0.45, 0.55, 0.7, 0.75], [0, 1, 1, 0]);
-  const s4O = useTransform(scrollYProgress, [0.7, 0.8, 0.95, 1], [0, 1, 1, 1]);
+  // Aurora glow transforms
+  const auroraHue = useTransform(scrollYProgress, [0, 0.5, 1], [246, 280, 246]);
+  const auroraScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.3, 1]);
 
-  // Text section transforms
-  const t1O = useTransform(scrollYProgress, [0, 0.05, 0.18, 0.25], [0, 1, 1, 0]);
-  const t1Y = useTransform(scrollYProgress, [0, 0.05, 0.18, 0.25], [30, 0, 0, -30]);
-  const t2O = useTransform(scrollYProgress, [0.22, 0.3, 0.43, 0.5], [0, 1, 1, 0]);
-  const t2Y = useTransform(scrollYProgress, [0.22, 0.3, 0.43, 0.5], [30, 0, 0, -30]);
-  const t3O = useTransform(scrollYProgress, [0.47, 0.55, 0.68, 0.75], [0, 1, 1, 0]);
-  const t3Y = useTransform(scrollYProgress, [0.47, 0.55, 0.68, 0.75], [30, 0, 0, -30]);
-  const t4O = useTransform(scrollYProgress, [0.72, 0.8, 0.93, 1], [0, 1, 1, 1]);
-  const t4Y = useTransform(scrollYProgress, [0.72, 0.8, 0.93, 1], [30, 0, 0, 0]);
+  // Build phone transforms from keyframes
+  const progressPoints = heroSteps.map((_, i) => i / (heroSteps.length - 1));
+  const phoneX = useTransform(scrollYProgress, progressPoints, phoneKeyframes.map((k) => k[0]));
+  const phoneY = useTransform(scrollYProgress, progressPoints, phoneKeyframes.map((k) => k[1]));
+  const phoneRotateY = useTransform(scrollYProgress, progressPoints, phoneKeyframes.map((k) => k[2]));
+  const phoneRotateX = useTransform(scrollYProgress, progressPoints, phoneKeyframes.map((k) => k[3]));
+  const phoneScale = useTransform(scrollYProgress, progressPoints, phoneKeyframes.map((k) => k[4]));
 
-  // Secondary phones
-  const phone2O = useTransform(scrollYProgress, [0.4, 0.5, 0.7, 0.75], [0, 1, 1, 0]);
-  const phone3O = useTransform(scrollYProgress, [0.45, 0.55, 0.7, 0.75], [0, 1, 1, 0]);
+  // Screen opacities - each visible during its step
+  const screenOpacities = screens.map((_, i) => {
+    const start = i / heroSteps.length;
+    const peak = (i + 0.5) / heroSteps.length;
+    const end = (i + 1) / heroSteps.length;
+    if (i === 0) return useTransform(scrollYProgress, [0, peak, end], [1, 1, 0]);
+    if (i === screens.length - 1) return useTransform(scrollYProgress, [start, peak], [0, 1]);
+    return useTransform(scrollYProgress, [start, start + 0.03, end - 0.03, end], [0, 1, 1, 0]);
+  });
 
-  const features = [
-    { title: "Growth Engine", subtitle: "The Spark", desc: "Generación masiva de ángulos de venta basados en tendencias reales. No adivinamos; usamos señales del mercado.", opacity: t1O, y: t1Y },
-    { title: "Smart Ad Editor", subtitle: "Studio Grade", desc: "Editor de alta fidelidad con manipulación de activos 3D, tipografías y sombras en tiempo real.", opacity: t2O, y: t2Y },
-    { title: "Studio Generation", subtitle: "AI Visuals", desc: "Fondos y escenas de producto tipo 'Estudio' generados por IA, basados en el ADN de tu marca.", opacity: t3O, y: t3Y },
-    { title: "Marketing Brain", subtitle: "The Core", desc: "Ingiere cualquier landing page para entender la psicología de la oferta de forma autónoma.", opacity: t4O, y: t4Y },
-  ];
+  // Text opacities and Y per step
+  const textTransforms = heroSteps.map((_, i) => {
+    const start = i / heroSteps.length;
+    const fadeIn = start + 0.02;
+    const hold = start + 0.1;
+    const end = (i + 1) / heroSteps.length;
+    const opacity = i === heroSteps.length - 1
+      ? useTransform(scrollYProgress, [start, fadeIn, hold], [0, 1, 1])
+      : useTransform(scrollYProgress, [start, fadeIn, hold, end], [0, 1, 1, 0]);
+    const y = i === heroSteps.length - 1
+      ? useTransform(scrollYProgress, [start, fadeIn, hold], [40, 0, 0])
+      : useTransform(scrollYProgress, [start, fadeIn, hold, end], [40, 0, 0, -40]);
+    return { opacity, y };
+  });
+
+  // Scroll indicator fade
+  const scrollIndicatorO = useTransform(scrollYProgress, [0, 0.04], [1, 0]);
+
+  // Secondary phones appear at specific steps
+  const phone2O = useTransform(scrollYProgress, [0.35, 0.43, 0.55, 0.58], [0, 1, 1, 0]);
+  const phone3O = useTransform(scrollYProgress, [0.38, 0.46, 0.55, 0.58], [0, 1, 1, 0]);
 
   const agents = [
     { emoji: "🔍", name: "Discovery Agent", subtitle: "Growth Engine", desc: "Escanea tendencias en LinkedIn y Google para encontrar ganchos psicológicos en segundos.", gradient: "from-blue-500/20 to-purple-500/20" },
     { emoji: "🎨", name: "Creative Agent", subtitle: "Visual Engine", desc: "Genera anuncios de alto rendimiento con layouts probados que respetan tu marca.", gradient: "from-purple-500/20 to-pink-500/20" },
     { emoji: "🧠", name: "Audit Agent", subtitle: "Marketing Brain", desc: "Auditorías instantáneas de URLs para detectar fallos y extraer el ADN de marca.", gradient: "from-pink-500/20 to-orange-500/20" },
+  ];
+
+  const features = [
+    { title: "Growth Engine", subtitle: "The Spark", desc: "Generación masiva de ángulos de venta basados en tendencias reales. No adivinamos; usamos señales del mercado.", icon: "⚡" },
+    { title: "Smart Ad Editor", subtitle: "Studio Grade", desc: "Editor de alta fidelidad con manipulación de activos 3D, tipografías y sombras en tiempo real.", icon: "🎨" },
+    { title: "Studio Generation", subtitle: "AI Visuals", desc: "Fondos y escenas de producto tipo 'Estudio' generados por IA, basados en el ADN de tu marca.", icon: "📸" },
+    { title: "Marketing Brain", subtitle: "The Core", desc: "Ingiere cualquier landing page para entender la psicología de la oferta de forma autónoma.", icon: "🧠" },
   ];
 
   const metrics = [
@@ -67,77 +124,121 @@ const LandingPage = () => {
   ];
 
   const problems = [
-    { icon: "⏱️", stat: "3-5 días", label: "Tiempo promedio de creación", sub: "Por cada iteración creativa" },
+    { icon: "⏱️", stat: "3-5 días", label: "Tiempo promedio", sub: "Por cada iteración creativa" },
     { icon: "💸", stat: "$250-500", label: "Costo por ángulo", sub: "Con agencias o freelancers" },
     { icon: "📉", stat: "10x", label: "Más rápido", sub: "Se agota la creatividad" },
   ];
 
   return (
     <div className="relative">
-      <AuroraBackground />
+      <AuroraBackground scrollProgress={scrollYProgress} />
       <Navbar />
 
-      {/* ═══ HERO ═══ */}
-      <section className="min-h-screen flex items-center justify-center relative overflow-hidden px-6 pt-20">
-        <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
+      {/* ═══ IMMERSIVE SCROLL HERO — 7 steps ═══ */}
+      <div ref={heroRef} className="h-[800vh] relative">
+        <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
+          {/* Star field */}
+          <StarField scrollProgress={starProgress} />
+
+          {/* Centered phone */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
+            className="relative z-10"
+            style={{
+              x: useTransform(phoneX, (v) => `${v}%`),
+              y: useTransform(phoneY, (v) => `${v}%`),
+              rotateY: phoneRotateY,
+              rotateX: phoneRotateX,
+              scale: phoneScale,
+              transformPerspective: 1200,
+            }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/5 mb-6">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <span className="text-sm text-primary font-medium">AI-Powered Creative Engine</span>
-            </div>
-            <h1 className="text-5xl md:text-7xl font-extrabold text-foreground tracking-tight mb-6 font-display leading-[1.1]">
-              Tu Director Creativo{" "}
-              <span className="text-primary">de IA</span>
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-lg mb-8 leading-relaxed">
-              Transforma una URL en ángulos de venta y anuncios Pro en segundos. Sin agencias. Sin esperas.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <button className="px-8 py-3.5 bg-primary text-primary-foreground rounded-xl font-semibold text-lg hover:bg-primary/90 transition-all shadow-[0_0_30px_hsl(246_100%_50%/0.4)]">
-                Empezar Gratis
-              </button>
-              <button className="px-8 py-3.5 border border-foreground/20 text-foreground rounded-xl font-semibold text-lg hover:bg-foreground/5 transition-all">
-                Ver Demo
-              </button>
-            </div>
+            <div className="absolute -inset-20 bg-primary/15 rounded-full blur-[100px]" />
+            <PhoneMockup className="relative z-10 w-[220px] md:w-[260px] lg:w-[280px]">
+              <div className="relative w-full h-full">
+                {screens.map((src, i) => (
+                  <motion.img
+                    key={i}
+                    src={src}
+                    style={{ opacity: screenOpacities[i] }}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    alt=""
+                    loading={i === 0 ? undefined : "lazy"}
+                  />
+                ))}
+              </div>
+            </PhoneMockup>
           </motion.div>
 
+          {/* Secondary phones — appear during step 3-4 */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-            className="relative flex justify-center"
+            className="absolute right-[8%] top-[15%] z-5 hidden lg:block"
+            style={{ opacity: phone2O, rotateY: -25, rotateZ: 5, scale: 0.55, transformPerspective: 1200 }}
           >
-            <div className="relative" style={{ animation: "float 6s ease-in-out infinite" }}>
-              <div className="absolute -inset-12 bg-primary/20 rounded-full blur-[80px]" />
-              <PhoneMockup className="relative z-10">
-                <img src={screenDashboard} className="w-full h-full object-cover" alt="Visbly Dashboard" />
-              </PhoneMockup>
-            </div>
+            <PhoneMockup className="w-[180px]">
+              <img src={screenStudio} className="w-full h-full object-cover" alt="" loading="lazy" />
+            </PhoneMockup>
+          </motion.div>
+          <motion.div
+            className="absolute left-[8%] bottom-[12%] z-5 hidden lg:block"
+            style={{ opacity: phone3O, rotateY: 20, rotateZ: -5, scale: 0.5, transformPerspective: 1200 }}
+          >
+            <PhoneMockup className="w-[160px]">
+              <img src={screenEditor} className="w-full h-full object-cover" alt="" loading="lazy" />
+            </PhoneMockup>
+          </motion.div>
+
+          {/* Text overlays — top area */}
+          <div className="absolute top-[12%] md:top-[15%] left-0 right-0 z-20 text-center px-6">
+            {heroSteps.map((step, i) => (
+              <motion.div
+                key={i}
+                className="absolute inset-x-0"
+                style={{ opacity: textTransforms[i].opacity, y: textTransforms[i].y }}
+              >
+                <span className="text-primary font-semibold text-xs md:text-sm uppercase tracking-[0.2em]">
+                  {step.subtitle}
+                </span>
+                <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-foreground mt-2 font-display leading-tight">
+                  {step.title}
+                </h2>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Step dots indicator */}
+          <div className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3">
+            {heroSteps.map((_, i) => {
+              const dotO = useTransform(
+                scrollYProgress,
+                [i / heroSteps.length, (i + 0.5) / heroSteps.length, (i + 1) / heroSteps.length],
+                [0.3, 1, 0.3]
+              );
+              return (
+                <motion.div
+                  key={i}
+                  className="w-1.5 h-1.5 rounded-full bg-primary"
+                  style={{ opacity: dotO }}
+                />
+              );
+            })}
+          </div>
+
+          {/* Scroll indicator */}
+          <motion.div
+            style={{ opacity: scrollIndicatorO }}
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20"
+          >
+            <span className="text-xs text-muted-foreground tracking-widest uppercase">Scroll</span>
+            <motion.div className="w-5 h-7 border-2 border-muted-foreground/40 rounded-full flex justify-center pt-1">
+              <motion.div
+                className="w-1 h-1.5 bg-muted-foreground rounded-full"
+                animate={{ y: [0, 6, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </motion.div>
           </motion.div>
         </div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        >
-          <span className="text-sm text-muted-foreground tracking-widest uppercase">Scroll</span>
-          <motion.div className="w-5 h-8 border-2 border-muted-foreground/50 rounded-full flex justify-center pt-1.5">
-            <motion.div
-              className="w-1 h-2 bg-muted-foreground rounded-full"
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            />
-          </motion.div>
-        </motion.div>
-      </section>
+      </div>
 
       {/* ═══ PROBLEM ═══ */}
       <section className="py-32 px-6 relative">
@@ -151,7 +252,6 @@ const LandingPage = () => {
               La fatiga creativa en Meta y TikTok ocurre 10x más rápido que hace dos años. Mantener el rendimiento exige una rotación constante que hoy es costosa, lenta y humano-dependiente.
             </p>
           </motion.div>
-
           <div className="grid md:grid-cols-3 gap-8">
             {problems.map((item, i) => (
               <motion.div
@@ -172,7 +272,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* ═══ SOLUTION / AGENTS ═══ */}
+      {/* ═══ AGENTS ═══ */}
       <section className="py-32 px-6 relative">
         <div className="max-w-6xl mx-auto">
           <motion.div {...fadeInUp} className="text-center mb-20">
@@ -184,7 +284,6 @@ const LandingPage = () => {
               Tres agentes de IA especializados que trabajan en sincronía para producir creativos de alto rendimiento.
             </p>
           </motion.div>
-
           <div className="grid md:grid-cols-3 gap-8">
             {agents.map((agent, i) => (
               <motion.div
@@ -208,63 +307,34 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* ═══ FEATURES SHOWCASE — scroll-driven ═══ */}
-      <div ref={featuresRef} className="h-[500vh] relative">
-        <div className="sticky top-0 h-screen flex items-center overflow-hidden">
-          <div className="w-full max-w-7xl mx-auto px-6 flex items-center justify-center relative">
-            {/* Text sections — left side */}
-            <div className="absolute left-6 md:left-12 lg:left-20 max-w-sm z-20">
-              {features.map((section, i) => (
-                <motion.div key={i} className="absolute" style={{ opacity: section.opacity, y: section.y }}>
-                  <span className="text-primary font-semibold text-sm uppercase tracking-widest">{section.subtitle}</span>
-                  <h3 className="text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4 font-display">{section.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{section.desc}</p>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Main phone — right side */}
-            <motion.div
-              className="ml-auto mr-0 md:mr-16 relative"
-              style={{
-                x: phoneX,
-                rotateY: phoneRotateY,
-                scale: phoneScale,
-                transformPerspective: 1200,
-              }}
-            >
-              <div className="absolute -inset-16 bg-primary/10 rounded-full blur-[100px]" />
-              <PhoneMockup className="relative z-10 w-[240px] md:w-[280px]">
-                <div className="relative w-full h-full">
-                  <motion.img src={screenDashboard} style={{ opacity: s1O }} className="absolute inset-0 w-full h-full object-cover" alt="" />
-                  <motion.img src={screenEditor} style={{ opacity: s2O }} className="absolute inset-0 w-full h-full object-cover" alt="" loading="lazy" />
-                  <motion.img src={screenStudio} style={{ opacity: s3O }} className="absolute inset-0 w-full h-full object-cover" alt="" loading="lazy" />
-                  <motion.img src={screenAudit} style={{ opacity: s4O }} className="absolute inset-0 w-full h-full object-cover" alt="" loading="lazy" />
-                </div>
-              </PhoneMockup>
-            </motion.div>
-
-            {/* Secondary phones (appear during Studio section) */}
-            <motion.div
-              className="absolute right-[10%] top-[12%] hidden lg:block"
-              style={{ opacity: phone2O, rotateY: -25, rotateZ: 5, scale: 0.65, transformPerspective: 1200 }}
-            >
-              <PhoneMockup className="w-[200px]">
-                <img src={screenStudio} className="w-full h-full object-cover" alt="" loading="lazy" />
-              </PhoneMockup>
-            </motion.div>
-
-            <motion.div
-              className="absolute left-[50%] bottom-[8%] hidden lg:block"
-              style={{ opacity: phone3O, rotateY: 20, rotateZ: -5, scale: 0.6, transformPerspective: 1200 }}
-            >
-              <PhoneMockup className="w-[180px]">
-                <img src={screenEditor} className="w-full h-full object-cover" alt="" loading="lazy" />
-              </PhoneMockup>
-            </motion.div>
+      {/* ═══ FEATURES DETAILED ═══ */}
+      <section className="py-32 px-6 relative">
+        <div className="max-w-5xl mx-auto">
+          <motion.div {...fadeInUp} className="text-center mb-20">
+            <span className="text-primary font-semibold text-sm uppercase tracking-widest">Ecosistema Pro</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mt-4 mb-6 font-display">
+              Funcionalidades
+            </h2>
+          </motion.div>
+          <div className="grid md:grid-cols-2 gap-8">
+            {features.map((feat, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+                className="p-8 rounded-3xl border border-foreground/10 bg-foreground/[0.02] backdrop-blur-sm"
+              >
+                <span className="text-3xl">{feat.icon}</span>
+                <span className="text-primary font-semibold text-xs uppercase tracking-widest ml-3">{feat.subtitle}</span>
+                <h3 className="text-2xl font-bold text-foreground mt-3">{feat.title}</h3>
+                <p className="text-muted-foreground mt-3 leading-relaxed">{feat.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
-      </div>
+      </section>
 
       {/* ═══ METRICS ═══ */}
       <section className="py-32 px-6 relative">
@@ -275,7 +345,6 @@ const LandingPage = () => {
               Métricas de Transformación
             </h2>
           </motion.div>
-
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
