@@ -64,26 +64,38 @@ const LandingPage = () => {
   const auroraHue = useTransform(scrollYProgress, [0, 0.5, 1], [246, 280, 246]);
   const auroraScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.3, 1]);
 
-  // Per-phone motion: overlap each step so the next phone enters from below
+  // Per-phone motion: each phone has a clear HOLD in center, then swaps
+  // Timeline per step: [enter 25%] [HOLD 50%] [exit 25%]
   const stepSize = 1 / heroSteps.length;
   const phoneTransforms = heroSteps.map((_, i) => {
     const start = i * stepSize;
     const end = start + stepSize;
-    const enterStart = Math.max(0, start - stepSize * 0.22);
-    const enterEnd = Math.min(1, start + stepSize * 0.18);
-    const exitStart = Math.max(0, end - stepSize * 0.18);
-    const exitEnd = Math.min(1, end + stepSize * 0.22);
+    // Enter occupies the first 25% of the step, exit the last 25%, hold in the middle 50%
+    const enterStart = start;
+    const enterEnd = start + stepSize * 0.25;
+    const exitStart = end - stepSize * 0.25;
+    const exitEnd = end;
 
     let y, opacity;
     if (i === 0) {
+      // First phone: visible from page top, holds, then exits up
       y = useTransform(scrollYProgress, [0, exitStart, exitEnd], [0, 0, -120]);
-      opacity = useTransform(scrollYProgress, [0, exitStart, exitEnd], [1, 1, 0]);
+      opacity = useTransform(scrollYProgress, [0, exitStart, exitEnd, Math.min(1, exitEnd + 0.001)], [1, 1, 0, 0]);
     } else if (i === heroSteps.length - 1) {
+      // Last phone: enters from below, then stays centered until end
       y = useTransform(scrollYProgress, [enterStart, enterEnd, 1], [120, 0, 0]);
-      opacity = useTransform(scrollYProgress, [enterStart, enterEnd, 1], [0, 1, 1]);
+      opacity = useTransform(scrollYProgress, [Math.max(0, enterStart - 0.001), enterStart, enterEnd, 1], [0, 0, 1, 1]);
     } else {
-      y = useTransform(scrollYProgress, [enterStart, enterEnd, exitStart, exitEnd], [120, 0, 0, -120]);
-      opacity = useTransform(scrollYProgress, [enterStart, enterEnd, exitStart, exitEnd], [0, 1, 1, 0]);
+      y = useTransform(
+        scrollYProgress,
+        [enterStart, enterEnd, exitStart, exitEnd],
+        [120, 0, 0, -120]
+      );
+      opacity = useTransform(
+        scrollYProgress,
+        [Math.max(0, enterStart - 0.001), enterStart, enterEnd, exitStart, exitEnd, Math.min(1, exitEnd + 0.001)],
+        [0, 0, 1, 1, 0, 0]
+      );
     }
 
     const kf = phoneKeyframes[i];
