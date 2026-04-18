@@ -64,37 +64,47 @@ const LandingPage = () => {
   const auroraHue = useTransform(scrollYProgress, [0, 0.5, 1], [246, 280, 246]);
   const auroraScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.3, 1]);
 
-  // Per-phone motion: each phone has a clear HOLD in center, then swaps
-  // Timeline per step: [enter 25%] [HOLD 50%] [exit 25%]
+  // Per-phone motion: one centered mockup per step with a real hold in the middle.
+  // The next phone starts entering slightly before the previous one fully exits.
   const stepSize = 1 / heroSteps.length;
+  const overlap = stepSize * 0.16;
+  const settle = stepSize * 0.18;
+  const release = stepSize * 0.18;
+
   const phoneTransforms = heroSteps.map((_, i) => {
     const start = i * stepSize;
     const end = start + stepSize;
-    // Enter occupies the first 25% of the step, exit the last 25%, hold in the middle 50%
-    const enterStart = start;
-    const enterEnd = start + stepSize * 0.25;
-    const exitStart = end - stepSize * 0.25;
-    const exitEnd = end;
+    const enterStart = i === 0 ? 0 : Math.max(0, start - overlap);
+    const enterEnd = i === 0 ? 0 : Math.min(1, start + settle);
+    const exitStart = i === heroSteps.length - 1 ? 1 : Math.max(0, end - release);
+    const exitEnd = i === heroSteps.length - 1 ? 1 : Math.min(1, end + overlap);
 
     let y, opacity;
+
     if (i === 0) {
-      // First phone: visible from page top, holds, then exits up
-      y = useTransform(scrollYProgress, [0, exitStart, exitEnd], [0, 0, -120]);
-      opacity = useTransform(scrollYProgress, [0, exitStart, exitEnd, Math.min(1, exitEnd + 0.001)], [1, 1, 0, 0]);
+      y = useTransform(scrollYProgress, [0, exitStart, exitEnd], [0, 0, -130]);
+      opacity = useTransform(
+        scrollYProgress,
+        [0, Math.max(0, exitEnd - 0.01), exitEnd],
+        [1, 1, 0]
+      );
     } else if (i === heroSteps.length - 1) {
-      // Last phone: enters from below, then stays centered until end
-      y = useTransform(scrollYProgress, [enterStart, enterEnd, 1], [120, 0, 0]);
-      opacity = useTransform(scrollYProgress, [Math.max(0, enterStart - 0.001), enterStart, enterEnd, 1], [0, 0, 1, 1]);
+      y = useTransform(scrollYProgress, [enterStart, enterEnd, 1], [130, 0, 0]);
+      opacity = useTransform(
+        scrollYProgress,
+        [enterStart, Math.min(1, enterStart + 0.012), 1],
+        [0, 1, 1]
+      );
     } else {
       y = useTransform(
         scrollYProgress,
         [enterStart, enterEnd, exitStart, exitEnd],
-        [120, 0, 0, -120]
+        [130, 0, 0, -130]
       );
       opacity = useTransform(
         scrollYProgress,
-        [Math.max(0, enterStart - 0.001), enterStart, enterEnd, exitStart, exitEnd, Math.min(1, exitEnd + 0.001)],
-        [0, 0, 1, 1, 0, 0]
+        [enterStart, Math.min(1, enterStart + 0.012), Math.max(0, exitEnd - 0.012), exitEnd],
+        [0, 1, 1, 0]
       );
     }
 
