@@ -64,80 +64,79 @@ const LandingPage = () => {
   const auroraHue = useTransform(scrollYProgress, [0, 0.5, 1], [246, 280, 246]);
   const auroraScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.3, 1]);
 
-  // Per-phone motion: one centered mockup per step with a real hold in the middle.
-  // The next phone starts entering slightly before the previous one fully exits.
   const stepSize = 1 / heroSteps.length;
-  const overlap = stepSize * 0.16;
-  const settle = stepSize * 0.18;
-  const release = stepSize * 0.18;
-
-  const phoneTransforms = heroSteps.map((_, i) => {
+  const transitionRatio = 0.2;
+  const stepRanges = heroSteps.map((_, i) => {
     const start = i * stepSize;
     const end = start + stepSize;
-    const enterStart = i === 0 ? 0 : Math.max(0, start - overlap);
-    const enterEnd = i === 0 ? 0 : Math.min(1, start + settle);
-    const exitStart = i === heroSteps.length - 1 ? 1 : Math.max(0, end - release);
-    const exitEnd = i === heroSteps.length - 1 ? 1 : Math.min(1, end + overlap);
+    const enterStart = i === 0 ? 0 : Math.max(0, start - stepSize * transitionRatio);
+    const enterEnd = start + stepSize * transitionRatio;
+    const exitStart = end - stepSize * transitionRatio;
+    const exitEnd = i === heroSteps.length - 1 ? 1 : Math.min(1, end + stepSize * transitionRatio);
 
-    let y, opacity;
-
-    if (i === 0) {
-      y = useTransform(scrollYProgress, [0, exitStart, exitEnd], [0, 0, -130]);
-      opacity = useTransform(
-        scrollYProgress,
-        [0, Math.max(0, exitEnd - 0.01), exitEnd],
-        [1, 1, 0]
-      );
-    } else if (i === heroSteps.length - 1) {
-      y = useTransform(scrollYProgress, [enterStart, enterEnd, 1], [130, 0, 0]);
-      opacity = useTransform(
-        scrollYProgress,
-        [enterStart, Math.min(1, enterStart + 0.012), 1],
-        [0, 1, 1]
-      );
-    } else {
-      y = useTransform(
-        scrollYProgress,
-        [enterStart, enterEnd, exitStart, exitEnd],
-        [130, 0, 0, -130]
-      );
-      opacity = useTransform(
-        scrollYProgress,
-        [enterStart, Math.min(1, enterStart + 0.012), Math.max(0, exitEnd - 0.012), exitEnd],
-        [0, 1, 1, 0]
-      );
-    }
-
-    const kf = phoneKeyframes[i];
-    const x = `${kf[0]}vw`;
-    const rotateY = kf[2];
-    const rotateX = kf[3];
-    const scale = kf[4];
-
-    return { x, y, opacity, rotateY, rotateX, scale };
+    return { start, end, enterStart, enterEnd, exitStart, exitEnd };
   });
 
-  // Text opacities and Y per step
+  const phoneTransforms = heroSteps.map((_, i) => {
+    const { enterStart, enterEnd, exitStart, exitEnd } = stepRanges[i];
+    const kf = phoneKeyframes[i];
+
+    const input = i === 0
+      ? [0, exitStart, exitEnd, 1]
+      : i === heroSteps.length - 1
+        ? [0, enterStart, enterEnd, 1]
+        : [0, enterStart, enterEnd, exitStart, exitEnd, 1];
+
+    const yOutput = i === 0
+      ? [0, 0, -135, -135]
+      : i === heroSteps.length - 1
+        ? [135, 135, 0, 0]
+        : [135, 135, 0, 0, -135, -135];
+
+    const opacityOutput = i === 0
+      ? [1, 1, 0, 0]
+      : i === heroSteps.length - 1
+        ? [0, 0, 1, 1]
+        : [0, 0, 1, 1, 0, 0];
+
+    return {
+      x: `${kf[0]}vw`,
+      y: useTransform(scrollYProgress, input, yOutput),
+      opacity: useTransform(scrollYProgress, input, opacityOutput),
+      rotateY: kf[2],
+      rotateX: kf[3],
+      scale: kf[4],
+    };
+  });
+
   const textTransforms = heroSteps.map((_, i) => {
-    const start = i / heroSteps.length;
-    const fadeIn = start + 0.02;
-    const hold = start + 0.1;
-    const end = (i + 1) / heroSteps.length;
-    const opacity = i === heroSteps.length - 1
-      ? useTransform(scrollYProgress, [start, fadeIn, hold], [0, 1, 1])
-      : useTransform(scrollYProgress, [start, fadeIn, hold, end], [0, 1, 1, 0]);
-    const y = i === heroSteps.length - 1
-      ? useTransform(scrollYProgress, [start, fadeIn, hold], [40, 0, 0])
-      : useTransform(scrollYProgress, [start, fadeIn, hold, end], [40, 0, 0, -40]);
-    return { opacity, y };
+    const { enterStart, enterEnd, exitStart, exitEnd } = stepRanges[i];
+    const input = i === 0
+      ? [0, enterEnd, exitStart, exitEnd, 1]
+      : i === heroSteps.length - 1
+        ? [0, enterStart, enterEnd, 1]
+        : [0, enterStart, enterEnd, exitStart, exitEnd, 1];
+
+    const opacityOutput = i === 0
+      ? [1, 1, 1, 0, 0]
+      : i === heroSteps.length - 1
+        ? [0, 0, 1, 1]
+        : [0, 0, 1, 1, 0, 0];
+
+    const yOutput = i === 0
+      ? [0, 0, 0, -32, -32]
+      : i === heroSteps.length - 1
+        ? [24, 24, 0, 0]
+        : [24, 24, 0, 0, -32, -32];
+
+    return {
+      opacity: useTransform(scrollYProgress, input, opacityOutput),
+      y: useTransform(scrollYProgress, input, yOutput),
+    };
   });
 
   // Scroll indicator fade
   const scrollIndicatorO = useTransform(scrollYProgress, [0, 0.04], [1, 0]);
-
-  // Secondary phones appear at specific steps
-  const phone2O = useTransform(scrollYProgress, [0.35, 0.43, 0.55, 0.58], [0, 1, 1, 0]);
-  const phone3O = useTransform(scrollYProgress, [0.38, 0.46, 0.55, 0.58], [0, 1, 1, 0]);
 
   const agents = [
     { emoji: "🔍", name: "Discovery Agent", subtitle: "Growth Engine", desc: "Escanea tendencias en LinkedIn y Google para encontrar ganchos psicológicos en segundos.", gradient: "from-blue-500/20 to-purple-500/20" },
