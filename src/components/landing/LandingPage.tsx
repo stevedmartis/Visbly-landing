@@ -171,7 +171,7 @@ const LandingPage = () => {
       <Navbar />
 
       {/* ═══ IMMERSIVE SCROLL HERO — 7 steps ═══ */}
-      <div ref={heroRef} className="h-[800vh] relative">
+      <div ref={heroRef} className="relative" style={{ height: "800vh" }}>
         <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
           {/* Star field */}
           <StarField scrollProgress={starProgress} />
