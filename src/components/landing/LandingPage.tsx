@@ -204,24 +204,6 @@ const LandingPage = () => {
             );
           })}
 
-          {/* Secondary phones — appear during step 3-4 */}
-          <motion.div
-            className="absolute right-[8%] top-[15%] z-5 hidden lg:block"
-            style={{ opacity: phone2O, rotateY: -25, rotateZ: 5, scale: 0.55, transformPerspective: 1200 }}
-          >
-            <PhoneMockup className="w-[180px]">
-              <img src={screenStudio} className="w-full h-full object-cover" alt="" loading="lazy" />
-            </PhoneMockup>
-          </motion.div>
-          <motion.div
-            className="absolute left-[8%] bottom-[12%] z-5 hidden lg:block"
-            style={{ opacity: phone3O, rotateY: 20, rotateZ: -5, scale: 0.5, transformPerspective: 1200 }}
-          >
-            <PhoneMockup className="w-[160px]">
-              <img src={screenEditor} className="w-full h-full object-cover" alt="" loading="lazy" />
-            </PhoneMockup>
-          </motion.div>
-
           {/* Text overlays — top area */}
           <div className="absolute top-[12%] md:top-[15%] left-0 right-0 z-20 text-center px-6">
             {heroSteps.map((step, i) => (
@@ -243,16 +225,22 @@ const LandingPage = () => {
           {/* Step dots indicator */}
           <div className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3">
             {heroSteps.map((_, i) => {
-              const dotO = useTransform(
-                scrollYProgress,
-                [i / heroSteps.length, (i + 0.5) / heroSteps.length, (i + 1) / heroSteps.length],
-                [0.3, 1, 0.3]
-              );
+              const { enterStart, enterEnd, exitStart, exitEnd } = stepRanges[i];
+              const dotO = i === 0
+                ? useTransform(scrollYProgress, [0, exitStart, exitEnd, 1], [1, 1, 0.25, 0.25])
+                : i === heroSteps.length - 1
+                  ? useTransform(scrollYProgress, [0, enterStart, enterEnd, 1], [0.25, 0.25, 1, 1])
+                  : useTransform(scrollYProgress, [0, enterStart, enterEnd, exitStart, exitEnd, 1], [0.25, 0.25, 1, 1, 0.25, 0.25]);
+              const dotScale = i === 0
+                ? useTransform(scrollYProgress, [0, exitStart, exitEnd, 1], [1.9, 1.9, 1, 1])
+                : i === heroSteps.length - 1
+                  ? useTransform(scrollYProgress, [0, enterStart, enterEnd, 1], [1, 1, 1.9, 1.9])
+                  : useTransform(scrollYProgress, [0, enterStart, enterEnd, exitStart, exitEnd, 1], [1, 1, 1.9, 1.9, 1, 1]);
               return (
                 <motion.div
                   key={i}
                   className="w-1.5 h-1.5 rounded-full bg-primary"
-                  style={{ opacity: dotO }}
+                  style={{ opacity: dotO, scale: dotScale }}
                 />
               );
             })}
