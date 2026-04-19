@@ -64,45 +64,51 @@ const LandingPage = () => {
   const auroraHue = useTransform(scrollYProgress, [0, 0.5, 1], [246, 280, 246]);
   const auroraScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.3, 1]);
 
+  // Each step owns a slot of scroll progress. Inside that slot:
+  //  - first 20%: phone enters from below (y: 135vh -> 0) + fades in
+  //  - middle 60%: phone HELD at center, full opacity
+  //  - last 20%: phone exits upward (y: 0 -> -135vh) + fades out
+  // First/last steps skip their enter/exit so they stay visible at the edges.
   const stepSize = 1 / heroSteps.length;
-  const transitionRatio = 0.2;
+  const transition = stepSize * 0.18;
+  const last = heroSteps.length - 1;
+
   const stepRanges = heroSteps.map((_, i) => {
     const start = i * stepSize;
     const end = start + stepSize;
-    const enterStart = i === 0 ? 0 : Math.max(0, start - stepSize * transitionRatio);
-    const enterEnd = start + stepSize * transitionRatio;
-    const exitStart = end - stepSize * transitionRatio;
-    const exitEnd = i === heroSteps.length - 1 ? 1 : Math.min(1, end + stepSize * transitionRatio);
-
-    return { start, end, enterStart, enterEnd, exitStart, exitEnd };
+    return {
+      start,
+      end,
+      enterStart: i === 0 ? 0 : start,
+      enterEnd: i === 0 ? 0 : start + transition,
+      exitStart: i === last ? 1 : end - transition,
+      exitEnd: i === last ? 1 : end,
+    };
   });
 
   const phoneTransforms = heroSteps.map((_, i) => {
     const { enterStart, enterEnd, exitStart, exitEnd } = stepRanges[i];
     const kf = phoneKeyframes[i];
 
-    const input = i === 0
-      ? [0, exitStart, exitEnd, 1]
-      : i === heroSteps.length - 1
-        ? [0, enterStart, enterEnd, 1]
-        : [0, enterStart, enterEnd, exitStart, exitEnd, 1];
-
-    const yOutput = i === 0
-      ? [0, 0, -135, -135]
-      : i === heroSteps.length - 1
-        ? [135, 135, 0, 0]
-        : [135, 135, 0, 0, -135, -135];
-
-    const opacityOutput = i === 0
-      ? [1, 1, 0, 0]
-      : i === heroSteps.length - 1
-        ? [0, 0, 1, 1]
-        : [0, 0, 1, 1, 0, 0];
+    let input: number[], yOut: number[], opOut: number[];
+    if (i === 0) {
+      input = [0, exitStart, exitEnd, 1];
+      yOut = [0, 0, -135, -135];
+      opOut = [1, 1, 0, 0];
+    } else if (i === last) {
+      input = [0, enterStart, enterEnd, 1];
+      yOut = [135, 135, 0, 0];
+      opOut = [0, 0, 1, 1];
+    } else {
+      input = [0, enterStart, enterEnd, exitStart, exitEnd, 1];
+      yOut = [135, 135, 0, 0, -135, -135];
+      opOut = [0, 0, 1, 1, 0, 0];
+    }
 
     return {
       x: `${kf[0]}vw`,
-      y: useTransform(scrollYProgress, input, yOutput),
-      opacity: useTransform(scrollYProgress, input, opacityOutput),
+      y: useTransform(scrollYProgress, input, yOut),
+      opacity: useTransform(scrollYProgress, input, opOut),
       rotateY: kf[2],
       rotateX: kf[3],
       scale: kf[4],
@@ -111,27 +117,23 @@ const LandingPage = () => {
 
   const textTransforms = heroSteps.map((_, i) => {
     const { enterStart, enterEnd, exitStart, exitEnd } = stepRanges[i];
-    const input = i === 0
-      ? [0, enterEnd, exitStart, exitEnd, 1]
-      : i === heroSteps.length - 1
-        ? [0, enterStart, enterEnd, 1]
-        : [0, enterStart, enterEnd, exitStart, exitEnd, 1];
-
-    const opacityOutput = i === 0
-      ? [1, 1, 1, 0, 0]
-      : i === heroSteps.length - 1
-        ? [0, 0, 1, 1]
-        : [0, 0, 1, 1, 0, 0];
-
-    const yOutput = i === 0
-      ? [0, 0, 0, -32, -32]
-      : i === heroSteps.length - 1
-        ? [24, 24, 0, 0]
-        : [24, 24, 0, 0, -32, -32];
-
+    let input: number[], opOut: number[], yOut: number[];
+    if (i === 0) {
+      input = [0, exitStart, exitEnd, 1];
+      opOut = [1, 1, 0, 0];
+      yOut = [0, 0, -32, -32];
+    } else if (i === last) {
+      input = [0, enterStart, enterEnd, 1];
+      opOut = [0, 0, 1, 1];
+      yOut = [24, 24, 0, 0];
+    } else {
+      input = [0, enterStart, enterEnd, exitStart, exitEnd, 1];
+      opOut = [0, 0, 1, 1, 0, 0];
+      yOut = [24, 24, 0, 0, -32, -32];
+    }
     return {
-      opacity: useTransform(scrollYProgress, input, opacityOutput),
-      y: useTransform(scrollYProgress, input, yOutput),
+      opacity: useTransform(scrollYProgress, input, opOut),
+      y: useTransform(scrollYProgress, input, yOut),
     };
   });
 
