@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import PhoneMockup from "./PhoneMockup";
 import StarField from "./StarField";
+import AdTemplateWall from "./AdTemplateWall";
 import screenDashboard from "@/assets/screen-dashboard.jpg";
 import screenEditor from "@/assets/screen-editor.jpg";
 import screenStudio from "@/assets/screen-studio.jpg";
@@ -72,6 +73,7 @@ const ImmersiveHero = () => {
     <div ref={heroRef} className="relative" style={{ height: `${N * 100}vh` }}>
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         <StarField scrollProgress={scrollYProgress} />
+        <AdTemplateWall scrollProgress={scrollYProgress} />
 
         {/* Single fixed phone — only perspective changes, screen swaps with crossfade */}
         <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
