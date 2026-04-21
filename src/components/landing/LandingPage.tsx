@@ -1,16 +1,8 @@
-import { useRef } from "react";
 import { motion, useScroll, useTransform, type Easing } from "framer-motion";
+import { useRef } from "react";
 import AuroraBackground from "./AuroraBackground";
-import PhoneMockup from "./PhoneMockup";
-import StarField from "./StarField";
+import ImmersiveHero from "./ImmersiveHero";
 import Navbar from "./Navbar";
-import screenDashboard from "@/assets/screen-dashboard.jpg";
-import screenEditor from "@/assets/screen-editor.jpg";
-import screenStudio from "@/assets/screen-studio.jpg";
-import screenAudit from "@/assets/screen-audit.jpg";
-import screenTrends from "@/assets/screen-trends.jpg";
-import screenBrand from "@/assets/screen-brand.jpg";
-import screenAnalytics from "@/assets/screen-analytics.jpg";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 40 },
@@ -19,126 +11,9 @@ const fadeInUp = {
   transition: { duration: 0.8, ease: "easeOut" as Easing },
 };
 
-const screens = [
-  screenDashboard,
-  screenTrends,
-  screenEditor,
-  screenStudio,
-  screenBrand,
-  screenAudit,
-  screenAnalytics,
-];
-
-const heroSteps = [
-  { subtitle: "AI Creative Director", title: "Tu Director Creativo de IA" },
-  { subtitle: "Growth Engine", title: "Ángulos de Venta en Segundos" },
-  { subtitle: "Smart Ad Editor", title: "Editor Studio en Tiempo Real" },
-  { subtitle: "AI Visuals", title: "Fondos de Estudio por IA" },
-  { subtitle: "Brand DNA", title: "ADN de Marca Automático" },
-  { subtitle: "Marketing Brain", title: "Auditoría Instantánea de URLs" },
-  { subtitle: "Analytics", title: "Métricas de Alto Rendimiento" },
-];
-
-// Phone position/perspective per step: [x%, y%, rotateY, rotateX, scale]
-const phoneKeyframes = [
-  [0, 0, 0, 0, 1],        // center
-  [15, -2, -12, 3, 0.95],  // right tilt
-  [-10, 3, 8, -2, 1.05],   // left slight
-  [0, -5, -20, 5, 0.9],    // dramatic right perspective
-  [20, 0, 15, 0, 1],       // right
-  [-15, 5, -10, -3, 0.95], // left tilt
-  [0, 0, 0, 0, 1.05],      // center big
-];
-
 const LandingPage = () => {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end end"],
-  });
-
-  // Star field rotation
-  const starProgress = scrollYProgress;
-
-  // Aurora glow transforms
-  const auroraHue = useTransform(scrollYProgress, [0, 0.5, 1], [246, 280, 246]);
-  const auroraScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.3, 1]);
-
-  // Each step owns a slot of scroll progress. Inside that slot:
-  //  - first 20%: phone enters from below (y: 135vh -> 0) + fades in
-  //  - middle 60%: phone HELD at center, full opacity
-  //  - last 20%: phone exits upward (y: 0 -> -135vh) + fades out
-  // First/last steps skip their enter/exit so they stay visible at the edges.
-  const stepSize = 1 / heroSteps.length;
-  const transition = stepSize * 0.18;
-  const last = heroSteps.length - 1;
-
-  const stepRanges = heroSteps.map((_, i) => {
-    const start = i * stepSize;
-    const end = start + stepSize;
-    return {
-      start,
-      end,
-      enterStart: i === 0 ? 0 : start,
-      enterEnd: i === 0 ? 0 : start + transition,
-      exitStart: i === last ? 1 : end - transition,
-      exitEnd: i === last ? 1 : end,
-    };
-  });
-
-  const phoneTransforms = heroSteps.map((_, i) => {
-    const { enterStart, enterEnd, exitStart, exitEnd } = stepRanges[i];
-    const kf = phoneKeyframes[i];
-
-    let input: number[], yOut: number[], opOut: number[];
-    if (i === 0) {
-      input = [0, exitStart, exitEnd, 1];
-      yOut = [0, 0, -135, -135];
-      opOut = [1, 1, 0, 0];
-    } else if (i === last) {
-      input = [0, enterStart, enterEnd, 1];
-      yOut = [135, 135, 0, 0];
-      opOut = [0, 0, 1, 1];
-    } else {
-      input = [0, enterStart, enterEnd, exitStart, exitEnd, 1];
-      yOut = [135, 135, 0, 0, -135, -135];
-      opOut = [0, 0, 1, 1, 0, 0];
-    }
-
-    return {
-      x: `${kf[0]}vw`,
-      y: useTransform(scrollYProgress, input, yOut),
-      opacity: useTransform(scrollYProgress, input, opOut),
-      rotateY: kf[2],
-      rotateX: kf[3],
-      scale: kf[4],
-    };
-  });
-
-  const textTransforms = heroSteps.map((_, i) => {
-    const { enterStart, enterEnd, exitStart, exitEnd } = stepRanges[i];
-    let input: number[], opOut: number[], yOut: number[];
-    if (i === 0) {
-      input = [0, exitStart, exitEnd, 1];
-      opOut = [1, 1, 0, 0];
-      yOut = [0, 0, -32, -32];
-    } else if (i === last) {
-      input = [0, enterStart, enterEnd, 1];
-      opOut = [0, 0, 1, 1];
-      yOut = [24, 24, 0, 0];
-    } else {
-      input = [0, enterStart, enterEnd, exitStart, exitEnd, 1];
-      opOut = [0, 0, 1, 1, 0, 0];
-      yOut = [24, 24, 0, 0, -32, -32];
-    }
-    return {
-      opacity: useTransform(scrollYProgress, input, opOut),
-      y: useTransform(scrollYProgress, input, yOut),
-    };
-  });
-
-  // Scroll indicator fade
-  const scrollIndicatorO = useTransform(scrollYProgress, [0, 0.04], [1, 0]);
+  const pageRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: pageRef });
 
   const agents = [
     { emoji: "🔍", name: "Discovery Agent", subtitle: "Growth Engine", desc: "Escanea tendencias en LinkedIn y Google para encontrar ganchos psicológicos en segundos.", gradient: "from-blue-500/20 to-purple-500/20" },
@@ -166,104 +41,11 @@ const LandingPage = () => {
   ];
 
   return (
-    <div className="relative">
+    <div ref={pageRef} className="relative">
       <AuroraBackground scrollProgress={scrollYProgress} />
       <Navbar />
 
-      {/* ═══ IMMERSIVE SCROLL HERO — 7 steps ═══ */}
-      <div ref={heroRef} className="relative" style={{ height: "800vh" }}>
-        <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-          {/* Star field */}
-          <StarField scrollProgress={starProgress} />
-
-          {/* Individual phones — each slides up/out, new enters from bottom */}
-          {screens.map((src, i) => {
-            const pt = phoneTransforms[i];
-            return (
-              <div key={i} className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
-                <motion.div
-                  style={{
-                    x: pt.x,
-                    y: useTransform(pt.y, (v) => `${v}vh`),
-                    opacity: pt.opacity,
-                    rotateY: pt.rotateY,
-                    rotateX: pt.rotateX,
-                    scale: pt.scale,
-                    transformPerspective: 1200,
-                  }}
-                >
-                  <div className="absolute -inset-20 bg-primary/15 rounded-full blur-[100px]" />
-                  <PhoneMockup className="relative z-10 w-[220px] md:w-[260px] lg:w-[280px]">
-                    <img
-                      src={src}
-                      className="w-full h-full object-cover"
-                      alt=""
-                      loading={i === 0 ? undefined : "lazy"}
-                    />
-                  </PhoneMockup>
-                </motion.div>
-              </div>
-            );
-          })}
-
-          {/* Text overlays — top area */}
-          <div className="absolute top-[12%] md:top-[15%] left-0 right-0 z-20 text-center px-6">
-            {heroSteps.map((step, i) => (
-              <motion.div
-                key={i}
-                className="absolute inset-x-0"
-                style={{ opacity: textTransforms[i].opacity, y: textTransforms[i].y }}
-              >
-                <span className="text-primary font-semibold text-xs md:text-sm uppercase tracking-[0.2em]">
-                  {step.subtitle}
-                </span>
-                <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-foreground mt-2 font-display leading-tight">
-                  {step.title}
-                </h2>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Step dots indicator */}
-          <div className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3">
-            {heroSteps.map((_, i) => {
-              const { enterStart, enterEnd, exitStart, exitEnd } = stepRanges[i];
-              const dotO = i === 0
-                ? useTransform(scrollYProgress, [0, exitStart, exitEnd, 1], [1, 1, 0.25, 0.25])
-                : i === heroSteps.length - 1
-                  ? useTransform(scrollYProgress, [0, enterStart, enterEnd, 1], [0.25, 0.25, 1, 1])
-                  : useTransform(scrollYProgress, [0, enterStart, enterEnd, exitStart, exitEnd, 1], [0.25, 0.25, 1, 1, 0.25, 0.25]);
-              const dotScale = i === 0
-                ? useTransform(scrollYProgress, [0, exitStart, exitEnd, 1], [1.9, 1.9, 1, 1])
-                : i === heroSteps.length - 1
-                  ? useTransform(scrollYProgress, [0, enterStart, enterEnd, 1], [1, 1, 1.9, 1.9])
-                  : useTransform(scrollYProgress, [0, enterStart, enterEnd, exitStart, exitEnd, 1], [1, 1, 1.9, 1.9, 1, 1]);
-              return (
-                <motion.div
-                  key={i}
-                  className="w-1.5 h-1.5 rounded-full bg-primary"
-                  style={{ opacity: dotO, scale: dotScale }}
-                />
-              );
-            })}
-          </div>
-
-          {/* Scroll indicator */}
-          <motion.div
-            style={{ opacity: scrollIndicatorO }}
-            className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20"
-          >
-            <span className="text-xs text-muted-foreground tracking-widest uppercase">Scroll</span>
-            <motion.div className="w-5 h-7 border-2 border-muted-foreground/40 rounded-full flex justify-center pt-1">
-              <motion.div
-                className="w-1 h-1.5 bg-muted-foreground rounded-full"
-                animate={{ y: [0, 6, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-              />
-            </motion.div>
-          </motion.div>
-        </div>
-      </div>
+      <ImmersiveHero />
 
       {/* ═══ PROBLEM ═══ */}
       <section className="py-32 px-6 relative">
