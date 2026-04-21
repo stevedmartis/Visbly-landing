@@ -73,6 +73,7 @@ const ImmersiveHero = () => {
     <div ref={heroRef} className="relative" style={{ height: `${N * 100}vh` }}>
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         <StarField scrollProgress={scrollYProgress} />
+        <AdTemplateWall scrollProgress={scrollYProgress} />
 
         {/* Single fixed phone — only perspective changes, screen swaps with crossfade */}
         <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
