@@ -89,19 +89,19 @@ const ImmersiveHero = () => {
           >
             <div className="absolute -inset-20 bg-primary/20 rounded-full blur-[120px]" />
             <PhoneMockup className="relative z-10 w-[220px] md:w-[260px] lg:w-[280px]">
-              <div className="relative w-full h-full">
-                <AnimatePresence mode="sync">
-                  <motion.img
-                    key={activeStep}
-                    src={screens[activeStep]}
-                    className="absolute inset-0 w-full h-full object-cover"
+              <div className="relative w-full h-full bg-card">
+                {screens.map((src, i) => (
+                  <img
+                    key={i}
+                    src={src}
                     alt=""
-                    initial={{ opacity: 0, scale: 1.05 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.5, ease: "easeOut" }}
+                    className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out"
+                    style={{ opacity: i === activeStep ? 1 : 0 }}
+                    loading="eager"
+                    decoding="sync"
+                    draggable={false}
                   />
-                </AnimatePresence>
+                ))}
               </div>
             </PhoneMockup>
           </motion.div>
