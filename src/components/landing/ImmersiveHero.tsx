@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import PhoneMockup from "./PhoneMockup";
 import StarField from "./StarField";
+import AdTemplateWall from "./AdTemplateWall";
 import screenDashboard from "@/assets/screen-dashboard.jpg";
 import screenEditor from "@/assets/screen-editor.jpg";
 import screenStudio from "@/assets/screen-studio.jpg";
