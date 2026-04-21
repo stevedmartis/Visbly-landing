@@ -1,16 +1,8 @@
-import { useRef } from "react";
 import { motion, useScroll, useTransform, type Easing } from "framer-motion";
+import { useRef } from "react";
 import AuroraBackground from "./AuroraBackground";
-import PhoneMockup from "./PhoneMockup";
-import StarField from "./StarField";
+import ImmersiveHero from "./ImmersiveHero";
 import Navbar from "./Navbar";
-import screenDashboard from "@/assets/screen-dashboard.jpg";
-import screenEditor from "@/assets/screen-editor.jpg";
-import screenStudio from "@/assets/screen-studio.jpg";
-import screenAudit from "@/assets/screen-audit.jpg";
-import screenTrends from "@/assets/screen-trends.jpg";
-import screenBrand from "@/assets/screen-brand.jpg";
-import screenAnalytics from "@/assets/screen-analytics.jpg";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 40 },
