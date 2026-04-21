@@ -50,20 +50,31 @@ const Row = ({
   );
 
   const baseX = useTransform(scrollProgress, [0, 1], [0, direction * speed]);
-  const x = useTransform(baseX, (v) => `${v}px`);
 
   return (
     <motion.div
       className="absolute left-1/2 flex gap-5 will-change-transform"
       style={{
-        x,
+        x: baseX,
         top: `${yOffset}%`,
         translateX: "-50%",
       }}
     >
-      {items.map((src, i) => (
-        <AdCard key={i} src={src} />
-      ))}
+      {/* Inner track: continuous idle drift, independent of scroll */}
+      <motion.div
+        className="flex gap-5"
+        animate={{ x: direction * -240 }}
+        transition={{
+          duration: 30 + (startIndex % 3) * 6,
+          ease: "linear",
+          repeat: Infinity,
+          repeatType: "loop",
+        }}
+      >
+        {items.map((src, i) => (
+          <AdCard key={i} src={src} />
+        ))}
+      </motion.div>
     </motion.div>
   );
 };
