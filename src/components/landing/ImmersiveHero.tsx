@@ -1,15 +1,14 @@
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent, AnimatePresence } from "framer-motion";
-import PhoneMockup from "./PhoneMockup";
 import StarField from "./StarField";
 import AdTemplateWall from "./AdTemplateWall";
-import screenDashboard from "@/assets/screen-dashboard.jpg";
-import screenEditor from "@/assets/screen-editor.jpg";
-import screenStudio from "@/assets/screen-studio.jpg";
-import screenAudit from "@/assets/screen-audit.jpg";
-import screenTrends from "@/assets/screen-trends.jpg";
-import screenBrand from "@/assets/screen-brand.jpg";
-import screenAnalytics from "@/assets/screen-analytics.jpg";
+import screenDashboard from "@/assets/screen-dashboard.png";
+import screenEditor from "@/assets/screen-editor.png";
+import screenStudio from "@/assets/screen-studio.png";
+import screenAudit from "@/assets/screen-audit.png";
+import screenTrends from "@/assets/screen-trends.png";
+import screenBrand from "@/assets/screen-brand.png";
+import screenAnalytics from "@/assets/screen-analytics.png";
 
 const screens = [
   screenDashboard,
@@ -88,13 +87,13 @@ const ImmersiveHero = () => {
             className="relative"
           >
             <div className="absolute -inset-20 bg-primary/20 rounded-full blur-[120px]" />
-            <div className="relative z-10 w-[220px] md:w-[260px] lg:w-[280px] aspect-[9/19.5]">
+            <div className="relative z-10 w-[320px] md:w-[400px] lg:w-[460px] aspect-square">
               {screens.map((src, i) => (
                 <img
                   key={i}
                   src={src}
                   alt=""
-                  className="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ease-out"
+                  className="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ease-out drop-shadow-2xl"
                   style={{ opacity: i === activeStep ? 1 : 0 }}
                   loading="eager"
                   decoding="sync"
