@@ -88,22 +88,20 @@ const ImmersiveHero = () => {
             className="relative"
           >
             <div className="absolute -inset-20 bg-primary/20 rounded-full blur-[120px]" />
-            <PhoneMockup className="relative z-10 w-[220px] md:w-[260px] lg:w-[280px]">
-              <div className="relative w-full h-full bg-card">
-                {screens.map((src, i) => (
-                  <img
-                    key={i}
-                    src={src}
-                    alt=""
-                    className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ease-out"
-                    style={{ opacity: i === activeStep ? 1 : 0 }}
-                    loading="eager"
-                    decoding="sync"
-                    draggable={false}
-                  />
-                ))}
-              </div>
-            </PhoneMockup>
+            <div className="relative z-10 w-[220px] md:w-[260px] lg:w-[280px] aspect-[9/19.5]">
+              {screens.map((src, i) => (
+                <img
+                  key={i}
+                  src={src}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ease-out"
+                  style={{ opacity: i === activeStep ? 1 : 0 }}
+                  loading="eager"
+                  decoding="sync"
+                  draggable={false}
+                />
+              ))}
+            </div>
           </motion.div>
         </div>
 
