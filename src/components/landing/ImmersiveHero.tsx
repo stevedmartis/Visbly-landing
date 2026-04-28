@@ -21,13 +21,13 @@ const screens = [
 ];
 
 const heroSteps = [
-  { subtitle: "AI Creative Director", title: "Tu Director Creativo de IA" },
-  { subtitle: "Growth Engine", title: "Ángulos de Venta en Segundos" },
-  { subtitle: "Smart Ad Editor", title: "Editor Studio en Tiempo Real" },
-  { subtitle: "AI Visuals", title: "Fondos de Estudio por IA" },
-  { subtitle: "Brand DNA", title: "ADN de Marca Automático" },
-  { subtitle: "Marketing Brain", title: "Auditoría Instantánea de URLs" },
-  { subtitle: "Analytics", title: "Métricas de Alto Rendimiento" },
+  { subtitle: "Vence la Fatiga Creativa", title: "Tu Director Creativo de IA" },
+  { subtitle: "Adiós al Bloqueo", title: "Ángulos de Venta en Segundos" },
+  { subtitle: "Calidad Profesional", title: "Editor Studio de Alta Fidelidad" },
+  { subtitle: "Product Showcase", title: "Fondos de Estudio Infinitos" },
+  { subtitle: "Brand Integrity", title: "ADN de Marca Automatizado" },
+  { subtitle: "Market Intelligence", title: "Auditoría de Landing Pages" },
+  { subtitle: "Escalabilidad", title: "Métricas de Alto Rendimiento" },
 ];
 
 // Per-step perspective: [rotateY, rotateX, scale, xVw]
@@ -86,8 +86,8 @@ const ImmersiveHero = () => {
             }}
             className="relative"
           >
-            <div className="absolute -inset-20 bg-primary/20 rounded-full blur-[120px]" />
-            <div className="relative z-10 w-[320px] md:w-[400px] lg:w-[460px] aspect-square">
+            <div className="absolute -inset-40 bg-primary/20 rounded-full blur-[180px]" />
+            <div className="relative z-10 w-[450px] md:w-[550px] lg:w-[650px] aspect-square">
               {screens.map((src, i) => (
                 <img
                   key={i}
@@ -105,24 +105,33 @@ const ImmersiveHero = () => {
         </div>
 
         {/* Text overlays — crossfade between steps */}
-        <div className="absolute top-[12%] md:top-[15%] left-0 right-0 z-20 text-center px-6 pointer-events-none">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeStep}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.45, ease: "easeOut" }}
+        <AnimatePresence>
+          <motion.div
+            key={activeStep}
+            layout
+            initial={{ opacity: 0, scale: 0.8, y: 30 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 1.2, y: -30 }}
+            transition={{ 
+              duration: 0.8, 
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="flex flex-col items-center absolute inset-0 pt-[8%] md:pt-[10%]"
+          >
+            <motion.span 
+              layout
+              className="inline-block px-5 py-2 rounded-full bg-white/10 border border-white/20 text-white font-bold text-[10px] md:text-xs uppercase tracking-[0.4em] backdrop-blur-md shadow-[0_0_30px_rgba(255,255,255,0.1)]"
             >
-              <span className="text-primary font-semibold text-xs md:text-sm uppercase tracking-[0.2em]">
-                {heroSteps[activeStep].subtitle}
-              </span>
-              <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-foreground mt-2 font-display leading-tight">
-                {heroSteps[activeStep].title}
-              </h2>
-            </motion.div>
-          </AnimatePresence>
-        </div>
+              {heroSteps[activeStep].subtitle}
+            </motion.span>
+            <motion.h2 
+              layout
+              className="text-3xl md:text-5xl lg:text-7xl font-extrabold text-white mt-8 font-display leading-tight drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
+            >
+              {heroSteps[activeStep].title}
+            </motion.h2>
+          </motion.div>
+        </AnimatePresence>
 
         {/* Synchronized dots */}
         <div className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3">

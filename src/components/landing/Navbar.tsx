@@ -9,10 +9,7 @@ const Navbar = () => (
   >
     <div className="max-w-7xl mx-auto flex items-center justify-between">
       <div className="flex items-center gap-2">
-        <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-          <span className="text-primary-foreground font-bold text-sm font-display">V</span>
-        </div>
-        <span className="text-foreground font-bold text-xl font-display">Visbly</span>
+        <img src="/visbly_logo.png" alt="Visbly Logo" className="h-8 w-auto" />
       </div>
       <button className="px-5 py-2 bg-primary/10 border border-primary/30 text-primary rounded-lg font-medium text-sm hover:bg-primary/20 transition-colors backdrop-blur-sm">
         Acceder
