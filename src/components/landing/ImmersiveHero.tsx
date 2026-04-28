@@ -74,64 +74,67 @@ const ImmersiveHero = () => {
         <StarField scrollProgress={scrollYProgress} />
         <AdTemplateWall scrollProgress={scrollYProgress} />
 
-        {/* Single fixed phone — only perspective changes, screen swaps with crossfade */}
-        <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
-          <motion.div
-            style={{
-              x,
-              rotateY,
-              rotateX,
-              scale,
-              transformPerspective: 1200,
-            }}
-            className="relative"
-          >
-            <div className="absolute -inset-40 bg-primary/20 rounded-full blur-[180px]" />
-            <div className="relative z-10 w-[450px] md:w-[550px] lg:w-[650px] aspect-square">
-              {screens.map((src, i) => (
-                <img
-                  key={i}
-                  src={src}
-                  alt=""
-                  className="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ease-out drop-shadow-2xl"
-                  style={{ opacity: i === activeStep ? 1 : 0 }}
-                  loading="eager"
-                  decoding="sync"
-                  draggable={false}
-                />
-              ))}
-            </div>
-          </motion.div>
-        </div>
+        {/* Content Wrapper for side-by-side on Tablet/Desktop, Stacked on Mobile */}
+        <div className="relative z-10 w-full max-w-7xl mx-auto h-full flex flex-col md:flex-row items-center justify-center md:justify-between px-6 md:px-12 pointer-events-none pt-0 md:pt-0">
 
-        {/* Text overlays — crossfade between steps */}
-        <AnimatePresence>
-          <motion.div
-            key={activeStep}
-            layout
-            initial={{ opacity: 0, scale: 0.8, y: 30 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 1.2, y: -30 }}
-            transition={{ 
-              duration: 0.8, 
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            className="flex flex-col items-center absolute inset-0 pt-[8%] md:pt-[10%]"
-          >
-            <motion.span 
-              layout
-              className="inline-block px-5 py-2 rounded-full bg-white/10 border border-white/20 text-white font-bold text-[10px] md:text-xs uppercase tracking-[0.4em] backdrop-blur-md shadow-[0_0_30px_rgba(255,255,255,0.1)]"
+          {/* Text Section — Absolute overlay on mobile, centered on Tablet up */}
+          <div className="w-full md:w-1/2 flex-none md:flex-1 grid grid-cols-1 grid-rows-1 items-center md:items-center z-30 absolute top-20 left-0 right-0 md:relative md:top-0 h-auto md:h-auto">
+            <AnimatePresence initial={false}>
+              <motion.div
+                key={activeStep}
+                initial={{ opacity: 0, x: -20, y: 10 }}
+                animate={{ opacity: 1, x: 0, y: 0 }}
+                exit={{ opacity: 0, x: 20, y: -10 }}
+                transition={{
+                  duration: 0.5,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="col-start-1 row-start-1 flex flex-col items-center md:items-start text-center md:text-left w-full"
+              >
+                <motion.span
+                  className="inline-block px-5 py-2 rounded-full bg-white/10 border border-white/20 text-white font-bold text-[10px] md:text-xs uppercase tracking-[0.4em] backdrop-blur-md"
+                >
+                  {heroSteps[activeStep].subtitle}
+                </motion.span>
+                <motion.h2
+                  className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold text-white mt-4 md:mt-8 font-display leading-tight drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] px-6 md:px-0"
+                >
+                  {heroSteps[activeStep].title}
+                </motion.h2>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Phone Section — Impactful on Desktop, Massive on Mobile */}
+          <div className="w-full md:w-1/2 flex-none md:flex-1 flex items-center justify-center md:justify-end z-20 h-screen md:h-auto pt-[12vh] md:pt-0">
+            <motion.div
+              style={{
+                x: useTransform(xVw, (v) => `calc(${v}vw + (var(--phone-offset, 0px)))`),
+                rotateY,
+                rotateX,
+                scale: useTransform(scale, (s) => s * (window.innerWidth < 768 ? 1.5 : 1)),
+                transformPerspective: 1200,
+              }}
+              className="relative [--phone-offset:0px] md:[--phone-offset:5vw] h-full md:h-auto"
             >
-              {heroSteps[activeStep].subtitle}
-            </motion.span>
-            <motion.h2 
-              layout
-              className="text-3xl md:text-5xl lg:text-7xl font-extrabold text-white mt-8 font-display leading-tight drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
-            >
-              {heroSteps[activeStep].title}
-            </motion.h2>
-          </motion.div>
-        </AnimatePresence>
+              <div className="absolute -inset-40 bg-primary/20 rounded-full blur-[180px]" />
+              <div className="relative z-10 h-[80vh] md:h-auto w-auto md:w-[400px] lg:w-[480px] xl:w-[550px] aspect-[9/19] flex items-center justify-center">
+                {screens.map((src, i) => (
+                  <img
+                    key={i}
+                    src={src}
+                    alt=""
+                    className="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ease-out drop-shadow-2xl"
+                    style={{ opacity: i === activeStep ? 1 : 0 }}
+                    loading="eager"
+                    decoding="sync"
+                    draggable={false}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
 
         {/* Synchronized dots */}
         <div className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3">
