@@ -97,7 +97,7 @@ const ImmersiveHero = () => {
                   {heroSteps[activeStep].subtitle}
                 </motion.span>
                 <motion.h2
-                  className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold text-white mt-4 md:mt-8 font-display leading-tight drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] px-6 md:px-0"
+                  className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold text-white mt-4 md:mt-8 font-display leading-tight drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] px-6 md:px-0"
                 >
                   {heroSteps[activeStep].title}
                 </motion.h2>
