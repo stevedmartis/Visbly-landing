@@ -1,5 +1,6 @@
-import { useRef, useState } from "react";
-import { motion, useScroll, useTransform, useMotionValueEvent, AnimatePresence } from "framer-motion";
+import { useRef, useState, useMemo } from "react";
+import { motion, useScroll, useTransform, useMotionValueEvent, AnimatePresence, type MotionValue } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 import StarField from "./StarField";
 import AdTemplateWall from "./AdTemplateWall";
 import screenDashboard from "@/assets/screen-dashboard.png";
@@ -30,7 +31,6 @@ const heroSteps = [
   { subtitle: "Escalabilidad", title: "Métricas de Alto Rendimiento" },
 ];
 
-// Per-step perspective: [rotateY, rotateX, scale, xVw]
 const perspectives: [number, number, number, number][] = [
   [0, 0, 1, 0],
   [-14, 4, 0.98, 4],
@@ -43,7 +43,62 @@ const perspectives: [number, number, number, number][] = [
 
 const N = heroSteps.length;
 
+const PhoneImage = ({ src, index, scrollYProgress }: { src: string; index: number; scrollYProgress: MotionValue<number> }) => {
+  // Use a strictly increasing range to avoid WAAPI "monotonically non-decreasing" errors
+  const { range, output } = useMemo(() => {
+    const start = index / N;
+    const end = (index + 1) / N;
+    const buffer = 0.05 / N;
+
+    let r = [
+      start - buffer,
+      start,
+      end - buffer,
+      end
+    ];
+
+    let o = [0, 1, 1, 0];
+
+    // Special handling for the first screen to be visible at start
+    if (index === 0) {
+      r = [0, end - buffer, end];
+      o = [1, 1, 0];
+    }
+    // Special handling for the last screen to stay visible at the end
+    else if (index === N - 1) {
+      r = [start - buffer, start, 1];
+      o = [0, 1, 1];
+    }
+
+    // Clamp and ensure strictly increasing
+    const finalR = r.map(v => Math.max(0, Math.min(1, v)));
+    for (let i = 1; i < finalR.length; i++) {
+      if (finalR[i] <= finalR[i - 1]) {
+        finalR[i] = finalR[i - 1] + 0.0001;
+      }
+    }
+
+    return { range: finalR, output: o };
+  }, [index]);
+
+  const opacity = useTransform(scrollYProgress, range, output);
+
+
+  return (
+    <motion.img
+      src={src}
+      alt=""
+      className="absolute inset-0 w-full h-full object-contain drop-shadow-2xl will-change-opacity"
+      style={{ opacity }}
+      loading="eager"
+      decoding="sync"
+      draggable={false}
+    />
+  );
+};
+
 const ImmersiveHero = () => {
+  const isMobile = useIsMobile();
   const heroRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -53,18 +108,21 @@ const ImmersiveHero = () => {
   const [activeStep, setActiveStep] = useState(0);
 
   useMotionValueEvent(scrollYProgress, "change", (v) => {
-    // Clamp to [0, N-1]
     const idx = Math.min(N - 1, Math.max(0, Math.floor(v * N)));
-    setActiveStep(idx);
+    if (idx !== activeStep) {
+      setActiveStep(idx);
+    }
   });
 
-  // Smooth perspective values driven by scroll
-  const stops = Array.from({ length: N }, (_, i) => i / (N - 1));
+  const stops = useMemo(() => Array.from({ length: N }, (_, i) => i / (N - 1)), []);
+
   const rotateY = useTransform(scrollYProgress, stops, perspectives.map((p) => p[0]));
   const rotateX = useTransform(scrollYProgress, stops, perspectives.map((p) => p[1]));
-  const scale = useTransform(scrollYProgress, stops, perspectives.map((p) => p[2]));
+  const scaleValue = useTransform(scrollYProgress, stops, perspectives.map((p) => p[2]));
   const xVw = useTransform(scrollYProgress, stops, perspectives.map((p) => p[3]));
-  const x = useTransform(xVw, (v) => `${v}vw`);
+
+  const responsiveScale = useTransform(scaleValue, (s) => s * (isMobile ? 1.4 : 1));
+  const responsiveX = useTransform(xVw, (v) => `calc(${v}vw + (var(--phone-offset, 0px)))`);
 
   const scrollIndicatorO = useTransform(scrollYProgress, [0, 0.04], [1, 0]);
 
@@ -74,61 +132,54 @@ const ImmersiveHero = () => {
         <StarField scrollProgress={scrollYProgress} />
         <AdTemplateWall scrollProgress={scrollYProgress} />
 
-        {/* Content Wrapper for side-by-side on Tablet/Desktop, Stacked on Mobile */}
         <div className="relative z-10 w-full max-w-7xl mx-auto h-full flex flex-col md:flex-row items-center justify-center md:justify-between px-6 md:px-12 pointer-events-none pt-0 md:pt-0">
 
-          {/* Text Section — Absolute overlay on mobile, centered on Tablet up */}
           <div className="w-full md:w-1/2 flex-none md:flex-1 grid grid-cols-1 grid-rows-1 items-center md:items-center z-30 absolute top-20 left-0 right-0 md:relative md:top-0 h-auto md:h-auto">
-            <AnimatePresence initial={false}>
+            <AnimatePresence initial={false} mode="wait">
               <motion.div
                 key={activeStep}
-                initial={{ opacity: 0, x: -20, y: 10 }}
+                initial={{ opacity: 0, x: -10, y: 5 }}
                 animate={{ opacity: 1, x: 0, y: 0 }}
-                exit={{ opacity: 0, x: 20, y: -10 }}
+                exit={{ opacity: 0, x: 10, y: -5 }}
                 transition={{
-                  duration: 0.5,
+                  duration: 0.4,
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className="col-start-1 row-start-1 flex flex-col items-center md:items-start text-center md:text-left w-full"
+                className="col-start-1 row-start-1 flex flex-col items-center md:items-start text-center md:text-left w-full will-change-transform"
               >
-                <motion.span
+                <span
                   className="inline-block px-5 py-2 rounded-full bg-white/10 border border-white/20 text-white font-bold text-[10px] md:text-xs uppercase tracking-[0.4em] backdrop-blur-md"
                 >
                   {heroSteps[activeStep].subtitle}
-                </motion.span>
-                <motion.h2
+                </span>
+                <h2
                   className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold text-white mt-4 md:mt-8 font-display leading-tight drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] px-6 md:px-0"
                 >
                   {heroSteps[activeStep].title}
-                </motion.h2>
+                </h2>
               </motion.div>
             </AnimatePresence>
           </div>
 
-          {/* Phone Section — Impactful on Desktop, Massive on Mobile */}
           <div className="w-full md:w-1/2 flex-none md:flex-1 flex items-center justify-center md:justify-end z-20 h-screen md:h-auto pt-[12vh] md:pt-0">
             <motion.div
               style={{
-                x: useTransform(xVw, (v) => `calc(${v}vw + (var(--phone-offset, 0px)))`),
+                x: responsiveX,
                 rotateY,
                 rotateX,
-                scale: useTransform(scale, (s) => s * (window.innerWidth < 768 ? 1.5 : 1)),
+                scale: responsiveScale,
                 transformPerspective: 1200,
               }}
-              className="relative [--phone-offset:0px] md:[--phone-offset:5vw] h-full md:h-auto"
+              className="relative [--phone-offset:0px] md:[--phone-offset:5vw] h-full md:h-auto will-change-transform"
             >
-              <div className="absolute -inset-40 bg-primary/20 rounded-full blur-[180px]" />
+              <div className={`absolute -inset-40 bg-primary/20 rounded-full ${isMobile ? 'blur-[80px]' : 'blur-[180px]'} will-change-transform opacity-60`} />
               <div className="relative z-10 h-[80vh] md:h-auto w-auto md:w-[400px] lg:w-[480px] xl:w-[550px] aspect-[9/19] flex items-center justify-center">
                 {screens.map((src, i) => (
-                  <img
+                  <PhoneImage
                     key={i}
                     src={src}
-                    alt=""
-                    className="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ease-out drop-shadow-2xl"
-                    style={{ opacity: i === activeStep ? 1 : 0 }}
-                    loading="eager"
-                    decoding="sync"
-                    draggable={false}
+                    index={i}
+                    scrollYProgress={scrollYProgress}
                   />
                 ))}
               </div>
@@ -136,7 +187,6 @@ const ImmersiveHero = () => {
           </div>
         </div>
 
-        {/* Synchronized dots */}
         <div className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-3">
           {heroSteps.map((_, i) => {
             const active = i === activeStep;
@@ -156,7 +206,6 @@ const ImmersiveHero = () => {
           })}
         </div>
 
-        {/* Scroll indicator */}
         <motion.div
           style={{ opacity: scrollIndicatorO }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20"
@@ -178,3 +227,5 @@ const ImmersiveHero = () => {
 };
 
 export default ImmersiveHero;
+
+

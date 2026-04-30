@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform, type Easing } from "framer-motion";
 import { useRef } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import AuroraBackground from "./AuroraBackground";
 import ImmersiveHero from "./ImmersiveHero";
 import Navbar from "./Navbar";
@@ -12,6 +13,7 @@ const fadeInUp = {
 };
 
 const LandingPage = () => {
+  const isMobile = useIsMobile();
   const pageRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: pageRef });
 
@@ -86,7 +88,7 @@ const LandingPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.15 }}
-                className="group relative p-8 rounded-3xl border border-foreground/10 bg-foreground/[0.02] backdrop-blur-sm overflow-hidden"
+                className={`group relative p-8 rounded-3xl border border-foreground/10 bg-foreground/[0.02] ${isMobile ? '' : 'backdrop-blur-sm'} overflow-hidden`}
               >
                 <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
                   <span className="text-6xl">{item.icon}</span>
@@ -135,7 +137,7 @@ const LandingPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.7, delay: i * 0.2 }}
-                className="group relative p-8 rounded-3xl border border-foreground/10 bg-foreground/[0.02] backdrop-blur-sm hover:border-primary/30 transition-all duration-500"
+                className={`group relative p-8 rounded-3xl border border-foreground/10 bg-foreground/[0.02] ${isMobile ? '' : 'backdrop-blur-sm'} hover:border-primary/30 transition-all duration-500`}
               >
                 <div className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${agent.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                 <div className="relative z-10">
@@ -167,7 +169,7 @@ const LandingPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="p-8 rounded-3xl border border-foreground/10 bg-foreground/[0.02] backdrop-blur-sm"
+                className={`p-8 rounded-3xl border border-foreground/10 bg-foreground/[0.02] ${isMobile ? '' : 'backdrop-blur-sm'}`}
               >
                 <span className="text-3xl">{feat.icon}</span>
                 <span className="text-primary font-semibold text-xs uppercase tracking-widest ml-3">{feat.subtitle}</span>
@@ -193,7 +195,7 @@ const LandingPage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="rounded-3xl border border-foreground/10 bg-foreground/[0.02] backdrop-blur-sm overflow-hidden"
+            className={`rounded-3xl border border-foreground/10 bg-foreground/[0.02] ${isMobile ? '' : 'backdrop-blur-sm'} overflow-hidden`}
           >
             <div className="overflow-x-auto">
               <table className="w-full min-w-[500px]">
@@ -254,7 +256,7 @@ const LandingPage = () => {
       {/* ═══ CTA ═══ */}
       <section className="py-20 px-6 relative">
         <div className="max-w-4xl mx-auto text-center relative">
-          <div className="absolute inset-0 bg-primary/5 rounded-[60px] blur-[100px]" />
+          <div className={`absolute inset-0 bg-primary/5 rounded-[60px] ${isMobile ? 'blur-[40px]' : 'blur-[100px]'}`} />
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -289,3 +291,4 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
+

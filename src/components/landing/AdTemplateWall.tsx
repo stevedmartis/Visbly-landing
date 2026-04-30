@@ -1,5 +1,6 @@
 import { motion, useTransform, type MotionValue } from "framer-motion";
 import { useMemo } from "react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import ad1 from "@/assets/ad-placeholder-1.jpg";
 import ad2 from "@/assets/ad-placeholder-2.jpg";
 import ad3 from "@/assets/ad-placeholder-3.jpg";
@@ -11,12 +12,11 @@ interface AdTemplateWallProps {
   scrollProgress: MotionValue<number>;
 }
 
-// Placeholder ad images — replace these paths with real ad creatives later
 const adImages = [ad1, ad2, ad3, ad4, ad5, ad6];
 
 const AdCard = ({ src }: { src: string }) => (
   <div
-    className="relative rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.45)] border border-white/10 shrink-0"
+    className="relative rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.45)] border border-white/10 shrink-0 bg-secondary/20"
     style={{ width: 160, height: 220 }}
   >
     <img
@@ -60,7 +60,6 @@ const Row = ({
         translateX: "-50%",
       }}
     >
-      {/* Inner track: continuous idle drift, independent of scroll */}
       <motion.div
         className="flex gap-5"
         animate={{ x: direction * -240 }}
@@ -80,13 +79,29 @@ const Row = ({
 };
 
 const AdTemplateWall = ({ scrollProgress }: AdTemplateWallProps) => {
+  const isMobile = useIsMobile();
   const wallRotate = useTransform(scrollProgress, [0, 1], [0, -8]);
   const wallScale = useTransform(scrollProgress, [0, 0.5, 1], [1, 1.05, 1.1]);
+
+  // Reduced rows and cards on mobile for performance
+  const rows = isMobile 
+    ? [
+        { direction: -1 as const, speed: 800, yOffset: 10, startIndex: 0, count: 6 },
+        { direction: 1 as const,  speed: 900, yOffset: 40, startIndex: 2, count: 6 },
+        { direction: -1 as const, speed: 700, yOffset: 70, startIndex: 4, count: 6 },
+      ]
+    : [
+        { direction: -1 as const, speed: 1200, yOffset: -5, startIndex: 0, count: 14 },
+        { direction: 1 as const,  speed: 1400, yOffset: 18, startIndex: 2, count: 14 },
+        { direction: -1 as const, speed: 1100, yOffset: 42, startIndex: 4, count: 14 },
+        { direction: 1 as const,  speed: 1500, yOffset: 66, startIndex: 1, count: 14 },
+        { direction: -1 as const, speed: 1300, yOffset: 88, startIndex: 3, count: 14 },
+      ];
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
       <motion.div
-        className="absolute inset-0"
+        className="absolute inset-0 will-change-transform"
         style={{
           rotate: wallRotate,
           scale: wallScale,
@@ -94,14 +109,19 @@ const AdTemplateWall = ({ scrollProgress }: AdTemplateWallProps) => {
           rotateX: 12,
         }}
       >
-        <Row scrollProgress={scrollProgress} direction={-1} speed={1200} yOffset={-5} startIndex={0} />
-        <Row scrollProgress={scrollProgress} direction={1}  speed={1400} yOffset={18} startIndex={2} />
-        <Row scrollProgress={scrollProgress} direction={-1} speed={1100} yOffset={42} startIndex={4} />
-        <Row scrollProgress={scrollProgress} direction={1}  speed={1500} yOffset={66} startIndex={1} />
-        <Row scrollProgress={scrollProgress} direction={-1} speed={1300} yOffset={88} startIndex={3} />
+        {rows.map((row, i) => (
+          <Row 
+            key={i}
+            scrollProgress={scrollProgress}
+            direction={row.direction}
+            speed={row.speed}
+            yOffset={row.yOffset}
+            startIndex={row.startIndex}
+            count={row.count}
+          />
+        ))}
       </motion.div>
 
-      {/* Radial focus mask — keeps phone the hero */}
       <div
         className="absolute inset-0"
         style={{
@@ -116,3 +136,4 @@ const AdTemplateWall = ({ scrollProgress }: AdTemplateWallProps) => {
 };
 
 export default AdTemplateWall;
+

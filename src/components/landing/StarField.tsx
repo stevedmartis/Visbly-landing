@@ -1,13 +1,17 @@
 import { useMemo } from "react";
 import { motion, type MotionValue, useTransform } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface StarFieldProps {
   scrollProgress?: MotionValue<number>;
 }
 
 const StarField = ({ scrollProgress }: StarFieldProps) => {
+  const isMobile = useIsMobile();
+  
   const stars = useMemo(() => {
-    return Array.from({ length: 80 }, (_, i) => ({
+    const count = isMobile ? 40 : 80;
+    return Array.from({ length: count }, (_, i) => ({
       id: i,
       x: Math.random() * 100,
       y: Math.random() * 100,
@@ -16,7 +20,7 @@ const StarField = ({ scrollProgress }: StarFieldProps) => {
       duration: Math.random() * 3 + 2,
       opacity: Math.random() * 0.6 + 0.1,
     }));
-  }, []);
+  }, [isMobile]);
 
   const rotate = scrollProgress
     ? useTransform(scrollProgress, [0, 1], [0, 45])
@@ -46,3 +50,4 @@ const StarField = ({ scrollProgress }: StarFieldProps) => {
 };
 
 export default StarField;
+
