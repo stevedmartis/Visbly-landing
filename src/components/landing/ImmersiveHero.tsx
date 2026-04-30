@@ -43,60 +43,6 @@ const perspectives: [number, number, number, number][] = [
 
 const N = heroSteps.length;
 
-const PhoneImage = ({ src, index, scrollYProgress }: { src: string; index: number; scrollYProgress: MotionValue<number> }) => {
-  // Use a strictly increasing range to avoid WAAPI "monotonically non-decreasing" errors
-  const { range, output } = useMemo(() => {
-    const start = index / N;
-    const end = (index + 1) / N;
-    const buffer = 0.05 / N;
-
-    let r = [
-      start - buffer,
-      start,
-      end - buffer,
-      end
-    ];
-
-    let o = [0, 1, 1, 0];
-
-    // Special handling for the first screen to be visible at start
-    if (index === 0) {
-      r = [0, end - buffer, end];
-      o = [1, 1, 0];
-    }
-    // Special handling for the last screen to stay visible at the end
-    else if (index === N - 1) {
-      r = [start - buffer, start, 1];
-      o = [0, 1, 1];
-    }
-
-    // Clamp and ensure strictly increasing
-    const finalR = r.map(v => Math.max(0, Math.min(1, v)));
-    for (let i = 1; i < finalR.length; i++) {
-      if (finalR[i] <= finalR[i - 1]) {
-        finalR[i] = finalR[i - 1] + 0.0001;
-      }
-    }
-
-    return { range: finalR, output: o };
-  }, [index]);
-
-  const opacity = useTransform(scrollYProgress, range, output);
-
-
-  return (
-    <motion.img
-      src={src}
-      alt=""
-      className="absolute inset-0 w-full h-full object-contain drop-shadow-2xl will-change-opacity"
-      style={{ opacity }}
-      loading="eager"
-      decoding="sync"
-      draggable={false}
-    />
-  );
-};
-
 const ImmersiveHero = () => {
   const isMobile = useIsMobile();
   const heroRef = useRef<HTMLDivElement>(null);
@@ -114,6 +60,7 @@ const ImmersiveHero = () => {
     }
   });
 
+  // Reverted to i / (N - 1) to ensure full 0-1 coverage for all perspectives
   const stops = useMemo(() => Array.from({ length: N }, (_, i) => i / (N - 1)), []);
 
   const rotateY = useTransform(scrollYProgress, stops, perspectives.map((p) => p[0]));
@@ -121,7 +68,7 @@ const ImmersiveHero = () => {
   const scaleValue = useTransform(scrollYProgress, stops, perspectives.map((p) => p[2]));
   const xVw = useTransform(scrollYProgress, stops, perspectives.map((p) => p[3]));
 
-  const responsiveScale = useTransform(scaleValue, (s) => s * (isMobile ? 1.4 : 1));
+  const responsiveScale = useTransform(scaleValue, (s) => s * (isMobile ? 1.5 : 1.1));
   const responsiveX = useTransform(xVw, (v) => `calc(${v}vw + (var(--phone-offset, 0px)))`);
 
   const scrollIndicatorO = useTransform(scrollYProgress, [0, 0.04], [1, 0]);
@@ -132,9 +79,9 @@ const ImmersiveHero = () => {
         <StarField scrollProgress={scrollYProgress} />
         <AdTemplateWall scrollProgress={scrollYProgress} />
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto h-full flex flex-col md:flex-row items-center justify-center md:justify-between px-6 md:px-12 pointer-events-none pt-0 md:pt-0">
+        <div className="relative z-10 w-full max-w-7xl mx-auto h-full flex flex-col md:flex-row items-center justify-center md:justify-between px-6 md:px-12 pointer-events-none pt-48 md:pt-0">
 
-          <div className="w-full md:w-1/2 flex-none md:flex-1 grid grid-cols-1 grid-rows-1 items-center md:items-center z-30 absolute top-20 left-0 right-0 md:relative md:top-0 h-auto md:h-auto">
+          <div className="w-full md:w-1/2 flex-none md:flex-1 grid grid-cols-1 grid-rows-1 items-center md:items-center z-30 relative md:relative md:top-0 h-auto md:h-auto mb-4 md:mb-0">
             <AnimatePresence initial={false} mode="wait">
               <motion.div
                 key={activeStep}
@@ -153,7 +100,7 @@ const ImmersiveHero = () => {
                   {heroSteps[activeStep].subtitle}
                 </span>
                 <h2
-                  className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold text-white mt-4 md:mt-8 font-display leading-tight drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] px-6 md:px-0"
+                  className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mt-4 md:mt-8 font-display leading-tight drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] px-6 md:px-0"
                 >
                   {heroSteps[activeStep].title}
                 </h2>
@@ -161,7 +108,7 @@ const ImmersiveHero = () => {
             </AnimatePresence>
           </div>
 
-          <div className="w-full md:w-1/2 flex-none md:flex-1 flex items-center justify-center md:justify-end z-20 h-screen md:h-auto pt-[12vh] md:pt-0">
+          <div className="w-full md:w-1/2 flex-none md:flex-1 flex items-center justify-center md:justify-end z-20 mt-[-40px] md:mt-0">
             <motion.div
               style={{
                 x: responsiveX,
@@ -170,18 +117,18 @@ const ImmersiveHero = () => {
                 scale: responsiveScale,
                 transformPerspective: 1200,
               }}
-              className="relative [--phone-offset:0px] md:[--phone-offset:5vw] h-full md:h-auto will-change-transform"
+              className="relative [--phone-offset:0px] md:[--phone-offset:8vw] will-change-transform"
             >
-              <div className={`absolute -inset-40 bg-primary/20 rounded-full ${isMobile ? 'blur-[80px]' : 'blur-[180px]'} will-change-transform opacity-60`} />
-              <div className="relative z-10 h-[80vh] md:h-auto w-auto md:w-[400px] lg:w-[480px] xl:w-[550px] aspect-[9/19] flex items-center justify-center">
-                {screens.map((src, i) => (
-                  <PhoneImage
-                    key={i}
-                    src={src}
-                    index={i}
-                    scrollYProgress={scrollYProgress}
+              <div className={`absolute -inset-20 bg-primary/20 rounded-full blur-[100px] will-change-transform opacity-40`} />
+              <div className="relative z-10 w-[320px] sm:w-[340px] md:w-[360px] lg:w-[420px] xl:w-[480px] aspect-[9/19] flex items-center justify-center">
+                <div className="absolute inset-0 pointer-events-none">
+                  <img
+                    src={screens[0]}
+                    alt="Visbly App"
+                    className="w-full h-full object-contain"
+                    draggable={false}
                   />
-                ))}
+                </div>
               </div>
             </motion.div>
           </div>
