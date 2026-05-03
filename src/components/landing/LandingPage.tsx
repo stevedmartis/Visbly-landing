@@ -4,6 +4,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import AuroraBackground from "./AuroraBackground";
 import ImmersiveHero from "./ImmersiveHero";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 40 },
@@ -280,12 +281,7 @@ const LandingPage = () => {
       </section>
 
       {/* ═══ FOOTER ═══ */}
-      <footer className="py-12 px-6 border-t border-foreground/10">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-          <img src="/visbly_logo.png" alt="Visbly Logo" className="h-6 w-auto opacity-70 hover:opacity-100 transition-opacity" />
-          <span className="text-muted-foreground text-sm">© 2026 Visbly. All rights reserved.</span>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

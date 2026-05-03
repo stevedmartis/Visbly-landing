@@ -6,66 +6,126 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eliminación de Datos - Visbly</title>
     <style>
+        :root {
+            --background: #05050a;
+            --foreground: #f0f2f5;
+            --primary: #4d00ff;
+            --card: #0d0d16;
+            --border: #1a1a2e;
+            --muted: #8899a6;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
-            color: #333;
-            max-width: 800px;
+            color: var(--foreground);
+            background: var(--background);
+            max-width: 900px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 80px 24px;
+            background-image: radial-gradient(circle at top right, rgba(77, 0, 255, 0.05), transparent 400px);
+        }
+
+        header {
+            margin-bottom: 60px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 30px;
+        }
+
+        .logo {
+            height: 32px;
+            margin-bottom: 24px;
+            opacity: 0.9;
         }
 
         h1 {
-            color: #000;
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin: 0;
+            background: linear-gradient(to right, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         h2 {
-            color: #222;
-            margin-top: 30px;
+            font-size: 1.5rem;
+            color: #fff;
+            margin-top: 48px;
+            border-left: 4px solid var(--primary);
+            padding-left: 20px;
         }
 
-        p {
-            margin-bottom: 20px;
+        p,
+        li {
+            color: var(--muted);
+            font-size: 1.1rem;
+        }
+
+        strong {
+            color: #fff;
         }
 
         .contact {
-            background: #f4f4f4;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 40px;
+            background: var(--card);
+            padding: 32px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            margin-top: 80px;
         }
 
-        .steps {
-            margin-left: 20px;
+        .contact a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back {
+            margin-bottom: 40px;
+            display: inline-block;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        ol {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 12px;
         }
     </style>
 </head>
 
 <body>
-    <h1>Instrucciones para la Eliminación de Datos</h1>
-    <p>En cumplimiento con las políticas de privacidad de Facebook (Meta) y otras plataformas, <strong>Visbly</strong>
-        proporciona un método sencillo para solicitar la eliminación de su información personal de nuestra base de
-        datos.</p>
+    <a href="/" class="back">← Volver a Visbly</a>
+    <header>
+        <img src="/visbly_logo.png" alt="Visbly Logo" class="logo">
+        <h1>Eliminación de Datos</h1>
+        <p>Instrucciones y cumplimiento de privacidad</p>
+    </header>
 
-    <h2>Cómo solicitar la eliminación de sus datos</h2>
-    <p>Si desea eliminar su cuenta y todos los datos asociados de nuestra plataforma, siga estos pasos:</p>
+    <section>
+        <p>De acuerdo con las regulaciones de protección de datos (RGPD) y las políticas de Meta, en Visbly garantizamos
+            el derecho de cualquier usuario a solicitar la eliminación permanente de su información.</p>
 
-    <div class="steps">
+        <h2>Procedimiento de Solicitud</h2>
+        <p>Para eliminar sus datos de nuestros servidores, siga el siguiente protocolo:</p>
+
         <ol>
-            <li>Envíe un correo electrónico a <strong>hola@visblyai.com</strong> desde la dirección de correo con la que
-                se registró.</li>
-            <li>En el asunto, escriba: <strong>"Solicitud de Eliminación de Datos"</strong>.</li>
-            <li>En el cuerpo del mensaje, proporcione su nombre completo y el ID de usuario (opcional).</li>
+            <li>Envíe un correo desde su cuenta registrada a <strong>hola@visblyai.com</strong>.</li>
+            <li>Indique en el asunto: <strong>"Derecho al Olvido / Eliminación de Datos"</strong>.</li>
+            <li>Confirme su identidad proporcionando su nombre o el ID de usuario de la plataforma.</li>
         </ol>
-    </div>
 
-    <p>Nuestro equipo procesará su solicitud en un plazo máximo de <strong>48 horas hábiles</strong>. Una vez completado
-        el proceso, recibirá una confirmación por correo electrónico y todos sus datos serán eliminados permanentemente
-        de nuestros servidores.</p>
+        <p>Nuestro equipo de infraestructura ejecutará la eliminación en un plazo de <strong>48 horas</strong>, borrando
+            permanentemente registros de uso, creativos generados y conexiones de API.</p>
+    </section>
 
     <div class="contact">
-        <strong>Contacto Directo</strong><br>
-        Para cualquier duda sobre su privacidad, escríbanos a: <a href="mailto:hola@visblyai.com">hola@visblyai.com</a>
+        <strong>Contacto de Privacidad</strong><br>
+        <a href="mailto:hola@visblyai.com">hola@visblyai.com</a>
     </div>
 </body>
 

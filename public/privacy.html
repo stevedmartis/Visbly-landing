@@ -5,34 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Política de Privacidad - Visbly</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 40px 20px; }
-        h1 { color: #000; }
-        h2 { color: #222; margin-top: 30px; }
-        p { margin-bottom: 20px; }
-        .contact { background: #f4f4f4; padding: 20px; border-radius: 8px; margin-top: 40px; }
+        :root {
+            --background: #05050a;
+            --foreground: #f0f2f5;
+            --primary: #4d00ff;
+            --card: #0d0d16;
+            --border: #1a1a2e;
+            --muted: #8899a6;
+        }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            line-height: 1.6; 
+            color: var(--foreground); 
+            background: var(--background);
+            max-width: 900px; 
+            margin: 0 auto; 
+            padding: 80px 24px;
+            background-image: radial-gradient(circle at top right, rgba(77, 0, 255, 0.05), transparent 400px),
+                              radial-gradient(circle at bottom left, rgba(77, 0, 255, 0.03), transparent 400px);
+        }
+        header { margin-bottom: 60px; border-bottom: 1px solid var(--border); padding-bottom: 30px; }
+        .logo { height: 32px; margin-bottom: 24px; opacity: 0.9; }
+        h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; margin: 0; background: linear-gradient(to right, #fff, #888); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        h2 { font-size: 1.5rem; color: #fff; margin-top: 48px; border-left: 4px solid var(--primary); padding-left: 20px; }
+        p, li { color: var(--muted); font-size: 1.1rem; }
+        strong { color: #fff; }
+        .contact { 
+            background: var(--card); 
+            padding: 32px; 
+            border-radius: 24px; 
+            border: 1px solid var(--border); 
+            margin-top: 80px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .contact a { color: var(--primary); text-decoration: none; font-weight: 600; }
+        .contact a:hover { text-decoration: underline; }
+        .back { margin-bottom: 40px; display: inline-block; color: var(--muted); text-decoration: none; font-size: 0.9rem; }
     </style>
 </head>
 <body>
-    <h1>Política de Privacidad</h1>
-    <p>Última actualización: 3 de mayo de 2026</p>
+    <a href="/" class="back">← Volver a Visbly</a>
+    <header>
+        <img src="/visbly_logo.png" alt="Visbly Logo" class="logo">
+        <h1>Política de Privacidad</h1>
+        <p>Efectiva desde el 3 de mayo de 2026</p>
+    </header>
 
-    <p>En <strong>Visbly</strong>, valoramos su privacidad y estamos comprometidos a proteger sus datos personales. Esta política de privacidad explica cómo recopilamos, usamos y protegemos su información cuando utiliza nuestra plataforma.</p>
+    <section>
+        <p>En <strong>Visbly</strong>, la privacidad no es una opción, es un estándar. Esta política detalla cómo protegemos la integridad de sus datos mientras potenciamos su estrategia publicitaria.</p>
 
-    <h2>1. Información que recopilamos</h2>
-    <p>Recopilamos información que usted nos proporciona directamente al registrarse, como su nombre, correo electrónico y datos de conexión con plataformas de anuncios (como Meta Ads).</p>
+        <h2>1. Recopilación Estratégica de Datos</h2>
+        <p>Solo recopilamos la información estrictamente necesaria para el funcionamiento de nuestra IA: credenciales de acceso, configuración de cuentas publicitarias y datos de marca para la generación de creativos.</p>
 
-    <h2>2. Uso de la información</h2>
-    <p>Utilizamos su información para proporcionar y mejorar nuestros servicios, procesar sus solicitudes de anuncios y comunicarnos con usted sobre actualizaciones o soporte técnico.</p>
+        <h2>2. Seguridad y Procesamiento</h2>
+        <p>Sus datos se procesan en entornos seguros con cifrado de grado bancario. La conexión con la API de Meta se realiza a través de protocolos oficiales, garantizando que su información nunca se comparta fuera del ecosistema Visbly.</p>
 
-    <h2>3. Compartir con terceros</h2>
-    <p>No vendemos sus datos personales. Solo compartimos información con proveedores de servicios esenciales (como servicios de hosting o APIs de IA) necesarios para el funcionamiento de Visbly.</p>
+        <h2>3. Transparencia de IA</h2>
+        <p>Nuestros agentes de IA utilizan sus datos para optimizar ganchos psicológicos y diseños visuales de forma privada para su cuenta. No utilizamos sus datos para entrenar modelos compartidos con otros competidores.</p>
 
-    <h2>4. Sus derechos</h2>
-    <p>Usted tiene derecho a acceder, corregir o eliminar sus datos personales en cualquier momento.</p>
+        <h2>4. Sus Derechos de Control</h2>
+        <p>Usted mantiene el control total. En cualquier momento puede solicitar una copia de sus datos o la eliminación completa de su registro de nuestros sistemas.</p>
+    </section>
 
     <div class="contact">
-        <strong>Contacto</strong><br>
-        Si tiene alguna pregunta sobre esta política, por favor contáctenos en: <a href="mailto:hola@visblyai.com">hola@visblyai.com</a>
+        <strong>Oficina de Privacidad</strong><br>
+        <p style="margin-top: 10px;">Para cualquier consulta relacionada con la protección de sus datos, contacte con nuestro equipo especializado en seguridad:</p>
+        <a href="mailto:hola@visblyai.com">hola@visblyai.com</a>
     </div>
 </body>
 </html>
