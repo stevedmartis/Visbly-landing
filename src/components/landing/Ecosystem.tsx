@@ -11,9 +11,9 @@ const Ecosystem = () => {
   ];
 
   return (
-    <section className="py-24 px-6 relative border-y border-foreground/5 bg-foreground/[0.01]">
+    <section className="pt-12 pb-24 px-6 relative border-y border-foreground/5 bg-foreground/[0.01]">
       <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row items-center gap-16">
+        <div className="flex flex-col md:flex-row items-center gap-8">
           <div className="flex-1">
             <motion.span
               initial={{ opacity: 0, x: -20 }}
@@ -28,7 +28,7 @@ const Ecosystem = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-4xl md:text-5xl font-bold text-foreground mt-4 mb-6 font-display"
+              className="text-4xl md:text-5xl font-bold text-foreground mt-2 mb-4 font-display"
             >
               Inyecta tu ADN desde cualquier fuente
             </motion.h2>
@@ -47,7 +47,7 @@ const Ecosystem = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="mt-10 grid grid-cols-2 gap-4"
+              className="mt-6 grid grid-cols-2 gap-4"
             >
               <div className="p-4 rounded-2xl bg-foreground/[0.03] border border-foreground/10">
                 <span className="text-primary font-bold text-xl block">100%</span>

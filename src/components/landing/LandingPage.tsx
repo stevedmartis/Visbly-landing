@@ -72,11 +72,11 @@ const LandingPage = () => {
       <ImmersiveHero />
 
       {/* ═══ CONTRAST / PROBLEM ═══ */}
-      <section className="pt-20 pb-8 px-6 relative overflow-hidden">
+      <section className="pt-12 pb-6 px-6 relative overflow-hidden">
         <div className="max-w-5xl mx-auto">
-          <motion.div {...fadeInUp} className="text-center mb-12">
+          <motion.div {...fadeInUp} className="text-center mb-8">
             <span className="text-primary font-semibold text-sm uppercase tracking-widest">El Desafío</span>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mt-4 mb-4 font-display">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mt-2 mb-4 font-display">
               El Cuello de Botella Creativo
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
@@ -125,11 +125,11 @@ const LandingPage = () => {
       <Ecosystem />
 
       {/* ═══ AGENTS ═══ */}
-      <section className="pt-24 pb-20 px-6 relative">
+      <section className="pt-12 pb-20 px-6 relative">
         <div className="max-w-6xl mx-auto">
-          <motion.div {...fadeInUp} className="text-center mb-16">
+          <motion.div {...fadeInUp} className="text-center mb-8">
             <span className="text-primary font-semibold text-sm uppercase tracking-widest">La Solución</span>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mt-4 mb-4 font-display">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mt-2 mb-4 font-display">
               Arquitectura Multi-Agente
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -160,11 +160,11 @@ const LandingPage = () => {
       </section>
 
       {/* ═══ POWERS DETAILED ═══ */}
-      <section id="powers" className="py-24 px-1 relative">
+      <section id="powers" className="py-12 px-1 relative">
         <div className="max-w-5xl mx-auto">
-          <motion.div {...fadeInUp} className="text-center mb-16">
+          <motion.div {...fadeInUp} className="text-center mb-8">
             <span className="text-primary font-semibold text-sm uppercase tracking-widest">Capacidades</span>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mt-4 mb-4 font-display">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mt-2 mb-4 font-display">
               Tus Superpoderes
             </h2>
           </motion.div>
@@ -189,11 +189,11 @@ const LandingPage = () => {
       </section>
 
       {/* ═══ METRICS ═══ */}
-      <section className="py-24 px-6 relative">
+      <section className="py-12 px-6 relative">
         <div className="max-w-4xl mx-auto">
-          <motion.div {...fadeInUp} className="text-center mb-12">
+          <motion.div {...fadeInUp} className="text-center mb-8">
             <span className="text-primary font-semibold text-sm uppercase tracking-widest">Impacto</span>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mt-4 mb-4 font-display">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mt-2 mb-4 font-display">
               Métricas de Transformación
             </h2>
           </motion.div>
@@ -253,7 +253,7 @@ const LandingPage = () => {
       </section>
 
       {/* ═══ CTA ═══ */}
-      <section className="py-20 px-6 relative">
+      <section className="py-12 px-6 relative">
         <div className="max-w-4xl mx-auto text-center relative">
           <div className={`absolute inset-0 bg-primary/5 rounded-[60px] ${isMobile ? 'blur-[40px]' : 'blur-[100px]'}`} />
           <motion.div

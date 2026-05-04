@@ -53,9 +53,9 @@ const Pricing = () => {
   ];
 
   return (
-    <section id="pricing" className="py-24 px-6 relative overflow-hidden">
+    <section id="pricing" className="py-12 px-6 relative overflow-hidden">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-8">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
