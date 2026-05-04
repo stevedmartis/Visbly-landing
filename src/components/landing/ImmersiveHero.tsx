@@ -5,28 +5,28 @@ import StarField from "./StarField";
 import AdTemplateWall from "./AdTemplateWall";
 import AppStoreButtons from "./AppStoreButtons";
 // REEMPLAZA ESTOS ARCHIVOS EN src/assets/ CON TUS CAPTURAS REALES
-import screen1 from "@/assets/screen1.png";
+import screen0 from "@/assets/screen0.png";
 
 const heroSteps = [
   {
     subtitle: "Scanner de Tendencias",
     title: "Genera Creativos que Venden en Segundos",
-    image: screen1
+    image: screen0
   },
   {
     subtitle: "Extracción de ADN",
     title: "La IA que piensa y diseña exactamente como tú",
-    image: screen1
+    image: screen0
   },
   {
     subtitle: "Generación Studio",
     title: "Diseño de Alta Fidelidad con Estética Liquid Glass",
-    image: screen1
+    image: screen0
   },
   {
     subtitle: "Orquestación MetaAds",
     title: "Tu Fábrica de Crecimiento 24/7 en Piloto Automático",
-    image: screen1
+    image: screen0
   },
 ];
 
