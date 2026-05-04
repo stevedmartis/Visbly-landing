@@ -7,27 +7,34 @@ import AppStoreButtons from "./AppStoreButtons";
 // REEMPLAZA ESTOS ARCHIVOS EN src/assets/ CON TUS CAPTURAS REALES
 import screen0 from "@/assets/screen0.png";
 import screen1 from "@/assets/screen1.png";
+import screen2 from "@/assets/screen2.png";
+import screen3 from "@/assets/screen3.png";
+import screen4 from "@/assets/screen4.png";
 
 const heroSteps = [
   {
     subtitle: "Scanner de Tendencias",
-    title: "Encuentra lo que funciona\nantes que nadie",
+    title: "Encuentra los Ángulos que Detienen el Scroll",
+    mobileTitle: "Ganchos que detienen el scroll",
     image: screen0
   },
   {
     subtitle: "Extracción de ADN",
-    title: "La IA que piensa y diseña\nexactamente como tú",
+    title: "Clona tu Identidad de Marca al Instante",
+    mobileTitle: "Clona tu Identidad de Marca",
     image: screen1
   },
   {
     subtitle: "Generación Studio",
-    title: "Ads de Alta Fidelidad\nen pocos segundos",
+    title: "Creativos de Clase Mundial en Segundos",
+    mobileTitle: "Creativos de Elite al instante",
     image: screen0
   },
   {
     subtitle: "Orquestación MetaAds",
-    title: "Tu Motor de Crecimiento\nen piloto automático",
-    image: screen0
+    title: "Lanza Campañas Ganadoras sin Esfuerzo",
+    mobileTitle: "Escala tus Ads sin esfuerzo",
+    image: screen4
   },
 ];
 
@@ -105,9 +112,9 @@ const ImmersiveHero = () => {
                     {heroSteps[activeStep].subtitle}
                   </span>
                   <h2
-                    className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mt-2 md:mt-8 font-display leading-tight drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] px-6 md:px-0 w-full whitespace-pre-line"
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mt-2 md:mt-8 font-display leading-tight drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] px-6 md:px-0 w-full whitespace-pre-line"
                   >
-                    {heroSteps[activeStep].title}
+                    {isMobile ? heroSteps[activeStep].mobileTitle : heroSteps[activeStep].title}
                   </h2>
                 </motion.div>
               </AnimatePresence>
