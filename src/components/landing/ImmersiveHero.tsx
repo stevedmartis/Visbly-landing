@@ -6,26 +6,27 @@ import AdTemplateWall from "./AdTemplateWall";
 import AppStoreButtons from "./AppStoreButtons";
 // REEMPLAZA ESTOS ARCHIVOS EN src/assets/ CON TUS CAPTURAS REALES
 import screen0 from "@/assets/screen0.png";
+import screen1 from "@/assets/screen1.png";
 
 const heroSteps = [
   {
     subtitle: "Scanner de Tendencias",
-    title: "Genera Creativos que Venden en Segundos",
+    title: "Encuentra lo que funciona\nantes que nadie",
     image: screen0
   },
   {
     subtitle: "Extracción de ADN",
-    title: "La IA que piensa y diseña exactamente como tú",
-    image: screen0
+    title: "La IA que piensa y diseña\nexactamente como tú",
+    image: screen1
   },
   {
     subtitle: "Generación Studio",
-    title: "Diseño de Alta Fidelidad con Estética Liquid Glass",
+    title: "Ads de Alta Fidelidad\nen pocos segundos",
     image: screen0
   },
   {
     subtitle: "Orquestación MetaAds",
-    title: "Tu Fábrica de Crecimiento 24/7 en Piloto Automático",
+    title: "Tu Motor de Crecimiento\nen piloto automático",
     image: screen0
   },
 ];
@@ -70,7 +71,7 @@ const ImmersiveHero = () => {
   const scaleValue = useSpring(rawScale, springConfig);
   const xVw = useSpring(rawX, springConfig);
 
-  const responsiveScale = useTransform(scaleValue, (s) => s * (isMobile ? 1.2 : 1.05));
+  const responsiveScale = useTransform(scaleValue, (s) => s * (isMobile ? 1.2 : 0.85));
   const responsiveX = useTransform(xVw, (v) => `calc(${v}vw + (var(--phone-offset, 0px)))`);
 
   const scrollIndicatorO = useTransform(scrollYProgress, [0, 0.04], [1, 0]);
@@ -81,11 +82,11 @@ const ImmersiveHero = () => {
         <StarField scrollProgress={scrollYProgress} />
         <AdTemplateWall scrollProgress={scrollYProgress} />
 
-        <div className="relative z-10 w-full max-w-[1440px] mx-auto h-full flex flex-col md:flex-row items-center justify-center md:justify-between px-6 md:px-12 pointer-events-none pt-10 md:pt-0">
+        <div className="relative z-10 w-full max-w-[1440px] mx-auto h-full flex flex-col md:flex-row items-center justify-start md:justify-between px-6 md:px-12 pointer-events-none pt-12 md:pt-0">
 
-          <div className="w-full md:w-[80%] flex-none md:flex-1 flex flex-col items-center md:items-start z-30 relative md:relative md:top-0 h-auto md:h-auto mb-4 md:mb-0">
+          <div className="w-full md:w-[80%] flex-none md:flex-1 flex flex-col items-center md:items-start z-30 relative md:relative md:top-0 h-auto md:h-auto mb-0 md:mb-0">
             {/* Title Container with fixed min-height to prevent jumping */}
-            <div className="w-full min-h-[80px] md:min-h-[180px] flex flex-col items-center md:items-start justify-center md:justify-start">
+            <div className="w-full min-h-[90px] md:min-h-[180px] flex flex-col items-center md:items-start justify-center md:justify-start">
               <AnimatePresence initial={false} mode="wait">
                 <motion.div
                   key={activeStep}
@@ -104,7 +105,7 @@ const ImmersiveHero = () => {
                     {heroSteps[activeStep].subtitle}
                   </span>
                   <h2
-                    className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mt-4 md:mt-8 font-display leading-tight drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] px-6 md:px-0 w-full"
+                    className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mt-2 md:mt-8 font-display leading-tight drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] px-6 md:px-0 w-full whitespace-pre-line"
                   >
                     {heroSteps[activeStep].title}
                   </h2>
@@ -122,14 +123,14 @@ const ImmersiveHero = () => {
               }}
               className="mt-1 md:mt-2 flex flex-col items-center md:items-start gap-1 z-40 pointer-events-auto will-change-transform"
             >
-              <span className="text-[10px] text-white/40 uppercase tracking-[0.3em] font-bold">
+              <span className="text-[10px] text-white/70 uppercase tracking-[0.4em] font-bold drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">
                 Descarga la Beta Pro
               </span>
               <AppStoreButtons className="scale-75 md:scale-90 origin-center md:origin-left" />
             </motion.div>
           </div>
 
-          <div className="w-full md:w-[20%] flex-none md:flex-1 flex items-center justify-center md:justify-center z-20 mt-[-80px] md:mt-0 md:-ml-20">
+          <div className="w-full md:w-[20%] flex-none md:flex-1 flex items-center justify-center md:justify-center z-20 mt-20 md:mt-0 md:-ml-20">
             {/* The Unified Phone Instance */}
             <motion.div
               style={{
@@ -144,7 +145,7 @@ const ImmersiveHero = () => {
               {/* Glow effect that stays with the phone */}
               <div className="absolute -inset-20 bg-primary/20 rounded-full blur-[100px] opacity-40" />
 
-              <div className="relative z-10 w-[200px] sm:w-[220px] md:w-[240px] lg:w-[260px] xl:w-[280px] aspect-[9/19] bg-[#0a0a0a] rounded-[2.5rem] border-[6px] border-[#1a1a1a] shadow-2xl overflow-hidden">
+              <div className="relative z-10 w-[180px] sm:w-[200px] md:w-[260px] lg:w-[280px] xl:w-[320px] aspect-[9/19] bg-[#0a0a0a] rounded-[2.5rem] border-[6px] border-[#1a1a1a] shadow-2xl overflow-hidden">
                 {/* Screen Content Layers */}
                 {heroSteps.map((step, i) => (
                   <motion.img
