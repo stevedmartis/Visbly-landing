@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import AppStoreButtons from "./AppStoreButtons";
 
 const Navbar = () => (
   <motion.nav
@@ -11,9 +12,13 @@ const Navbar = () => (
       <div className="flex items-center gap-2">
         <img src="/visbly_logo.png" alt="Visbly Logo" className="h-8 w-auto" />
       </div>
-      <button className="px-5 py-2 bg-primary/10 border border-primary/30 text-primary rounded-lg font-medium text-sm hover:bg-primary/20 transition-colors backdrop-blur-sm">
-        Acceder
-      </button>
+
+      <div className="flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-8">
+          <a href="#powers" className="text-sm font-medium text-white/60 hover:text-white transition-colors">Poderes</a>
+          <a href="#pricing" className="text-sm font-medium text-white/60 hover:text-white transition-colors">Precios</a>
+        </div>
+      </div>
     </div>
   </motion.nav>
 );

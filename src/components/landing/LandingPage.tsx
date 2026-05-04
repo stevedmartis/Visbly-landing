@@ -5,6 +5,9 @@ import AuroraBackground from "./AuroraBackground";
 import ImmersiveHero from "./ImmersiveHero";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import Pricing from "./Pricing";
+import Ecosystem from "./Ecosystem";
+import AppStoreButtons from "./AppStoreButtons";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 40 },
@@ -24,11 +27,11 @@ const LandingPage = () => {
     { emoji: "🧠", name: "Audit Agent", subtitle: "Marketing Brain", desc: "Auditorías instantáneas de URLs para detectar fallos y extraer el ADN de marca.", gradient: "from-pink-500/20 to-orange-500/20" },
   ];
 
-  const features = [
-    { title: "Growth Engine", subtitle: "The Spark", desc: "Generación masiva de ángulos de venta basados en tendencias reales. No adivinamos; usamos señales del mercado.", icon: "⚡" },
-    { title: "Smart Ad Editor", subtitle: "Studio Grade", desc: "Editor de alta fidelidad con manipulación de activos 3D, tipografías y sombras en tiempo real.", icon: "🎨" },
-    { title: "Studio Generation", subtitle: "AI Visuals", desc: "Fondos y escenas de producto tipo 'Estudio' generados por IA, basados en el ADN de tu marca.", icon: "📸" },
-    { title: "Marketing Brain", subtitle: "The Core", desc: "Ingiere cualquier landing page para entender la psicología de la oferta de forma autónoma.", icon: "🧠" },
+  const powers = [
+    { title: "Scanner de Tendencias", subtitle: "Growth Engine", desc: "Detecta ángulos de venta ganadores analizando LinkedIn y Google en tiempo real. No adivines qué funciona, compruébalo.", icon: "🔍" },
+    { title: "Extracción de ADN", subtitle: "Marketing Brain", desc: "Tu IA ingiere cualquier URL para clonar tu voz, estilo y psicología de marca al 100% en segundos.", icon: "🧬" },
+    { title: "Generación Studio", subtitle: "Visual Engine", desc: "Crea anuncios con estética de alta gama 'Liquid Glass' y fondos orgánicos que detienen el scroll.", icon: "✨" },
+    { title: "Orquestación Meta", subtitle: "Direct Deployment", desc: "Configura y lanza tus campañas a FB e IG directamente desde Visibly. Automatización total de extremo a extremo.", icon: "🚀" },
   ];
 
   const metrics = [
@@ -118,8 +121,11 @@ const LandingPage = () => {
         </div>
       </section>
 
+      {/* ═══ ECOSYSTEM ═══ */}
+      <Ecosystem />
+
       {/* ═══ AGENTS ═══ */}
-      <section className="pt-8 pb-20 px-6 relative">
+      <section className="pt-24 pb-20 px-6 relative">
         <div className="max-w-6xl mx-auto">
           <motion.div {...fadeInUp} className="text-center mb-16">
             <span className="text-primary font-semibold text-sm uppercase tracking-widest">La Solución</span>
@@ -153,17 +159,17 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* ═══ FEATURES DETAILED ═══ */}
-      <section className="py-2 px-1 relative">
+      {/* ═══ POWERS DETAILED ═══ */}
+      <section id="powers" className="py-24 px-1 relative">
         <div className="max-w-5xl mx-auto">
           <motion.div {...fadeInUp} className="text-center mb-16">
-            <span className="text-primary font-semibold text-sm uppercase tracking-widest">Ecosistema Pro</span>
+            <span className="text-primary font-semibold text-sm uppercase tracking-widest">Capacidades</span>
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mt-4 mb-4 font-display">
-              Funcionalidades
+              Tus Superpoderes
             </h2>
           </motion.div>
           <div className="grid md:grid-cols-2 gap-8">
-            {features.map((feat, i) => (
+            {powers.map((pow, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
@@ -172,10 +178,10 @@ const LandingPage = () => {
                 transition={{ duration: 0.6, delay: i * 0.1 }}
                 className={`p-8 rounded-3xl border border-foreground/10 bg-foreground/[0.02] ${isMobile ? '' : 'backdrop-blur-sm'}`}
               >
-                <span className="text-3xl">{feat.icon}</span>
-                <span className="text-primary font-semibold text-xs uppercase tracking-widest ml-3">{feat.subtitle}</span>
-                <h3 className="text-2xl font-bold text-foreground mt-3">{feat.title}</h3>
-                <p className="text-muted-foreground mt-3 leading-relaxed">{feat.desc}</p>
+                <span className="text-3xl">{pow.icon}</span>
+                <span className="text-primary font-semibold text-xs uppercase tracking-widest ml-3">{pow.subtitle}</span>
+                <h3 className="text-2xl font-bold text-foreground mt-3">{pow.title}</h3>
+                <p className="text-muted-foreground mt-3 leading-relaxed">{pow.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -183,7 +189,7 @@ const LandingPage = () => {
       </section>
 
       {/* ═══ METRICS ═══ */}
-      <section className="py-20 px-6 relative">
+      <section className="py-24 px-6 relative">
         <div className="max-w-4xl mx-auto">
           <motion.div {...fadeInUp} className="text-center mb-12">
             <span className="text-primary font-semibold text-sm uppercase tracking-widest">Impacto</span>
@@ -204,7 +210,7 @@ const LandingPage = () => {
                   <tr className="border-b border-foreground/10">
                     <th className="px-6 py-4 text-left text-sm font-medium text-muted-foreground">Métrica</th>
                     <th className="px-6 py-4 text-left text-sm font-medium text-muted-foreground">Antes</th>
-                    <th className="px-6 py-4 text-left text-sm font-medium text-muted-foreground">Con Visbly</th>
+                    <th className="px-6 py-4 text-left text-sm font-medium text-muted-foreground">Con Visibly</th>
                     <th className="px-6 py-4 text-left text-sm font-medium text-primary">Impacto</th>
                   </tr>
                 </thead>
@@ -228,16 +234,8 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* ═══ PLATFORMS ═══ */}
-      <section className="py-8 bg-foreground/[0.02]">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="flex justify-center items-center gap-16 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
-            <img src="/ig.png" alt="Instagram" className="h-8 w-auto" />
-            <img src="/tiktok.png" alt="TikTok" className="h-8 w-auto" />
-            <img src="/linkedin.png" alt="LinkedIn" className="h-8 w-auto" />
-          </div>
-        </div>
-      </section>
+      {/* ═══ PRICING ═══ */}
+      <Pricing />
 
       {/* ═══ TRUST BAR / ARCHETYPES ═══ */}
       <section className="py-12 border-y border-foreground/5 bg-foreground/[0.01]">
@@ -273,9 +271,14 @@ const LandingPage = () => {
             <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-10">
               Únete a los Media Buyers que ya están rompiendo el cuello de botella creativo con Visibly.
             </p>
-            <button className="px-10 py-4 bg-primary text-primary-foreground rounded-xl font-semibold text-lg hover:bg-primary/90 transition-all shadow-[0_0_40px_hsl(var(--primary)/0.5)] hover:shadow-[0_0_60px_hsl(var(--primary)/0.6)]">
+            <button className="px-10 py-4 bg-primary text-primary-foreground rounded-xl font-semibold text-lg hover:bg-primary/90 transition-all shadow-[0_0_40px_hsl(var(--primary)/0.5)] hover:shadow-[0_0_60px_hsl(var(--primary)/0.6)] mb-10">
               Genera tu primer Ángulo Gratis
             </button>
+
+            <div className="flex flex-col items-center gap-4">
+              <span className="text-xs text-muted-foreground uppercase tracking-[0.2em]">Disponible en</span>
+              <AppStoreButtons className="justify-center scale-90 md:scale-100" />
+            </div>
           </motion.div>
         </div>
       </section>
