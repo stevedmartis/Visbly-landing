@@ -5,10 +5,10 @@ const Footer = () => {
     <footer className="py-20 px-6 border-t border-foreground/5 bg-background relative overflow-hidden">
       {/* Sutil gradiente de fondo */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
-      
+
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-12 md:gap-8">
-          
+
           {/* Columna Branding */}
           <div className="col-span-2 lg:col-span-2">
             <img src="/visbly_logo.png" alt="Visbly Logo" className="h-8 w-auto mb-6 opacity-90" />
@@ -64,7 +64,7 @@ const Footer = () => {
             © 2026 Visbly. Todos los derechos reservados. Impulsado por IA para marketers de élite.
           </p>
           <div className="flex gap-6">
-            <span className="text-[10px] text-muted-foreground/50 uppercase tracking-tighter">Hecho con ❤️ en Latam</span>
+            <span className="text-[10px] text-muted-foreground/50 uppercase tracking-tighter">Hecho con ❤️ en Viña del Mar, Chile</span>
           </div>
         </div>
       </div>
