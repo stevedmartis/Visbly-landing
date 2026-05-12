@@ -1,13 +1,13 @@
 import { motion, useTransform, type MotionValue } from "framer-motion";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import ad1 from "@/assets/ad_visbly1.png";
 import ad2 from "@/assets/ad_visb2.png";
-import ad3 from "@/assets/ad_visb3.png";
-import ad4 from "@/assets/ad_visb4.png";
+import ad3 from "@/assets/visb3.png";
+import ad4 from "@/assets/visb4.png";
 import ad5 from "@/assets/ad_visb5.png";
 import ad6 from "@/assets/ad_visb6.png";
-import ad7 from "@/assets/ad_visb6.png";
+import ad7 from "@/assets/ad_visb7.png";
 
 interface AdTemplateWallProps {
   scrollProgress: MotionValue<number>;
@@ -15,20 +15,28 @@ interface AdTemplateWallProps {
 
 const adImages = [ad1, ad2, ad3, ad4, ad5, ad6, ad7];
 
-const AdCard = ({ src }: { src: string }) => (
-  <div
-    className="relative rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.45)] border border-white/10 shrink-0 bg-secondary/20"
-    style={{ width: 160, height: 220 }}
-  >
-    <img
-      src={src}
-      alt=""
-      className="w-full h-full object-cover"
-      loading="lazy"
-      draggable={false}
-    />
-  </div>
-);
+const AdCard = ({ src }: { src: string }) => {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <div
+      className="relative rounded-2xl overflow-hidden shadow-[0_10px_40px_rgba(0,0,0,0.45)] border border-white/10 shrink-0 bg-secondary/20"
+      style={{ width: 160, height: 220 }}
+    >
+      <motion.img
+        src={src}
+        alt=""
+        initial={{ opacity: 0 }}
+        animate={{ opacity: loaded ? 1 : 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        onLoad={() => setLoaded(true)}
+        className="w-full h-full object-cover"
+        loading="lazy"
+        draggable={false}
+      />
+    </div>
+  );
+};
 
 const Row = ({
   scrollProgress,

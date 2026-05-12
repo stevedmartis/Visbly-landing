@@ -9,7 +9,6 @@ import screen0 from "@/assets/screen0.png";
 import screen1 from "@/assets/screen1.png";
 import screen2 from "@/assets/screen2.png";
 import screen3 from "@/assets/screen3.png";
-import screen4 from "@/assets/screen4.png";
 
 const heroSteps = [
   {
