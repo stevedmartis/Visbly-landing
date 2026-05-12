@@ -8,6 +8,7 @@ import Footer from "./Footer";
 import Pricing from "./Pricing";
 import Ecosystem from "./Ecosystem";
 import AppStoreButtons from "./AppStoreButtons";
+import Partners from "./Partners";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 40 },
@@ -22,16 +23,10 @@ const LandingPage = () => {
   const { scrollYProgress } = useScroll({ target: pageRef });
 
   const agents = [
-    { emoji: "🔍", name: "Discovery Agent", subtitle: "Growth Engine", desc: "Escanea tendencias en LinkedIn y Google para encontrar ganchos psicológicos en segundos.", gradient: "from-blue-500/20 to-purple-500/20" },
-    { emoji: "🎨", name: "Creative Agent", subtitle: "Visual Engine", desc: "Genera anuncios de alto rendimiento con layouts probados que respetan tu marca.", gradient: "from-purple-500/20 to-pink-500/20" },
-    { emoji: "🧠", name: "Audit Agent", subtitle: "Marketing Brain", desc: "Auditorías instantáneas de URLs para detectar fallos y extraer el ADN de marca.", gradient: "from-pink-500/20 to-orange-500/20" },
-  ];
-
-  const powers = [
-    { title: "Scanner de Tendencias", subtitle: "Growth Engine", desc: "Detecta ángulos de venta ganadores analizando LinkedIn y Google en tiempo real. No adivines qué funciona, compruébalo.", icon: "🔍" },
-    { title: "Extracción de ADN", subtitle: "Marketing Brain", desc: "Tu IA ingiere cualquier URL para clonar tu voz, estilo y psicología de marca al 100% en segundos.", icon: "🧬" },
-    { title: "Generación Studio", subtitle: "Visual Engine", desc: "Crea anuncios con estética de alta gama 'Liquid Glass' y fondos orgánicos que detienen el scroll.", icon: "✨" },
-    { title: "Orquestación Meta", subtitle: "Direct Deployment", desc: "Configura y lanza tus campañas a FB e IG directamente desde Visibly. Automatización total de extremo a extremo.", icon: "🚀" },
+    { emoji: "🔍", name: "Discovery Agent", subtitle: "Market Intelligence", desc: "Escanea tendencias y ganchos psicológicos en tiempo real para encontrar tu próximo ángulo ganador.", gradient: "from-blue-500/20 to-purple-500/20" },
+    { emoji: "🧠", name: "Audit Agent", subtitle: "Brand Strategy", desc: "Analiza cualquier URL para extraer y clonar el ADN de tu marca, asegurando consistencia total en cada anuncio.", gradient: "from-purple-500/20 to-pink-500/20" },
+    { emoji: "🎨", name: "Creative Agent", subtitle: "Visual Studio", desc: "Diseña creativos de alto impacto con estética 'Liquid Glass' y layouts probados para maximizar tu CTR.", gradient: "from-pink-500/20 to-orange-500/20" },
+    { emoji: "🚀", name: "Meta Orchestrator", subtitle: "Direct Execution", desc: "Tus agentes lanzan y escalan campañas a Meta directamente desde Visbly. Automatización de extremo a extremo.", gradient: "from-orange-500/20 to-red-500/20" },
   ];
 
   const metrics = [
@@ -80,7 +75,7 @@ const LandingPage = () => {
               El Cuello de Botella Creativo
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
-              La fatiga creativa ocurre 10x más rápido que hace dos años. Mantener el rendimiento hoy exige una rotación constante que es costosa, lenta y difícil de escalar.
+              La fatiga creativa ocurre 10x más rápido que hace dos años. Mantener el rendimiento exige una rotación de agentes que trabajen 24/7 en tu estrategia.
             </p>
           </motion.div>
 
@@ -124,19 +119,18 @@ const LandingPage = () => {
       {/* ═══ ECOSYSTEM ═══ */}
       <Ecosystem />
 
-      {/* ═══ AGENTS ═══ */}
-      <section className="pt-12 pb-20 px-6 relative">
+      <section id="powers" className="pt-12 pb-20 px-6 relative">
         <div className="max-w-6xl mx-auto">
           <motion.div {...fadeInUp} className="text-center mb-8">
             <span className="text-primary font-semibold text-sm uppercase tracking-widest">La Solución</span>
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mt-2 mb-4 font-display">
-              Arquitectura Multi-Agente
+              Tus Agentes con Superpoderes
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Tres agentes de IA especializados que trabajan en sincronía para producir creativos de alto rendimiento.
+              Cuatro agentes de IA especializados que trabajan en sincronía para automatizar tu marketing de extremo a extremo.
             </p>
           </motion.div>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {agents.map((agent, i) => (
               <motion.div
                 key={i}
@@ -159,34 +153,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* ═══ POWERS DETAILED ═══ */}
-      <section id="powers" className="py-12 px-1 relative">
-        <div className="max-w-5xl mx-auto">
-          <motion.div {...fadeInUp} className="text-center mb-8">
-            <span className="text-primary font-semibold text-sm uppercase tracking-widest">Capacidades</span>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mt-2 mb-4 font-display">
-              Tus Superpoderes
-            </h2>
-          </motion.div>
-          <div className="grid md:grid-cols-2 gap-8">
-            {powers.map((pow, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                className={`p-8 rounded-3xl border border-foreground/10 bg-foreground/[0.02] ${isMobile ? '' : 'backdrop-blur-sm'}`}
-              >
-                <span className="text-3xl">{pow.icon}</span>
-                <span className="text-primary font-semibold text-xs uppercase tracking-widest ml-3">{pow.subtitle}</span>
-                <h3 className="text-2xl font-bold text-foreground mt-3">{pow.title}</h3>
-                <p className="text-muted-foreground mt-3 leading-relaxed">{pow.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* ═══ METRICS ═══ */}
       <section className="py-12 px-6 relative">
@@ -237,20 +203,8 @@ const LandingPage = () => {
       {/* ═══ PRICING ═══ */}
       <Pricing />
 
-      {/* ═══ TRUST BAR / ARCHETYPES ═══ */}
-      <section className="py-12 border-y border-foreground/5 bg-foreground/[0.01]">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <p className="text-sm text-muted-foreground uppercase tracking-[0.3em] mb-8">
-            Arququetipos Optimizados para
-          </p>
-          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-            <span className="text-xl md:text-2xl font-bold font-display tracking-tighter">SaaS & Software</span>
-            <span className="text-xl md:text-2xl font-bold font-display tracking-tighter">Fintech</span>
-            <span className="text-xl md:text-2xl font-bold font-display tracking-tighter">DTC Brands</span>
-            <span className="text-xl md:text-2xl font-bold font-display tracking-tighter">E-commerce</span>
-          </div>
-        </div>
-      </section>
+      {/* ═══ PARTNERS / TECH STACK ═══ */}
+      <Partners />
 
       {/* ═══ CTA ═══ */}
       <section className="py-12 px-6 relative">
@@ -269,7 +223,7 @@ const LandingPage = () => {
               <span className="text-primary">Empieza a Escalar.</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-10">
-              Únete a los Media Buyers que ya están rompiendo el cuello de botella creativo con Visibly.
+              Únete a los Media Buyers que ya están rompiendo el cuello de botella creativo con Visbly.
             </p>
             <button className="px-10 py-4 bg-primary text-primary-foreground rounded-xl font-semibold text-lg hover:bg-primary/90 transition-all shadow-[0_0_40px_hsl(var(--primary)/0.5)] hover:shadow-[0_0_60px_hsl(var(--primary)/0.6)] mb-10">
               Genera tu primer Ángulo Gratis

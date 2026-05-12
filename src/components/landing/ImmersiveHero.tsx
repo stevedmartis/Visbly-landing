@@ -13,26 +13,26 @@ import screen4 from "@/assets/screen4.png";
 
 const heroSteps = [
   {
-    subtitle: "Scanner de Tendencias",
-    title: "Encuentra los Ángulos que Detienen el Scroll",
+    subtitle: "Discovery Agent",
+    title: "Identifica Ángulos que Detienen el Scroll",
     mobileTitle: "Ganchos que detienen el scroll",
     image: screen0
   },
   {
-    subtitle: "Extracción de ADN",
-    title: "Clona tu Identidad de Marca al Instante",
-    mobileTitle: "Clona tu Identidad de Marca",
+    subtitle: "Audit Agent",
+    title: "Clona tu ADN de Marca en un Click",
+    mobileTitle: "Clona tu ADN de Marca",
     image: screen1
   },
   {
-    subtitle: "Generación Studio",
-    title: "Creativos de Clase Mundial en Segundos",
-    mobileTitle: "Creativos de Elite al instante",
+    subtitle: "Creative Agent",
+    title: "Anuncios de Élite Generados por IA",
+    mobileTitle: "Anuncios de Elite al instante",
     image: screen0
   },
   {
-    subtitle: "Orquestación MetaAds",
-    title: "Lanza Campañas Ganadoras sin Esfuerzo",
+    subtitle: "Meta Orchestrator",
+    title: "Escala tus Campañas en Piloto Automático",
     mobileTitle: "Escala tus Ads sin esfuerzo",
     image: screen4
   },
