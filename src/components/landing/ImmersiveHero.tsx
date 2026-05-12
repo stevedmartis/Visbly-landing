@@ -28,13 +28,13 @@ const heroSteps = [
     subtitle: "Creative Agent",
     title: "Anuncios de Élite Generados por IA",
     mobileTitle: "Anuncios de Elite al instante",
-    image: screen0
+    image: screen2
   },
   {
     subtitle: "Meta Orchestrator",
     title: "Escala tus Campañas en Piloto Automático",
     mobileTitle: "Escala tus Ads sin esfuerzo",
-    image: screen4
+    image: screen3
   },
 ];
 

@@ -1,18 +1,19 @@
 import { motion, useTransform, type MotionValue } from "framer-motion";
 import { useMemo } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import ad1 from "@/assets/ad-placeholder-1.jpg";
-import ad2 from "@/assets/ad-placeholder-2.jpg";
-import ad3 from "@/assets/ad-placeholder-3.jpg";
-import ad4 from "@/assets/ad-placeholder-4.jpg";
-import ad5 from "@/assets/ad-placeholder-5.jpg";
-import ad6 from "@/assets/ad-placeholder-6.jpg";
+import ad1 from "@/assets/ad_visbly1.png";
+import ad2 from "@/assets/ad_visb2.png";
+import ad3 from "@/assets/ad_visb3.png";
+import ad4 from "@/assets/ad_visb4.png";
+import ad5 from "@/assets/ad_visb5.png";
+import ad6 from "@/assets/ad_visb6.png";
+import ad7 from "@/assets/ad_visb6.png";
 
 interface AdTemplateWallProps {
   scrollProgress: MotionValue<number>;
 }
 
-const adImages = [ad1, ad2, ad3, ad4, ad5, ad6];
+const adImages = [ad1, ad2, ad3, ad4, ad5, ad6, ad7];
 
 const AdCard = ({ src }: { src: string }) => (
   <div
@@ -84,19 +85,19 @@ const AdTemplateWall = ({ scrollProgress }: AdTemplateWallProps) => {
   const wallScale = useTransform(scrollProgress, [0, 0.5, 1], [1, 1.05, 1.1]);
 
   // Reduced rows and cards on mobile for performance
-  const rows = isMobile 
+  const rows = isMobile
     ? [
-        { direction: -1 as const, speed: 800, yOffset: 10, startIndex: 0, count: 6 },
-        { direction: 1 as const,  speed: 900, yOffset: 40, startIndex: 2, count: 6 },
-        { direction: -1 as const, speed: 700, yOffset: 70, startIndex: 4, count: 6 },
-      ]
+      { direction: -1 as const, speed: 800, yOffset: 10, startIndex: 0, count: 6 },
+      { direction: 1 as const, speed: 900, yOffset: 40, startIndex: 2, count: 6 },
+      { direction: -1 as const, speed: 700, yOffset: 70, startIndex: 4, count: 6 },
+    ]
     : [
-        { direction: -1 as const, speed: 1200, yOffset: -5, startIndex: 0, count: 14 },
-        { direction: 1 as const,  speed: 1400, yOffset: 18, startIndex: 2, count: 14 },
-        { direction: -1 as const, speed: 1100, yOffset: 42, startIndex: 4, count: 14 },
-        { direction: 1 as const,  speed: 1500, yOffset: 66, startIndex: 1, count: 14 },
-        { direction: -1 as const, speed: 1300, yOffset: 88, startIndex: 3, count: 14 },
-      ];
+      { direction: -1 as const, speed: 1200, yOffset: -5, startIndex: 0, count: 14 },
+      { direction: 1 as const, speed: 1400, yOffset: 18, startIndex: 2, count: 14 },
+      { direction: -1 as const, speed: 1100, yOffset: 42, startIndex: 4, count: 14 },
+      { direction: 1 as const, speed: 1500, yOffset: 66, startIndex: 1, count: 14 },
+      { direction: -1 as const, speed: 1300, yOffset: 88, startIndex: 3, count: 14 },
+    ];
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -110,7 +111,7 @@ const AdTemplateWall = ({ scrollProgress }: AdTemplateWallProps) => {
         }}
       >
         {rows.map((row, i) => (
-          <Row 
+          <Row
             key={i}
             scrollProgress={scrollProgress}
             direction={row.direction}
