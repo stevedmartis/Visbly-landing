@@ -1,10 +1,16 @@
 import { motion } from "framer-motion";
+import { trackLead } from "@/lib/meta-pixel";
 
 const AppStoreButtons = ({ className = "" }: { className?: string }) => {
+  const handleDownload = () => {
+    trackLead();
+  };
+
   return (
     <div className={`flex flex-nowrap items-center gap-2 sm:gap-4 ${className}`}>
       <motion.a
         href="#"
+        onClick={handleDownload}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className="h-10 sm:h-12 md:h-14 transition-all"
@@ -18,6 +24,7 @@ const AppStoreButtons = ({ className = "" }: { className?: string }) => {
 
       <motion.a
         href="#"
+        onClick={handleDownload}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className="h-10 sm:h-12 md:h-14 transition-all"
