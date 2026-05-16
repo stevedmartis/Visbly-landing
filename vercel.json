@@ -10,6 +10,10 @@
       "destination": "/terms.html"
     },
     {
+      "source": "/support",
+      "destination": "/support.html"
+    },
+    {
       "source": "/delete-data",
       "destination": "/delete-data.html"
     }

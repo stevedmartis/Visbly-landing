@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soporte y Ayuda - Visbly</title>
+    <style>
+        :root {
+            --background: #05050a;
+            --foreground: #f0f2f5;
+            --primary: #4d00ff;
+            --card: #0d0d16;
+            --border: #1a1a2e;
+            --muted: #8899a6;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--foreground);
+            background: var(--background);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 24px;
+            background-image: radial-gradient(circle at top right, rgba(77, 0, 255, 0.05), transparent 400px),
+                radial-gradient(circle at bottom left, rgba(77, 0, 255, 0.03), transparent 400px);
+        }
+
+        header {
+            margin-bottom: 60px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 30px;
+        }
+
+        .logo {
+            height: 32px;
+            margin-bottom: 24px;
+            opacity: 0.9;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin: 0;
+            background: linear-gradient(to right, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-top: 48px;
+            border-left: 4px solid var(--primary);
+            padding-left: 20px;
+        }
+
+        p,
+        li {
+            color: var(--muted);
+            font-size: 1.1rem;
+        }
+
+        strong {
+            color: #fff;
+        }
+
+        .contact {
+            background: var(--card);
+            padding: 32px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            margin-top: 80px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+
+        .contact a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .contact a:hover {
+            text-decoration: underline;
+        }
+
+        .back {
+            margin-bottom: 40px;
+            display: inline-block;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .faq-item {
+            margin-bottom: 32px;
+        }
+
+        .faq-q {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="/" class="back">← Volver a Visbly</a>
+    <header>
+        <img src="/visbly_logo.png" alt="Visbly Logo" class="logo">
+        <h1>Centro de Soporte</h1>
+        <p>Estamos aquí para ayudarte a escalar.</p>
+    </header>
+
+    <section>
+        <h2>Preguntas Frecuentes</h2>
+
+        <div class="faq-item">
+            <div class="faq-q">¿Cómo contacto con el equipo técnico?</div>
+            <p>Puedes enviarnos un correo electrónico a hola@visblyai.com. Respondemos a todas las consultas en un plazo
+                de 24 horas hábiles.</p>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q">¿Qué hago si tengo problemas con la conexión de Meta?</div>
+            <p>Asegúrate de tener permisos de administrador en la cuenta comercial de Meta. Si el problema persiste,
+                desconecta y vuelve a conectar la cuenta desde los ajustes de Visbly.</p>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q">¿Cómo gestiono mi suscripción?</div>
+            <p>Las suscripciones se gestionan directamente a través de Apple App Store o Google Play Store, garantizando
+                tu seguridad y control total sobre los pagos.</p>
+        </div>
+
+        <h2>Ayuda Directa</h2>
+        <p>Si no encuentras lo que buscas en las FAQ, nuestro equipo está listo para asistirte en la implementación de
+            tus agentes.</p>
+    </section>
+
+    <div class="contact">
+        <strong>¿Necesitas hablar con un humano?</strong><br>
+        <p style="margin-top: 10px; margin-bottom: 20px;">Envíanos un mensaje y te ayudaremos con tu estrategia:</p>
+        <a href="mailto:hola@visblyai.com">hola@visblyai.com</a>
+    </div>
+</body>
+
+</html>

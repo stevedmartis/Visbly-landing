@@ -43,6 +43,7 @@ const Footer = () => {
             <ul className="space-y-4 text-sm text-muted-foreground">
               <li className="hover:text-primary transition-colors"><a href="#">Sobre nosotros</a></li>
               <li className="hover:text-primary transition-colors"><a href="#">Blog</a></li>
+              <li className="hover:text-primary transition-colors"><a href="/support">Soporte</a></li>
               <li className="hover:text-primary transition-colors"><a href="mailto:hola@visblyai.com">Contacto</a></li>
             </ul>
           </div>
