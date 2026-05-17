@@ -13,25 +13,25 @@ import screen3 from "@/assets/screen3.png";
 const heroSteps = [
   {
     subtitle: "Discovery Agent",
-    title: "Identifica Ángulos que Detienen el Scroll",
+    title: "Identifica Ángulos de Venta de Alto Impacto en Segundos",
     mobileTitle: "Ganchos que detienen el scroll",
     image: screen0
   },
   {
     subtitle: "Audit Agent",
-    title: "Clona tu ADN de Marca en un Click",
+    title: "Clona tu ADN de Marca con Fidelidad del 100%",
     mobileTitle: "Clona tu ADN de Marca",
     image: screen1
   },
   {
     subtitle: "Creative Agent",
-    title: "Anuncios de Élite Generados por IA",
-    mobileTitle: "Anuncios de Elite al instante",
+    title: "Anuncios Premium 'Liquid Glass' Listos para Vender",
+    mobileTitle: "Anuncios de Élite al instante",
     image: screen2
   },
   {
     subtitle: "Meta Orchestrator",
-    title: "Escala tus Campañas en Piloto Automático",
+    title: "Escala y Lanza tus Campañas en Piloto Automático",
     mobileTitle: "Escala tus Ads sin esfuerzo",
     image: screen3
   },

@@ -75,7 +75,7 @@ const LandingPage = () => {
               El Cuello de Botella Creativo
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
-              La fatiga creativa ocurre 10x más rápido que hace dos años. Mantener el rendimiento exige una rotación de agentes que trabajen 24/7 en tu estrategia.
+              Mantener el rendimiento de tus campañas exige una rotación constante de anuncios. Visbly contrata a tu propio equipo de agentes de IA especializados para que automaticen y escalen tu estrategia, diseño de creativos y ejecución en Meta Ads 24/7 sin el costo de una agencia.
             </p>
           </motion.div>
 
