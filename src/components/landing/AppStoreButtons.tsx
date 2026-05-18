@@ -23,7 +23,9 @@ const AppStoreButtons = ({ className = "" }: { className?: string }) => {
       </motion.a>
 
       <motion.a
-        href="#"
+        href="https://play.google.com/store/apps/details?id=cl.freeily.visbly"
+        target="_blank"
+        rel="noopener noreferrer"
         onClick={handleDownload}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
