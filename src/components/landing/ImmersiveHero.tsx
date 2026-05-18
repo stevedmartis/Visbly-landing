@@ -38,7 +38,7 @@ const heroSteps = [
 ];
 
 const perspectives: [number, number, number, number, number][] = [
-  [-32, 12, -6, 1.05, 6],    // Step 0: Sleek right-side view, deep yaw rotation
+  [0, 0, 0, 1.05, -8],       // Step 0: Perfectly centered and straight front view
   [38, -12, 8, 1.16, -22],   // Step 1: Slide far left, view phone from left-side depth
   [-44, 16, -10, 1.24, 10],  // Step 2: Slide far right, high-contrast right-side view
   [-15, 6, -3, 1.36, -8],    // Step 3: Slide to center, elegant volumetric final preview
