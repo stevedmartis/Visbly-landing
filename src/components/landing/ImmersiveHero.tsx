@@ -37,11 +37,11 @@ const heroSteps = [
   },
 ];
 
-const perspectives: [number, number, number, number][] = [
-  [0, 0, 1, 0],
-  [-14, 4, 0.98, 4],
-  [16, -2, 1, 5],
-  [0, 0, 1.05, 0],
+const perspectives: [number, number, number, number, number][] = [
+  [-12, 8, -2, 1.0, 0],     // Step 0: Sleek initial angled display
+  [18, -10, 4, 1.1, -4],    // Step 1: Slide left slightly, inverse tilt
+  [-26, 14, -8, 1.2, 4],    // Step 2: High 3D perspective display
+  [0, 0, 0, 1.32, -10],     // Step 3: Align straight, massive zoom, slide to center
 ];
 
 const N = heroSteps.length;
@@ -69,16 +69,18 @@ const ImmersiveHero = () => {
 
   const rawRotateY = useTransform(scrollYProgress, stops, perspectives.map((p) => p[0]));
   const rawRotateX = useTransform(scrollYProgress, stops, perspectives.map((p) => p[1]));
-  const rawScale = useTransform(scrollYProgress, stops, perspectives.map((p) => p[2]));
-  const rawX = useTransform(scrollYProgress, stops, perspectives.map((p) => p[3]));
+  const rawRotateZ = useTransform(scrollYProgress, stops, perspectives.map((p) => p[2]));
+  const rawScale = useTransform(scrollYProgress, stops, perspectives.map((p) => p[3]));
+  const rawX = useTransform(scrollYProgress, stops, perspectives.map((p) => p[4]));
 
   const rotateY = useSpring(rawRotateY, springConfig);
   const rotateX = useSpring(rawRotateX, springConfig);
+  const rotateZ = useSpring(rawRotateZ, springConfig);
   const scaleValue = useSpring(rawScale, springConfig);
   const xVw = useSpring(rawX, springConfig);
 
-  const responsiveScale = useTransform(scaleValue, (s) => s * (isMobile ? 1.2 : 0.85));
-  const responsiveX = useTransform(xVw, (v) => `calc(${v}vw + (var(--phone-offset, 0px)))`);
+  const responsiveScale = useTransform(scaleValue, (s) => s * (isMobile ? 1.15 : 0.85));
+  const responsiveX = useTransform(xVw, (v) => isMobile ? '0px' : `calc(${v}vw + (var(--phone-offset, 0px)))`);
 
   const scrollIndicatorO = useTransform(scrollYProgress, [0, 0.04], [1, 0]);
 
@@ -143,37 +145,71 @@ const ImmersiveHero = () => {
                 x: responsiveX,
                 rotateY,
                 rotateX,
+                rotateZ,
                 scale: responsiveScale,
-                transformPerspective: 1200,
+                transformPerspective: 1400,
               }}
               className="relative [--phone-offset:0px] md:[--phone-offset:8vw] will-change-transform"
             >
               {/* Glow effect that stays with the phone */}
-              <div className="absolute -inset-20 bg-primary/20 rounded-full blur-[100px] opacity-40" />
+              <div className="absolute -inset-20 bg-primary/20 rounded-full blur-[100px] opacity-35" />
 
-              <div className="relative z-10 w-[180px] sm:w-[200px] md:w-[260px] lg:w-[280px] xl:w-[320px] aspect-[9/19] bg-[#0a0a0a] rounded-[2.5rem] border-[6px] border-[#1a1a1a] shadow-2xl overflow-hidden">
-                {/* Screen Content Layers */}
-                {heroSteps.map((step, i) => (
-                  <motion.img
-                    key={i}
-                    src={step.image}
-                    alt={`Screen ${i}`}
-                    initial={false}
-                    animate={{
-                      opacity: i === activeStep ? 1 : 0,
-                      scale: i === activeStep ? 1 : 1.1
-                    }}
-                    transition={{ duration: 0.8, ease: "easeInOut" }}
-                    className="absolute inset-0 w-full h-full object-cover"
-                    style={{ zIndex: i === activeStep ? 20 : 10 }}
-                    fetchPriority={i === 0 ? "high" : "low"}
-                    decoding={i === 0 ? "sync" : "async"}
-                    loading={i === 0 ? "eager" : "lazy"}
-                  />
-                ))}
+              {/* Ultra-Realistic iPhone Pro hardware wrapper */}
+              <div className="relative p-[10px] bg-gradient-to-b from-[#2b2b2d] via-[#1c1c1e] to-[#0c0c0d] rounded-[3.2rem] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9),_inset_0_1px_2px_rgba(255,255,255,0.2),_inset_0_-1px_2px_rgba(0,0,0,0.8)] border border-black/40">
 
-                {/* Fixed Reflection/Glass overlay */}
-                <div className="absolute inset-0 z-30 bg-gradient-to-tr from-white/10 to-transparent pointer-events-none opacity-50" />
+                {/* Simulated Polished Titanium bevel reflection */}
+                <div className="absolute inset-[1px] rounded-[3.1rem] border border-white/10 pointer-events-none z-30 opacity-70" />
+                <div className="absolute inset-[3px] rounded-[3.0rem] border border-black/80 pointer-events-none z-30" />
+
+                {/* Left Side Buttons (Volume & Action) */}
+                {/* Action button */}
+                <div className="absolute -left-[2px] top-[18%] w-[2.5px] h-[16px] bg-gradient-to-b from-[#48484a] to-[#2c2c2e] rounded-l border-y border-black z-0 shadow-sm" />
+                {/* Volume Up */}
+                <div className="absolute -left-[2px] top-[26%] w-[2.5px] h-[34px] bg-gradient-to-b from-[#48484a] to-[#2c2c2e] rounded-l border-y border-black z-0 shadow-sm" />
+                {/* Volume Down */}
+                <div className="absolute -left-[2px] top-[36%] w-[2.5px] h-[34px] bg-gradient-to-b from-[#48484a] to-[#2c2c2e] rounded-l border-y border-black z-0 shadow-sm" />
+
+                {/* Right Side Power Button */}
+                <div className="absolute -right-[2px] top-[29%] w-[2.5px] h-[52px] bg-gradient-to-b from-[#48484a] to-[#2c2c2e] rounded-r border-y border-black z-0 shadow-sm" />
+
+                {/* Screen Housing with thin uniform Pro Bezel */}
+                <div className="relative z-10 w-[180px] sm:w-[200px] md:w-[260px] lg:w-[280px] xl:w-[310px] aspect-[9/19.5] bg-[#050505] rounded-[2.6rem] border-[4px] border-[#08080a] shadow-2xl overflow-hidden">
+
+                  {/* Screen Content Layers */}
+                  {heroSteps.map((step, i) => (
+                    <motion.img
+                      key={i}
+                      src={step.image}
+                      alt={`Screen ${i}`}
+                      initial={false}
+                      animate={{
+                        opacity: i === activeStep ? 1 : 0,
+                        scale: i === activeStep ? 1 : 1.05
+                      }}
+                      transition={{ duration: 0.8, ease: "easeInOut" }}
+                      className="absolute inset-0 w-full h-full object-cover"
+                      style={{ zIndex: i === activeStep ? 20 : 10 }}
+                      fetchPriority={i === 0 ? "high" : "low"}
+                      decoding={i === 0 ? "sync" : "async"}
+                      loading={i === 0 ? "eager" : "lazy"}
+                    />
+                  ))}
+
+                  {/* Top Dynamic Island */}
+                  <div className="absolute top-[10px] left-1/2 -translate-x-1/2 w-[34%] h-[16px] bg-black rounded-full z-40 flex items-center justify-end px-3 shadow-inner border border-white/5">
+                    {/* Simulated lens glare */}
+                    <div className="w-[5px] h-[5px] rounded-full bg-[#111122] border border-[#222244] opacity-80" />
+                  </div>
+
+                  {/* Bottom Home Indicator Line (iOS) */}
+                  <div className="absolute bottom-[8px] left-1/2 -translate-x-1/2 w-[36%] h-[4px] bg-white/30 rounded-full z-40 pointer-events-none" />
+
+                  {/* Fixed Premium Glass Reflection Overlay */}
+                  <div className="absolute inset-0 z-30 bg-gradient-to-tr from-white/0 via-white/5 to-white/10 pointer-events-none opacity-60 mix-blend-overlay" />
+
+                  {/* Inner bezel depth shadow */}
+                  <div className="absolute inset-0 rounded-[2.2rem] shadow-[inset_0_0_12px_rgba(0,0,0,0.9)] pointer-events-none z-40" />
+                </div>
               </div>
             </motion.div>
           </div>
