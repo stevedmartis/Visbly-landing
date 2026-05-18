@@ -1,13 +1,13 @@
 import { motion, useTransform, type MotionValue } from "framer-motion";
 import { useMemo, useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import ad1 from "@/assets/ad_visbly1.png";
-import ad2 from "@/assets/ad_visb2.png";
-import ad3 from "@/assets/visb3.png";
-import ad4 from "@/assets/visb4.png";
-import ad5 from "@/assets/ad_visb5.png";
-import ad6 from "@/assets/ad_visb6.png";
-import ad7 from "@/assets/ad_visb7.png";
+import ad1 from "@/assets/ad_visbly1.webp";
+import ad2 from "@/assets/ad_visb2.webp";
+import ad3 from "@/assets/visb3.webp";
+import ad4 from "@/assets/visb4.webp";
+import ad5 from "@/assets/ad_visb5.webp";
+import ad6 from "@/assets/ad_visb6.webp";
+import ad7 from "@/assets/ad_visb7.webp";
 
 interface AdTemplateWallProps {
   scrollProgress: MotionValue<number>;

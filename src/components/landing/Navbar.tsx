@@ -10,7 +10,7 @@ const Navbar = () => (
   >
     <div className="max-w-7xl mx-auto flex items-center justify-between">
       <div className="flex items-center gap-2">
-        <img src="/visbly_logo.png" alt="Visbly Logo" className="h-8 w-auto" />
+        <img src="/visbly_logo.webp" alt="Visbly Logo" className="h-8 w-auto" />
       </div>
 
       <div className="flex items-center gap-8">

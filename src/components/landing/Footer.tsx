@@ -11,7 +11,7 @@ const Footer = () => {
 
           {/* Columna Branding */}
           <div className="col-span-2 lg:col-span-2">
-            <img src="/visbly_logo.png" alt="Visbly Logo" className="h-8 w-auto mb-6 opacity-90" />
+            <img src="/visbly_logo.webp" alt="Visbly Logo" className="h-8 w-auto mb-6 opacity-90" />
             <p className="text-muted-foreground max-w-xs mb-8 text-sm leading-relaxed">
               El primer Director Creativo de IA diseñado para Media Buyers y fundadores que necesitan escalar su estrategia creativa.
             </p>

@@ -5,10 +5,10 @@ import StarField from "./StarField";
 import AdTemplateWall from "./AdTemplateWall";
 import AppStoreButtons from "./AppStoreButtons";
 // REEMPLAZA ESTOS ARCHIVOS EN src/assets/ CON TUS CAPTURAS REALES
-import screen0 from "@/assets/screen0.png";
-import screen1 from "@/assets/screen1.png";
-import screen2 from "@/assets/screen2.png";
-import screen3 from "@/assets/screen3.png";
+import screen0 from "@/assets/screen0.webp";
+import screen1 from "@/assets/screen1.webp";
+import screen2 from "@/assets/screen2.webp";
+import screen3 from "@/assets/screen3.webp";
 
 const heroSteps = [
   {
@@ -166,6 +166,9 @@ const ImmersiveHero = () => {
                     transition={{ duration: 0.8, ease: "easeInOut" }}
                     className="absolute inset-0 w-full h-full object-cover"
                     style={{ zIndex: i === activeStep ? 20 : 10 }}
+                    fetchPriority={i === 0 ? "high" : "low"}
+                    decoding={i === 0 ? "sync" : "async"}
+                    loading={i === 0 ? "eager" : "lazy"}
                   />
                 ))}
 

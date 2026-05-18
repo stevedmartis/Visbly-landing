@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 
 const Ecosystem = () => {
   const sources = [
-    { name: "LinkedIn", icon: "/linkedin.png", type: "Social DNA" },
+    { name: "LinkedIn", icon: "/linkedin.webp", type: "Social DNA" },
     { name: "Facebook", icon: "https://cdn.simpleicons.org/facebook", type: "Ad Context" },
-    { name: "Instagram", icon: "/ig.png", type: "Visual DNA" },
+    { name: "Instagram", icon: "/ig.webp", type: "Visual DNA" },
     { name: "Notion", icon: "https://cdn.simpleicons.org/notion/white", type: "Docs & Strategy" },
     { name: "GitHub", icon: "https://cdn.simpleicons.org/github/white", type: "Technical DNA" },
     { name: "Websites", icon: "https://www.vectorlogo.zone/logos/google_chrome/google_chrome-icon.svg", type: "Full Domain Scan" },

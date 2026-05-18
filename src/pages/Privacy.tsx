@@ -10,7 +10,7 @@ const Privacy = () => {
       <header className="border-b border-foreground/5 px-6 py-4">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <Link to="/">
-            <img src="/visbly_logo.png" alt="Visbly" className="h-7 w-auto opacity-90" />
+            <img src="/visbly_logo.webp" alt="Visbly" className="h-7 w-auto opacity-90" />
           </Link>
           <span className="text-xs text-muted-foreground uppercase tracking-widest">Privacidad</span>
         </div>
