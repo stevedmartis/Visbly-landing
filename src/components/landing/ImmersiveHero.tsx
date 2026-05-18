@@ -172,8 +172,8 @@ const ImmersiveHero = () => {
                 {/* Right Side Power Button */}
                 <div className="absolute -right-[2px] top-[29%] w-[2.5px] h-[52px] bg-gradient-to-b from-[#48484a] to-[#2c2c2e] rounded-r border-y border-black z-0 shadow-sm" />
 
-                {/* Screen Housing with thin uniform Pro Bezel */}
-                <div className="relative z-10 w-[180px] sm:w-[200px] md:w-[260px] lg:w-[280px] xl:w-[310px] aspect-[9/19.5] bg-[#050505] rounded-[2.6rem] border-[4px] border-[#08080a] shadow-2xl overflow-hidden">
+                 {/* Screen Housing with thin uniform Pro Bezel */}
+                <div className="relative z-10 w-[180px] sm:w-[200px] md:w-[260px] lg:w-[280px] xl:w-[310px] aspect-[9/19.5] bg-[#050505] rounded-[2.6rem] border-[4px] border-[#08080a] shadow-2xl overflow-hidden [webkit-mask-image:-webkit-radial-gradient(white,black)]">
 
                   {/* Screen Content Layers */}
                   {heroSteps.map((step, i) => (
@@ -183,11 +183,10 @@ const ImmersiveHero = () => {
                       alt={`Screen ${i}`}
                       initial={false}
                       animate={{
-                        opacity: i === activeStep ? 1 : 0,
-                        scale: i === activeStep ? 1 : 1.05
+                        opacity: i === activeStep ? 1 : 0
                       }}
-                      transition={{ duration: 0.8, ease: "easeInOut" }}
-                      className="absolute inset-0 w-full h-full object-cover"
+                      transition={{ duration: 0.45, ease: "easeInOut" }}
+                      className="absolute inset-0 w-full h-full object-cover rounded-[2.2rem]"
                       style={{ zIndex: i === activeStep ? 20 : 10 }}
                       fetchPriority={i === 0 ? "high" : "low"}
                       decoding={i === 0 ? "sync" : "async"}
