@@ -112,11 +112,11 @@ const ImmersiveHero = () => {
                   >
                     {heroSteps[activeStep].subtitle}
                   </span>
-                  <h2
+                  <h1
                     className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mt-2 md:mt-8 font-display leading-tight drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] px-6 md:px-0 w-full whitespace-pre-line"
                   >
                     {isMobile ? heroSteps[activeStep].mobileTitle : heroSteps[activeStep].title}
-                  </h2>
+                  </h1>
                 </motion.div>
               </AnimatePresence>
             </div>

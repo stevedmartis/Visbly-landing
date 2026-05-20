@@ -5,57 +5,70 @@ const Pricing = () => {
   const plans = [
     {
       name: "Starter",
-      subtitle: "Enciende tu tracción inicial",
-      price: "4.990",
-      originalPrice: "7.990",
+      subtitle: "Tracción Inicial",
+      price: "5.990",
       period: "/ mes",
-      promo: "Primer mes a precio especial",
       features: [
-        "3 Growth Sprints diarios",
-        "1 Persona de IA (Tú)",
-        "Análisis de 1 Sitio Web / ADN",
-        "Canal: Meta (FB/IG)",
-        "Soporte por Comunidad",
+        "Conecta 1 Cuenta de Meta Ads",
+        "Límite de 3 campañas activas",
+        "10 Sprints diarios y copys de IA",
+        "Lanzamiento automático de campañas",
       ],
       cta: "Empezar Ahora",
       highlight: false,
+      gradient: "from-[#6366F1]/10 to-[#4F46E5]/10",
+      borderClass: "border-[#6366F1]/20 hover:border-[#6366F1]/80 hover:shadow-[0_0_40px_rgba(99,102,241,0.25)]",
+      badgeColor: "bg-[#6366F1]",
+      checkBg: "bg-[#6366F1]/20",
+      checkColor: "text-[#6366F1]",
+      buttonClass: "bg-[#6366F1] text-white hover:bg-[#4F46E5] shadow-lg shadow-[#6366F1]/20 border border-transparent",
     },
     {
       name: "Scale",
-      subtitle: "Para agencias y equipos en crecimiento",
-      price: "7.990",
-      period: "/ mes",
-      features: [
-        "10 Growth Sprints diarios",
-        "3 Personas de IA (Equipo)",
-        "Análisis de 5 Sitios Web / ADN",
-        "Canales: Meta + LinkedIn",
-        "Soporte Prioritario",
-      ],
-      cta: "Escalar Ahora",
-      highlight: true,
-    },
-    {
-      name: "Infinity",
-      subtitle: "Dominio total para grandes compañías",
+      subtitle: "Crecimiento Acelerado",
       price: "9.990",
       period: "/ mes",
       features: [
-        "Sprints Ilimitados",
-        "Personas de IA Ilimitadas",
-        "ADN de Marca Ilimitado",
-        "Todos los canales (TikTok inc.)",
-        "Account Manager dedicado",
+        "Conecta hasta 3 Cuentas de Meta Ads",
+        "Sprints y copys de IA ilimitados",
+        "Detección automática de Ads ganadores",
+        "Escalamiento de pauta con un clic",
       ],
-      cta: "Contactar Ventas",
+      cta: "Escalar Ahora",
+      highlight: true,
+      gradient: "from-[#EC4899]/15 to-[#D946EF]/15",
+      borderClass: "border-[#EC4899]/60 shadow-[0_0_40px_rgba(236,72,153,0.35)] hover:border-[#D946EF] hover:shadow-[0_0_50px_rgba(236,72,153,0.5)]",
+      badgeColor: "bg-gradient-to-r from-[#EC4899] to-[#D946EF]",
+      checkBg: "bg-[#EC4899]/20",
+      checkColor: "text-[#EC4899]",
+      buttonClass: "bg-gradient-to-r from-[#EC4899] to-[#D946EF] text-white hover:opacity-95 shadow-lg shadow-[#EC4899]/30 border border-transparent",
+    },
+    {
+      name: "Infinity",
+      subtitle: "Dominio Ilimitado",
+      price: "14.990",
+      period: "/ mes",
+      features: [
+        "Cuentas y campañas de Meta ilimitadas",
+        "Todo el Growth Engine desbloqueado",
+        "Reglas de Auto-Escalamiento (Autopilot)",
+        "Soporte estratégico prioritario 1-a-1",
+      ],
+      cta: "Dominar Ahora",
       highlight: false,
+      gradient: "from-[#F59E0B]/10 to-[#EF4444]/10",
+      borderClass: "border-[#F59E0B]/20 hover:border-[#F59E0B]/80 hover:shadow-[0_0_40px_rgba(245,158,11,0.25)]",
+      badgeColor: "bg-[#F59E0B]",
+      checkBg: "bg-[#F59E0B]/20",
+      checkColor: "text-[#F59E0B]",
+      buttonClass: "bg-gradient-to-r from-[#F59E0B] to-[#EF4444] text-white hover:opacity-95 shadow-lg shadow-[#F59E0B]/20 border border-transparent",
     },
   ];
 
   return (
-    <section id="pricing" className="py-12 px-6 relative overflow-hidden">
+    <section id="pricing" className="py-16 px-6 relative overflow-hidden">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-8">
+        <div className="text-center mb-12">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -82,9 +95,18 @@ const Pricing = () => {
           >
             Elige el motor que mejor se adapte a tu ritmo de crecimiento.
           </motion.p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 0.6 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="text-xs text-muted-foreground mt-2"
+          >
+            * Valores expresados en CLP (Pesos Chilenos) facturados a través de las tiendas oficiales de aplicaciones.
+          </motion.p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-8 items-stretch">
           {plans.map((plan, i) => (
             <motion.div
               key={i}
@@ -92,56 +114,39 @@ const Pricing = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className={`relative p-8 rounded-[32px] border ${
-                plan.highlight
-                  ? "border-primary/50 bg-primary/[0.03] shadow-[0_0_40px_rgba(59,130,246,0.1)]"
-                  : "border-foreground/10 bg-foreground/[0.02]"
-              } backdrop-blur-xl flex flex-col`}
+              className={`group relative p-8 rounded-[32px] border bg-gradient-to-br ${plan.gradient} bg-[#07090E]/60 backdrop-blur-2xl flex flex-col transition-all duration-300 ${plan.borderClass}`}
             >
               {plan.highlight && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-primary-foreground text-xs font-bold rounded-full uppercase tracking-wider">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-[#EC4899] to-[#D946EF] text-white text-xs font-black rounded-full uppercase tracking-wider shadow-md">
                   Más Popular
                 </div>
               )}
 
               <div className="mb-8">
-                <h3 className="text-2xl font-bold text-foreground">{plan.name}</h3>
+                <h3 className="text-2xl font-bold text-foreground font-display">{plan.name}</h3>
                 <p className="text-sm text-muted-foreground mt-1">{plan.subtitle}</p>
               </div>
 
               <div className="mb-8 flex flex-col">
                 <div className="flex items-baseline gap-1">
-                  <span className="text-4xl font-bold text-foreground">${plan.price}</span>
-                  <span className="text-muted-foreground text-sm">{plan.period}</span>
+                  <span className="text-4xl font-extrabold text-white font-display">${plan.price}</span>
+                  <span className="text-muted-foreground text-sm font-medium">{plan.period}</span>
                 </div>
-                {plan.originalPrice && (
-                  <div className="mt-1 flex items-center gap-2">
-                    <span className="text-sm text-muted-foreground line-through">${plan.originalPrice}</span>
-                    <span className="text-[10px] font-bold text-primary uppercase tracking-tighter bg-primary/10 px-2 py-0.5 rounded">
-                      Promo Lanzamiento
-                    </span>
-                  </div>
-                )}
-                {plan.promo && <p className="text-[10px] text-primary/80 mt-2 font-medium">{plan.promo}</p>}
               </div>
 
               <div className="space-y-4 mb-10 flex-grow">
                 {plan.features.map((feature, j) => (
                   <div key={j} className="flex items-start gap-3">
-                    <div className="mt-1 p-0.5 rounded-full bg-primary/20">
-                      <Check className="w-3 h-3 text-primary" />
+                    <div className={`mt-1 p-0.5 rounded-full ${plan.checkBg}`}>
+                      <Check className={`w-3 h-3 ${plan.checkColor}`} />
                     </div>
-                    <span className="text-sm text-foreground/80">{feature}</span>
+                    <span className="text-sm text-foreground/90 font-medium">{feature}</span>
                   </div>
                 ))}
               </div>
 
               <button
-                className={`w-full py-4 rounded-2xl font-semibold transition-all ${
-                  plan.highlight
-                    ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/20"
-                    : "bg-foreground/5 text-foreground hover:bg-foreground/10 border border-foreground/10"
-                }`}
+                className={`w-full py-4 rounded-2xl font-bold transition-all duration-300 ${plan.buttonClass}`}
               >
                 {plan.cta}
               </button>
