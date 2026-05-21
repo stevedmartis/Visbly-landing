@@ -1,69 +1,120 @@
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
+import { ArrowUp, Check, Sparkles } from "lucide-react";
 
 const Pricing = () => {
+  const scrollToHero = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const plans = [
     {
       name: "Starter",
+      emoji: "⚡",
       subtitle: "Tracción Inicial",
-      price: "5.990",
+      price: "14.990",
+      futurePrice: "17.990",
       period: "/ mes",
+      priceLabel: "Sube el 20 de Julio",
       features: [
         "Conecta 1 Cuenta de Meta Ads",
-        "Límite de 3 campañas activas",
-        "10 Sprints diarios y copys de IA",
+        "30 ángulos creativos de IA al mes",
+        "Hasta 5 campañas activas",
+        "Discovery + Creative Agent",
         "Lanzamiento automático de campañas",
+        "Soporte por email",
       ],
-      cta: "Empezar Ahora",
+      cta: "Empezar",
       highlight: false,
-      gradient: "from-[#6366F1]/10 to-[#4F46E5]/10",
-      borderClass: "border-[#6366F1]/20 hover:border-[#6366F1]/80 hover:shadow-[0_0_40px_rgba(99,102,241,0.25)]",
+      gradient: "from-[#6366F1]/5 to-[#6366F1]/15",
+      borderClass: "border-[#6366F1]/20 hover:border-[#6366F1]/50 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)]",
       badgeColor: "bg-[#6366F1]",
-      checkBg: "bg-[#6366F1]/20",
-      checkColor: "text-[#6366F1]",
-      buttonClass: "bg-[#6366F1] text-white hover:bg-[#4F46E5] shadow-lg shadow-[#6366F1]/20 border border-transparent",
+      checkBg: "bg-[#6366F1]/15",
+      checkColor: "text-[#818CF8]",
     },
     {
       name: "Scale",
+      emoji: "📈",
       subtitle: "Crecimiento Acelerado",
-      price: "9.990",
+      price: "29.990",
+      futurePrice: "34.990",
       period: "/ mes",
+      priceLabel: "Sube el 20 de Julio",
       features: [
         "Conecta hasta 3 Cuentas de Meta Ads",
-        "Sprints y copys de IA ilimitados",
+        "Ángulos y copys de IA ilimitados",
+        "Campañas ilimitadas",
+        "Los 4 Agentes completos",
         "Detección automática de Ads ganadores",
         "Escalamiento de pauta con un clic",
+        "Soporte prioritario",
       ],
-      cta: "Escalar Ahora",
+      cta: "Escalar",
       highlight: true,
-      gradient: "from-[#EC4899]/15 to-[#D946EF]/15",
-      borderClass: "border-[#EC4899]/60 shadow-[0_0_40px_rgba(236,72,153,0.35)] hover:border-[#D946EF] hover:shadow-[0_0_50px_rgba(236,72,153,0.5)]",
-      badgeColor: "bg-gradient-to-r from-[#EC4899] to-[#D946EF]",
-      checkBg: "bg-[#EC4899]/20",
-      checkColor: "text-[#EC4899]",
-      buttonClass: "bg-gradient-to-r from-[#EC4899] to-[#D946EF] text-white hover:opacity-95 shadow-lg shadow-[#EC4899]/30 border border-transparent",
+      gradient: "from-[#818CF8]/10 to-[#6366F1]/20",
+      borderClass: "border-[#818CF8]/50 shadow-[0_0_40px_rgba(129,140,248,0.2)] hover:border-[#818CF8] hover:shadow-[0_0_50px_rgba(129,140,248,0.3)]",
+      badgeColor: "bg-gradient-to-r from-[#6366F1] to-[#818CF8]",
+      checkBg: "bg-[#818CF8]/15",
+      checkColor: "text-[#A5B4FC]",
     },
     {
       name: "Infinity",
+      emoji: "♾️",
       subtitle: "Dominio Ilimitado",
-      price: "14.990",
+      price: "59.990",
+      futurePrice: "69.990",
       period: "/ mes",
+      priceLabel: "Sube el 20 de Julio",
       features: [
         "Cuentas y campañas de Meta ilimitadas",
         "Todo el Growth Engine desbloqueado",
         "Reglas de Auto-Escalamiento (Autopilot)",
-        "Soporte estratégico prioritario 1-a-1",
+        "API Access",
+        "Brand kits ilimitados",
+        "Analytics avanzado",
+        "Soporte estratégico 1-a-1",
       ],
-      cta: "Dominar Ahora",
+      cta: "Al Infinito",
       highlight: false,
-      gradient: "from-[#F59E0B]/10 to-[#EF4444]/10",
-      borderClass: "border-[#F59E0B]/20 hover:border-[#F59E0B]/80 hover:shadow-[0_0_40px_rgba(245,158,11,0.25)]",
-      badgeColor: "bg-[#F59E0B]",
-      checkBg: "bg-[#F59E0B]/20",
-      checkColor: "text-[#F59E0B]",
-      buttonClass: "bg-gradient-to-r from-[#F59E0B] to-[#EF4444] text-white hover:opacity-95 shadow-lg shadow-[#F59E0B]/20 border border-transparent",
+      gradient: "from-[#4F46E5]/5 to-[#4338CA]/15",
+      borderClass: "border-[#4F46E5]/20 hover:border-[#4F46E5]/50 hover:shadow-[0_0_30px_rgba(79,70,229,0.15)]",
+      badgeColor: "bg-[#4F46E5]",
+      checkBg: "bg-[#4F46E5]/15",
+      checkColor: "text-[#818CF8]",
+    },
+    {
+      name: "Agency",
+      emoji: "🏢",
+      subtitle: "White-Label & Multi-Cliente",
+      price: "149.990",
+      futurePrice: "179.990",
+      period: "/ mes",
+      priceLabel: "Sube el 20 de Julio",
+      features: [
+        "Todo lo de Infinity incluido",
+        "Hasta 10 marcas/clientes",
+        "Dashboard white-label",
+        "Onboarding personalizado",
+        "Canal dedicado en Slack",
+        "Reportes multi-cuenta",
+        "API prioritaria",
+      ],
+      cta: "Potencia",
+      highlight: false,
+      gradient: "from-[#3B82F6]/5 to-[#2563EB]/15",
+      borderClass: "border-[#3B82F6]/20 hover:border-[#3B82F6]/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)]",
+      badgeColor: "bg-[#3B82F6]",
+      checkBg: "bg-[#3B82F6]/15",
+      checkColor: "text-[#60A5FA]",
     },
   ];
+
+  const handlePlanClick = (planName: string) => {
+    if (planName === "Agency") {
+      window.location.href = "mailto:hola@visblyai.com?subject=Visbly Agency Plan - Consulta";
+    } else {
+      scrollToHero();
+    }
+  };
 
   return (
     <section id="pricing" className="py-16 px-6 relative overflow-hidden">
@@ -95,18 +146,31 @@ const Pricing = () => {
           >
             Elige el motor que mejor se adapte a tu ritmo de crecimiento.
           </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.25 }}
+            className="inline-flex items-center gap-2 mt-4 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/20"
+          >
+            <Sparkles className="w-4 h-4 text-primary" />
+            <span className="text-sm font-semibold text-primary">7 días de prueba gratis,</span>
+            <span className="text-sm text-muted-foreground">cancela cuando quieras</span>
+          </motion.div>
+
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 0.6 }}
             viewport={{ once: true }}
             transition={{ delay: 0.3 }}
-            className="text-xs text-muted-foreground mt-2"
+            className="text-xs text-muted-foreground mt-4"
           >
             * Valores expresados en CLP (Pesos Chilenos) facturados a través de las tiendas oficiales de aplicaciones.
           </motion.p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 items-stretch">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
           {plans.map((plan, i) => (
             <motion.div
               key={i}
@@ -114,27 +178,31 @@ const Pricing = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className={`group relative p-8 rounded-[32px] border bg-gradient-to-br ${plan.gradient} bg-[#07090E]/60 backdrop-blur-2xl flex flex-col transition-all duration-300 ${plan.borderClass}`}
+              className={`group relative p-10 rounded-[32px] border bg-gradient-to-br ${plan.gradient} bg-[#07090E]/60 backdrop-blur-2xl flex flex-col transition-all duration-300 ${plan.borderClass}`}
             >
               {plan.highlight && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-[#EC4899] to-[#D946EF] text-white text-xs font-black rounded-full uppercase tracking-wider shadow-md">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 py-1 bg-gradient-to-r from-[#6366F1] to-[#818CF8] text-white text-xs font-black rounded-full uppercase tracking-wider shadow-md z-10">
                   Más Popular
                 </div>
               )}
 
               <div className="mb-8">
-                <h3 className="text-2xl font-bold text-foreground font-display">{plan.name}</h3>
-                <p className="text-sm text-muted-foreground mt-1">{plan.subtitle}</p>
+                <h3 className="text-2xl font-bold text-foreground font-display">{plan.emoji} {plan.name}</h3>
+                <p className="text-sm text-muted-foreground mt-1 line-clamp-1">{plan.subtitle}</p>
               </div>
 
-              <div className="mb-8 flex flex-col">
+              <div className="mb-8">
                 <div className="flex items-baseline gap-1">
                   <span className="text-4xl font-extrabold text-white font-display">${plan.price}</span>
-                  <span className="text-muted-foreground text-sm font-medium">{plan.period}</span>
+                  <span className="text-xs text-muted-foreground/50 font-medium">/mes</span>
+                </div>
+                <div className="mt-2">
+                  <span className="text-base text-muted-foreground line-through">${plan.futurePrice}</span>
+                  <p className="text-[10px] text-muted-foreground/50 mt-1">{plan.priceLabel}</p>
                 </div>
               </div>
 
-              <div className="space-y-4 mb-10 flex-grow">
+              <div className="space-y-3 mb-8 flex-grow">
                 {plan.features.map((feature, j) => (
                   <div key={j} className="flex items-start gap-3">
                     <div className={`mt-1 p-0.5 rounded-full ${plan.checkBg}`}>
@@ -145,11 +213,21 @@ const Pricing = () => {
                 ))}
               </div>
 
-              <button
-                className={`w-full py-4 rounded-2xl font-bold transition-all duration-300 ${plan.buttonClass}`}
-              >
-                {plan.cta}
-              </button>
+              <p className="text-center text-xs text-muted-foreground mb-3">Prueba 7 días gratis · Cancela cuando quieras</p>
+
+              <div className="rounded-2xl p-[2px] bg-gradient-to-r from-[#6366F1] via-[#818CF8] to-[#3B82F6]">
+                <button
+                  onClick={() => handlePlanClick(plan.name)}
+                  className="w-full py-4 rounded-2xl font-bold transition-all duration-300 flex items-center justify-center gap-2 bg-gradient-to-r from-[#6366F1] via-[#818CF8] to-[#3B82F6] text-white hover:opacity-90"
+                >
+                  {plan.cta}
+                  {plan.name === "Agency" ? (
+                    <ArrowUp className="w-4 h-4 rotate-45" />
+                  ) : (
+                    <ArrowUp className="w-4 h-4" />
+                  )}
+                </button>
+              </div>
             </motion.div>
           ))}
         </div>
