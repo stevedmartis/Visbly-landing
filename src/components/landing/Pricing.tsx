@@ -11,8 +11,8 @@ const Pricing = () => {
       name: "Starter",
       emoji: "⚡",
       subtitle: "Tracción Inicial",
-      price: "14.990",
-      futurePrice: "17.990",
+      price: "9.990",
+      futurePrice: "12.990",
       period: "/ mes",
       priceLabel: "Sube el 20 de Julio",
       features: [
@@ -35,8 +35,8 @@ const Pricing = () => {
       name: "Scale",
       emoji: "📈",
       subtitle: "Crecimiento Acelerado",
-      price: "29.990",
-      futurePrice: "34.990",
+      price: "19.990",
+      futurePrice: "24.990",
       period: "/ mes",
       priceLabel: "Sube el 20 de Julio",
       features: [
@@ -60,8 +60,8 @@ const Pricing = () => {
       name: "Infinity",
       emoji: "♾️",
       subtitle: "Dominio Ilimitado",
-      price: "59.990",
-      futurePrice: "69.990",
+      price: "39.990",
+      futurePrice: "49.990",
       period: "/ mes",
       priceLabel: "Sube el 20 de Julio",
       features: [
@@ -85,8 +85,8 @@ const Pricing = () => {
       name: "Agency",
       emoji: "🏢",
       subtitle: "White-Label & Multi-Cliente",
-      price: "149.990",
-      futurePrice: "179.990",
+      price: "99.990",
+      futurePrice: "129.990",
       period: "/ mes",
       priceLabel: "Sube el 20 de Julio",
       features: [
