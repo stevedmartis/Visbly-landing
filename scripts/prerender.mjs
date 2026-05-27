@@ -1,8 +1,8 @@
-import puppeteer from 'puppeteer';
+import puppeteer from 'puppeteer-core';
 import { createServer } from 'http';
 import { readFileSync, existsSync, writeFileSync } from 'fs';
 import { join, extname, resolve } from 'path';
-import { homedir } from 'os';
+import { platform } from 'os';
 
 const DIST = resolve(process.cwd(), 'dist');
 const PORT = 4567;
@@ -59,14 +59,23 @@ function startServer() {
 }
 
 async function findChrome() {
-  // Try puppeteer's bundled Chromium first
-  const bundledPath = puppeteer.executablePath();
-  if (bundledPath && existsSync(bundledPath)) {
-    console.log(`Using bundled Chromium: ${bundledPath}`);
-    return bundledPath;
+  const isLinux = platform() === 'linux';
+
+  // 1) On Linux (Vercel): use @sparticuz/chromium
+  if (isLinux) {
+    try {
+      const { default: chromium } = await import('@sparticuz/chromium');
+      const path = await chromium.executablePath();
+      if (path && existsSync(path)) {
+        console.log(`Using @sparticuz/chromium: ${path}`);
+        return { executablePath: path, args: chromium.args };
+      }
+    } catch {
+      // fall through
+    }
   }
 
-  // Fall back to system Chrome (macOS / Linux)
+  // 2) Fall back to system Chrome (macOS / Linux dev)
   const candidates = [
     '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
     '/Applications/Chromium.app/Contents/MacOS/Chromium',
@@ -79,11 +88,11 @@ async function findChrome() {
   for (const path of candidates) {
     if (existsSync(path)) {
       console.log(`Using system Chrome: ${path}`);
-      return path;
+      return { executablePath: path, args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu'] };
     }
   }
 
-  throw new Error('Chrome/Chromium not found. Install puppeteer with browser download or use a system with Chrome.');
+  throw new Error('Chrome/Chromium not found. Install @sparticuz/chromium or have Chrome on your system.');
 }
 
 async function prerender() {
@@ -96,11 +105,12 @@ async function prerender() {
 
   await startServer();
 
-  const chromePath = await findChrome();
+  const { executablePath: chromePath, args: chromeArgs } = await findChrome();
+
   const browser = await puppeteer.launch({
     executablePath: chromePath,
     headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-gpu'],
+    args: chromeArgs,
   });
 
   try {
