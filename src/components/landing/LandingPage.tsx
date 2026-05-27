@@ -30,7 +30,7 @@ const LandingPage = () => {
   const agents = [
     { emoji: "🔍", name: "Discovery Agent", subtitle: "Market Intelligence", desc: "Escanea tendencias y ganchos psicológicos en tiempo real para encontrar tu próximo ángulo ganador.", gradient: "from-blue-500/20 to-purple-500/20" },
     { emoji: "🧠", name: "Audit Agent", subtitle: "Brand Strategy", desc: "Analiza cualquier URL para extraer y clonar el ADN de tu marca, asegurando consistencia total en cada anuncio.", gradient: "from-purple-500/20 to-pink-500/20" },
-    { emoji: "🎨", name: "Creative Agent", subtitle: "Visual Studio", desc: "Diseña creativos de alto impacto con estética 'Liquid Glass' y layouts probados para maximizar tu CTR.", gradient: "from-pink-500/20 to-orange-500/20" },
+    { emoji: "🎨", name: "Creative Agent", subtitle: "Visual Studio", desc: "Diseña creativos de alto impacto con estética premium y layouts validados para maximizar tu CTR.", gradient: "from-pink-500/20 to-orange-500/20" },
     { emoji: "🚀", name: "Meta Orchestrator", subtitle: "Direct Execution", desc: "Tus agentes lanzan y escalan campañas a Meta directamente desde Visbly. Automatización de extremo a extremo.", gradient: "from-orange-500/20 to-red-500/20" },
   ];
 
