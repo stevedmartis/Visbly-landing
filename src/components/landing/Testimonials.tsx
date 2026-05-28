@@ -69,7 +69,7 @@ const Testimonials = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-primary font-semibold text-sm uppercase tracking-widest"
+            className="text-secondary font-semibold text-sm uppercase tracking-widest"
           >
             Testimonios
           </motion.span>

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowUp, Check, Sparkles } from "lucide-react";
+import { ArrowUp, Check } from "lucide-react";
 
 const Pricing = () => {
   const scrollToHero = () => {
@@ -124,7 +124,7 @@ const Pricing = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-primary font-semibold text-sm uppercase tracking-widest"
+            className="text-secondary font-semibold text-sm uppercase tracking-widest"
           >
             Inversión
           </motion.span>
@@ -147,17 +147,7 @@ const Pricing = () => {
             Elige el motor que mejor se adapte a tu ritmo de crecimiento.
           </motion.p>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.25 }}
-            className="inline-flex items-center gap-2 mt-4 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/20"
-          >
-            <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-semibold text-primary">7 días de prueba gratis,</span>
-            <span className="text-sm text-muted-foreground">cancela cuando quieras</span>
-          </motion.div>
+
 
           <motion.p
             initial={{ opacity: 0 }}
@@ -213,7 +203,9 @@ const Pricing = () => {
                 ))}
               </div>
 
-              <p className="text-center text-xs text-muted-foreground mb-3">Prueba 7 días gratis · Cancela cuando quieras</p>
+              {plan.name === "Starter" && (
+                <p className="text-center text-xs text-muted-foreground mb-3">Prueba 7 días gratis · Cancela cuando quieras</p>
+              )}
 
               <div className="rounded-2xl p-[2px] bg-gradient-to-r from-[#6366F1] via-[#818CF8] to-[#3B82F6]">
                 <button

@@ -19,7 +19,7 @@ const Ecosystem = () => {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="text-primary font-semibold text-sm uppercase tracking-widest"
+              className="text-secondary font-semibold text-sm uppercase tracking-widest"
             >
               Conectividad Total
             </motion.span>
@@ -82,7 +82,7 @@ const Ecosystem = () => {
                   />
                 </div>
                 <span className="text-xs font-bold text-foreground text-center">{source.name}</span>
-                <span className="text-[10px] text-primary/60 text-center mt-1 uppercase tracking-tighter font-medium">{source.type}</span>
+                <span className="text-[10px] text-secondary/60 text-center mt-1 uppercase tracking-tighter font-medium">{source.type}</span>
               </motion.div>
             ))}
           </div>

@@ -135,7 +135,7 @@ const LandingPage = () => {
       <section className="pt-16 pb-6 px-6 relative overflow-hidden">
         <div className="max-w-5xl mx-auto">
           <motion.div {...fadeInUp} className="text-center mb-8">
-            <span className="text-primary font-semibold text-sm uppercase tracking-widest">El Desafío</span>
+            <span className="text-secondary font-semibold text-sm uppercase tracking-widest">El Desafío</span>
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mt-2 mb-4 font-display">
               El Cuello de Botella Creativo
             </h2>
@@ -167,12 +167,11 @@ const LandingPage = () => {
                   </div>
 
                   <div className="relative">
-                    <span className="text-xs uppercase tracking-wider font-semibold text-primary block mb-1">Con Visbly</span>
+                    <span className="text-xs uppercase tracking-wider font-semibold text-secondary block mb-1">Con Visbly</span>
                     <div className="text-2xl font-bold text-foreground">{item.visbly}</div>
                   </div>
                 </div>
-
-                <div className="mt-8 pt-6 border-t border-foreground/5 text-sm font-medium text-primary/80 tracking-wide uppercase">
+                <div className="mt-8 pt-6 border-t border-foreground/5 text-sm font-medium text-secondary/80 tracking-wide uppercase">
                   {item.label}
                 </div>
               </motion.div>
@@ -187,7 +186,7 @@ const LandingPage = () => {
       <section id="powers" className="pt-16 pb-20 px-6 relative">
         <div className="max-w-6xl mx-auto">
           <motion.div {...fadeInUp} className="text-center mb-8">
-            <span className="text-primary font-semibold text-sm uppercase tracking-widest">La Solución</span>
+            <span className="text-secondary font-semibold text-sm uppercase tracking-widest">La Solución</span>
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mt-2 mb-4 font-display">
               Tus Agentes con Superpoderes
             </h2>
@@ -209,7 +208,7 @@ const LandingPage = () => {
                 <div className="relative z-10">
                   <span className="text-4xl">{agent.emoji}</span>
                   <h3 className="text-xl font-bold text-foreground mt-4">{agent.name}</h3>
-                  <span className="text-sm text-primary font-medium">{agent.subtitle}</span>
+                  <span className="text-sm text-secondary font-medium">{agent.subtitle}</span>
                   <p className="text-muted-foreground mt-3 leading-relaxed">{agent.desc}</p>
                 </div>
               </motion.div>
@@ -223,7 +222,7 @@ const LandingPage = () => {
       <section className="py-12 px-6 relative">
         <div className="max-w-4xl mx-auto">
           <motion.div {...fadeInUp} className="text-center mb-8">
-            <span className="text-primary font-semibold text-sm uppercase tracking-widest">Impacto</span>
+            <span className="text-secondary font-semibold text-sm uppercase tracking-widest">Impacto</span>
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mt-2 mb-4 font-display">
               Métricas de Transformación
             </h2>
@@ -242,7 +241,7 @@ const LandingPage = () => {
                     <th className="px-6 py-4 text-left text-sm font-medium text-muted-foreground">Métrica</th>
                     <th className="px-6 py-4 text-left text-sm font-medium text-muted-foreground">Antes</th>
                     <th className="px-6 py-4 text-left text-sm font-medium text-muted-foreground">Con Visbly</th>
-                    <th className="px-6 py-4 text-left text-sm font-medium text-primary">Impacto</th>
+                    <th className="px-6 py-4 text-left text-sm font-medium text-secondary">Impacto</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -278,7 +277,7 @@ const LandingPage = () => {
       <section className="py-16 px-6 relative">
         <div className="max-w-3xl mx-auto">
           <motion.div {...fadeInUp} className="text-center mb-12">
-            <span className="text-primary font-semibold text-sm uppercase tracking-widest">FAQ</span>
+            <span className="text-secondary font-semibold text-sm uppercase tracking-widest">FAQ</span>
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mt-2 mb-4 font-display">
               Preguntas Frecuentes
             </h2>
@@ -344,7 +343,7 @@ const LandingPage = () => {
             <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-6">
               Únete a los Media Buyers que ya están rompiendo el cuello de botella creativo con Visbly.
             </p>
-            <p className="text-sm text-primary/80 font-medium mb-10">
+            <p className="text-sm text-secondary/80 font-medium mb-10">
               7 días gratis · Cancela cuando quieras
             </p>
             <div className="relative inline-flex mb-10 group">
