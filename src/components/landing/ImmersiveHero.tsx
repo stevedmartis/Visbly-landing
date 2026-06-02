@@ -5,23 +5,23 @@ import StarField from "./StarField";
 import AdTemplateWall from "./AdTemplateWall";
 import AppStoreButtons from "./AppStoreButtons";
 // REEMPLAZA ESTOS ARCHIVOS EN src/assets/ CON TUS CAPTURAS REALES
-import screen0 from "@/assets/screen0.webp";
 import screen1 from "@/assets/screen1.webp";
 import screen2 from "@/assets/screen2.webp";
 import screen3 from "@/assets/screen3.webp";
+import screen4 from "@/assets/screen4.webp";
 
 const heroSteps = [
-  {
-    subtitle: "Discovery Agent",
-    title: "Identifica Ángulos de Venta de Alto Impacto en Segundos",
-    mobileTitle: "Ganchos que detienen el scroll",
-    image: screen0
-  },
   {
     subtitle: "Audit Agent",
     title: "Clona tu ADN de Marca con Fidelidad del 100%",
     mobileTitle: "Clona tu ADN de Marca",
     image: screen1
+  },
+  {
+    subtitle: "UGC Script Planner",
+    title: "Tu Calendario de Contenido y Guiones UGC Semanales en 30s",
+    mobileTitle: "Planifica tu Semana de UGC",
+    image: screen4
   },
   {
     subtitle: "Creative Agent",

@@ -21,7 +21,7 @@ const Ecosystem = () => {
               viewport={{ once: true }}
               className="text-secondary font-semibold text-sm uppercase tracking-widest"
             >
-              Conectividad Total
+              Paso 1: Clonación de ADN de Marca
             </motion.span>
             <motion.h2
               initial={{ opacity: 0, x: -20 }}

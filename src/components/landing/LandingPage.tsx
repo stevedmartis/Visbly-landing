@@ -8,10 +8,13 @@ import ImmersiveHero from "./ImmersiveHero";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Pricing from "./Pricing";
-import Ecosystem from "./Ecosystem";
 import AppStoreButtons from "./AppStoreButtons";
 import Partners from "./Partners";
 import Testimonials from "./Testimonials";
+import screen1 from "@/assets/screen1.webp";
+import screen2 from "@/assets/screen2.webp";
+import screen3 from "@/assets/screen3.webp";
+import screen4 from "@/assets/screen4.webp";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 40 },
@@ -28,8 +31,8 @@ const LandingPage = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const agents = [
-    { emoji: "🔍", name: "Discovery Agent", subtitle: "Market Intelligence", desc: "Escanea tendencias y ganchos psicológicos en tiempo real para encontrar tu próximo ángulo ganador.", gradient: "from-blue-500/20 to-purple-500/20" },
-    { emoji: "🧠", name: "Audit Agent", subtitle: "Brand Strategy", desc: "Analiza cualquier URL para extraer y clonar el ADN de tu marca, asegurando consistencia total en cada anuncio.", gradient: "from-purple-500/20 to-pink-500/20" },
+    { emoji: "🧠", name: "Audit Agent", subtitle: "Brand Strategy", desc: "Analiza cualquier URL y redes para extraer y clonar el ADN de tu marca, asegurando consistencia total en cada anuncio.", gradient: "from-blue-500/20 to-purple-500/20" },
+    { emoji: "📝", name: "UGC Script Planner", subtitle: "Weekly Playbook", desc: "Planifica una semana completa de videos y redacta los guiones bajo arquetipos no lineales de alta retención como la Doble Caída.", gradient: "from-purple-500/20 to-pink-500/20" },
     { emoji: "🎨", name: "Creative Agent", subtitle: "Visual Studio", desc: "Diseña creativos de alto impacto con estética premium y layouts validados para maximizar tu CTR.", gradient: "from-pink-500/20 to-orange-500/20" },
     { emoji: "🚀", name: "Meta Orchestrator", subtitle: "Direct Execution", desc: "Tus agentes lanzan y escalan campañas a Meta directamente desde Visbly. Automatización de extremo a extremo.", gradient: "from-orange-500/20 to-red-500/20" },
   ];
@@ -96,6 +99,14 @@ const LandingPage = () => {
       q: "¿Cómo funciona la clonación de ADN de marca?",
       a: "Visbly analiza tus fuentes digitales — website, LinkedIn, Instagram, Notion, GitHub — para entender tu voz, estética y posicionamiento. Luego, los agentes generan anuncios que suenan y se ven exactamente como tu marca, con 100% de fidelidad.",
     },
+    {
+      q: "¿Cómo funciona el Planificador UGC Semanal y qué es el arquetipo de Doble Caída?",
+      a: "El Planificador UGC de Visbly genera un playbook de contenido de 7 días adaptando tu ADN de marca a guiones estructurados para retención (Atracción, Confianza, Conversión). El arquetipo de 'Doble Caída' es una fórmula basada en el efecto Zeigarnik que utiliza una interrupción de patrón en los primeros 3 segundos y una crisis inesperada en el segundo 15 para elevar drásticamente el tiempo de reproducción de tus videos.",
+    },
+    {
+      q: "¿Es compatible con mi modelo de negocio (E-commerce, SaaS, Servicios)?",
+      a: "Totalmente. Visbly está optimizado de forma nativa para múltiples modelos. Si tienes un E-commerce, el motor prioriza layouts de producto de alto impacto visual y badges de confianza. Si vendes software (SaaS) o servicios profesionales, la IA estructura anuncios basados en objeción-solución, comparativas Old vs New y KPIs corporativos para captar leads. Los agentes adaptan la estrategia y la estética al ADN de tu marca.",
+    },
   ];
 
   const handleCtaClick = () => {
@@ -140,7 +151,7 @@ const LandingPage = () => {
               El Cuello de Botella Creativo
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
-              Mantener el rendimiento de tus campañas exige una rotación constante de anuncios. Visbly contrata a tu propio equipo de agentes de IA especializados que automatizan y escalan tu estrategia, diseño de creativos y ejecución en Meta Ads 24/7 — sin el costo de una agencia.
+              Mantener el rendimiento de tus campañas exige una rotación constante de anuncios. Ya sea que tengas un <strong className="font-semibold text-foreground">E-commerce</strong> escalando ventas de producto, un <strong className="font-semibold text-foreground">SaaS</strong> captando leads o una firma de <strong className="font-semibold text-foreground">servicios profesionales</strong>, Visbly contrata a tu propio equipo de agentes de IA especializados que automatizan tu estrategia, diseño de creativos y ejecución en Meta Ads 24/7 — sin el costo de una agencia.
             </p>
           </motion.div>
 
@@ -180,9 +191,7 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* ═══ ECOSYSTEM ═══ */}
-      <Ecosystem />
-
+      {/* ═══ POWERS SUMMARY ═══ */}
       <section id="powers" className="pt-16 pb-20 px-6 relative">
         <div className="max-w-6xl mx-auto">
           <motion.div {...fadeInUp} className="text-center mb-8">
@@ -213,6 +222,395 @@ const LandingPage = () => {
                 </div>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ STEP 1: AUDIT AGENT FEATURE SECTION ═══ */}
+      <section className="py-20 px-6 relative overflow-hidden border-t border-foreground/5 bg-foreground/[0.01]">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] aspect-square max-w-[800px] bg-gradient-to-tr from-secondary/10 to-primary/5 blur-[120px] rounded-full pointer-events-none" />
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+
+            {/* Column 1: Visual Phone Mockup (Left on Desktop) */}
+            <div className="lg:col-span-5 flex justify-center order-2 lg:order-1">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
+                className="relative"
+              >
+                {/* Glow behind device */}
+                <div className="absolute -inset-10 bg-primary/20 rounded-full blur-[60px] opacity-50" />
+
+                {/* iPhone Pro Frame simulation */}
+                <div className="relative p-[9px] bg-gradient-to-b from-[#2b2b2d] via-[#1c1c1e] to-[#0c0c0d] rounded-[2.8rem] shadow-[0_20px_50px_rgba(0,0,0,0.8)] border border-black/40 w-[240px] sm:w-[260px]">
+                  <div className="absolute inset-[1px] rounded-[2.7rem] border border-white/5 pointer-events-none z-30" />
+
+                  {/* Screen Content */}
+                  <div className="relative z-10 rounded-[2.3rem] overflow-hidden aspect-[9/19.5] bg-[#050505] border-[3px] border-[#08080a]">
+                    <img
+                      src={screen1}
+                      alt="Audit Agent App Screen"
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+
+                    {/* Top Island */}
+                    <div className="absolute top-[8px] left-1/2 -translate-x-1/2 w-[34%] h-[14px] bg-black rounded-full z-40 border border-white/5" />
+
+                    {/* Bottom Line */}
+                    <div className="absolute bottom-[6px] left-1/2 -translate-x-1/2 w-[36%] h-[3px] bg-white/20 rounded-full z-40" />
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Column 2: Info & Pitch (Right on Desktop) */}
+            <div className="lg:col-span-7 flex flex-col justify-center text-center lg:text-left order-1 lg:order-2">
+              <motion.span
+                {...fadeInUp}
+                className="text-secondary font-semibold text-sm uppercase tracking-widest"
+              >
+                Paso 1: Audit Agent
+              </motion.span>
+              <motion.h2
+                {...fadeInUp}
+                className="text-4xl md:text-5xl font-bold text-foreground mt-2 mb-6 font-display leading-tight"
+              >
+                Clona tu ADN de Marca
+                <br />
+                <span className="text-primary">Con Fidelidad del 100%</span>
+              </motion.h2>
+              <motion.p
+                {...fadeInUp}
+                className="text-lg text-muted-foreground leading-relaxed mb-8"
+              >
+                Visbly escanea tus fuentes digitales para entender tu negocio en profundidad, sin importar tu modelo. Ya sea que tengas una tienda online (<strong className="font-semibold text-foreground">E-commerce</strong>), una plataforma tecnológica (<strong className="font-semibold text-foreground">SaaS</strong>) o una firma de <strong className="font-semibold text-foreground">servicios/consultoría</strong>, analizamos tu web, LinkedIn o Instagram para extraer automáticamente tu tono de voz, propuesta de valor, colores y arquetipos de comunicación al instante.
+              </motion.p>
+
+              {/* Bullet Points */}
+              <div className="space-y-4 text-left">
+                <motion.div {...fadeInUp} className="flex gap-3">
+                  <span className="text-primary font-bold text-xl">🧠</span>
+                  <div>
+                    <h4 className="font-bold text-foreground">Extracción Inteligente</h4>
+                    <p className="text-sm text-muted-foreground mt-1">Conecta tu web o redes y deja que nuestros agentes extraigan el ADN de tu negocio de forma inmediata.</p>
+                  </div>
+                </motion.div>
+                <motion.div {...fadeInUp} className="flex gap-3">
+                  <span className="text-primary font-bold text-xl">🎯</span>
+                  <div>
+                    <h4 className="font-bold text-foreground">Consistencia Total</h4>
+                    <p className="text-sm text-muted-foreground mt-1">Garantiza que cada guión de video, anuncio o copy generado hable con la voz real de tu marca en cada canal.</p>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ STEP 2: UGC PLANNER FEATURE SECTION ═══ */}
+      <section className="py-20 px-6 relative overflow-hidden border-t border-foreground/5 bg-foreground/[0.01]">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] aspect-square max-w-[800px] bg-gradient-to-tr from-primary/10 to-secondary/5 blur-[120px] rounded-full pointer-events-none" />
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+
+            {/* Column 1: Info & Pitch */}
+            <div className="lg:col-span-7 flex flex-col justify-center text-center lg:text-left">
+              <motion.span
+                {...fadeInUp}
+                className="text-secondary font-semibold text-sm uppercase tracking-widest"
+              >
+                Paso 2: UGC Script Planner
+              </motion.span>
+              <motion.h2
+                {...fadeInUp}
+                className="text-4xl md:text-5xl font-bold text-foreground mt-2 mb-6 font-display leading-tight"
+              >
+                Planifica tu Playbook UGC
+                <br />
+                <span className="text-primary">Completo en Segundos</span>
+              </motion.h2>
+              <motion.p
+                {...fadeInUp}
+                className="text-lg text-muted-foreground leading-relaxed mb-8"
+              >
+                Los anuncios exitosos no son casualidad; siguen una estructura psicológica. Visbly diseña un calendario editorial de 7 días adaptando dinámicamente tu ADN de marca en guiones listos para grabar, organizados por etapas de embudo para romper la ceguera publicitaria.
+              </motion.p>
+
+              {/* Archetypes grid list */}
+              <div className="grid sm:grid-cols-2 gap-6 text-left">
+                <motion.div
+                  {...fadeInUp}
+                  className="p-5 rounded-2xl border border-foreground/10 bg-foreground/[0.02] backdrop-blur-sm"
+                >
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-red-500/10 text-red-500 font-bold text-sm">🪤</span>
+                    <h3 className="font-bold text-foreground">Doble Caída (Zeigarnik)</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Estructura no lineal de alta retención. Inicia con un pattern interrupt físico de alto impacto y genera un giro/crisis inesperado en el segundo 15 para mantener al espectador pegado a la pantalla.
+                  </p>
+                </motion.div>
+
+                <motion.div
+                  {...fadeInUp}
+                  className="p-5 rounded-2xl border border-foreground/10 bg-foreground/[0.02] backdrop-blur-sm"
+                >
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-purple-500/10 text-purple-500 font-bold text-sm">🧲</span>
+                    <h3 className="font-bold text-foreground">Atracción Viral</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Diseñado específicamente para audiencias frías. Utiliza anti-hooks disruptivos que cuestionan mitos comunes del sector para detener el scroll de forma inmediata.
+                  </p>
+                </motion.div>
+
+                <motion.div
+                  {...fadeInUp}
+                  className="p-5 rounded-2xl border border-foreground/10 bg-foreground/[0.02] backdrop-blur-sm"
+                >
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-green-500/10 text-green-500 font-bold text-sm">🛡️</span>
+                    <h3 className="font-bold text-foreground">Generación de Confianza</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Historias de vulnerabilidad del fundador o casos reales. Genera conexión y credibilidad sincera antes de empujar la venta directa.
+                  </p>
+                </motion.div>
+
+                <motion.div
+                  {...fadeInUp}
+                  className="p-5 rounded-2xl border border-foreground/10 bg-foreground/[0.02] backdrop-blur-sm"
+                >
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-orange-500/10 text-orange-500 font-bold text-sm">⚡</span>
+                    <h3 className="font-bold text-foreground">Conversión & Cierre</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Enfoque en los beneficios y transformación definitiva, respaldado por sellos de autoridad y testimonios reales con un llamado a la acción claro y urgente.
+                  </p>
+                </motion.div>
+              </div>
+            </div>
+
+            {/* Column 2: Visual Phone Mockup */}
+            <div className="lg:col-span-5 flex justify-center">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
+                className="relative"
+              >
+                {/* Glow behind device */}
+                <div className="absolute -inset-10 bg-primary/20 rounded-full blur-[60px] opacity-50" />
+
+                {/* iPhone Pro Frame simulation */}
+                <div className="relative p-[9px] bg-gradient-to-b from-[#2b2b2d] via-[#1c1c1e] to-[#0c0c0d] rounded-[2.8rem] shadow-[0_20px_50px_rgba(0,0,0,0.8)] border border-black/40 w-[240px] sm:w-[260px]">
+                  <div className="absolute inset-[1px] rounded-[2.7rem] border border-white/5 pointer-events-none z-30" />
+
+                  {/* Screen Content */}
+                  <div className="relative z-10 rounded-[2.3rem] overflow-hidden aspect-[9/19.5] bg-[#050505] border-[3px] border-[#08080a]">
+                    <img
+                      src={screen4}
+                      alt="UGC Script Planner App Screen"
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+
+                    {/* Top Island */}
+                    <div className="absolute top-[8px] left-1/2 -translate-x-1/2 w-[34%] h-[14px] bg-black rounded-full z-40 border border-white/5" />
+
+                    {/* Bottom Line */}
+                    <div className="absolute bottom-[6px] left-1/2 -translate-x-1/2 w-[36%] h-[3px] bg-white/20 rounded-full z-40" />
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ STEP 3: CREATIVE STUDIO FEATURE SECTION ═══ */}
+      <section className="py-20 px-6 relative overflow-hidden border-t border-foreground/5 bg-foreground/[0.01]">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] aspect-square max-w-[800px] bg-gradient-to-tr from-secondary/10 to-primary/5 blur-[120px] rounded-full pointer-events-none" />
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+
+            {/* Column 1: Visual Phone Mockup (Left on Desktop) */}
+            <div className="lg:col-span-5 flex justify-center order-2 lg:order-1">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
+                className="relative"
+              >
+                {/* Glow behind device */}
+                <div className="absolute -inset-10 bg-primary/20 rounded-full blur-[60px] opacity-50" />
+
+                {/* iPhone Pro Frame simulation */}
+                <div className="relative p-[9px] bg-gradient-to-b from-[#2b2b2d] via-[#1c1c1e] to-[#0c0c0d] rounded-[2.8rem] shadow-[0_20px_50px_rgba(0,0,0,0.8)] border border-black/40 w-[240px] sm:w-[260px]">
+                  <div className="absolute inset-[1px] rounded-[2.7rem] border border-white/5 pointer-events-none z-30" />
+
+                  {/* Screen Content */}
+                  <div className="relative z-10 rounded-[2.3rem] overflow-hidden aspect-[9/19.5] bg-[#050505] border-[3px] border-[#08080a]">
+                    <img
+                      src={screen2}
+                      alt="Creative Agent App Screen"
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+
+                    {/* Top Island */}
+                    <div className="absolute top-[8px] left-1/2 -translate-x-1/2 w-[34%] h-[14px] bg-black rounded-full z-40 border border-white/5" />
+
+                    {/* Bottom Line */}
+                    <div className="absolute bottom-[6px] left-1/2 -translate-x-1/2 w-[36%] h-[3px] bg-white/20 rounded-full z-40" />
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Column 2: Info & Pitch (Right on Desktop) */}
+            <div className="lg:col-span-7 flex flex-col justify-center text-center lg:text-left order-1 lg:order-2">
+              <motion.span
+                {...fadeInUp}
+                className="text-secondary font-semibold text-sm uppercase tracking-widest"
+              >
+                Paso 3: Creative Agent
+              </motion.span>
+              <motion.h2
+                {...fadeInUp}
+                className="text-4xl md:text-5xl font-bold text-foreground mt-2 mb-6 font-display leading-tight"
+              >
+                Creativos de Élite
+                <br />
+                <span className="text-primary">Diseñados para Convertir</span>
+              </motion.h2>
+              <motion.p
+                {...fadeInUp}
+                className="text-lg text-muted-foreground leading-relaxed mb-8"
+              >
+                Visbly transforma automáticamente tus ángulos de venta en creativos visuales premium. Nuestro Creative Agent utiliza layouts de alto impacto con contrastes de color calculados para maximizar tu CTR en Meta Ads, respetando al 100% tus fuentes y colores corporativos.
+              </motion.p>
+
+              {/* Bullet Points */}
+              <div className="space-y-4 text-left">
+                <motion.div {...fadeInUp} className="flex gap-3">
+                  <span className="text-primary font-bold text-xl">⚡</span>
+                  <div>
+                    <h4 className="font-bold text-foreground">Variantes Instantáneas</h4>
+                    <p className="text-sm text-muted-foreground mt-1">Genera múltiples versiones visuales a partir de un solo guión para evitar la fatiga creativa y optimizar tus pruebas A/B.</p>
+                  </div>
+                </motion.div>
+                <motion.div {...fadeInUp} className="flex gap-3">
+                  <span className="text-primary font-bold text-xl">🎨</span>
+                  <div>
+                    <h4 className="font-bold text-foreground">Fidelidad Estética Pro</h4>
+                    <p className="text-sm text-muted-foreground mt-1">Nada de plantillas genéricas. Los agentes aplican tus directrices visuales, logotipos y tipografía de manera estricta.</p>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ═══ STEP 4: META ORCHESTRATOR FEATURE SECTION ═══ */}
+      <section className="py-20 px-6 relative overflow-hidden border-t border-foreground/5 bg-foreground/[0.01]">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] aspect-square max-w-[800px] bg-gradient-to-tr from-primary/10 to-secondary/5 blur-[120px] rounded-full pointer-events-none" />
+
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
+
+            {/* Column 1: Info & Pitch */}
+            <div className="lg:col-span-7 flex flex-col justify-center text-center lg:text-left">
+              <motion.span
+                {...fadeInUp}
+                className="text-secondary font-semibold text-sm uppercase tracking-widest"
+              >
+                Paso 4: Meta Orchestrator
+              </motion.span>
+              <motion.h2
+                {...fadeInUp}
+                className="text-4xl md:text-5xl font-bold text-foreground mt-2 mb-6 font-display leading-tight"
+              >
+                Pauta en Piloto Automático
+                <br />
+                <span className="text-primary">Lanza y Escala sin Esfuerzo</span>
+              </motion.h2>
+              <motion.p
+                {...fadeInUp}
+                className="text-lg text-muted-foreground leading-relaxed mb-8"
+              >
+                Tu equipo de agentes no solo piensa y diseña; ejecuta directamente. Conecta tu cuenta publicitaria de Facebook Ads en segundos y deja que Meta Orchestrator cree las campañas, configure los conjuntos de anuncios y asigne los presupuestos de forma óptima.
+              </motion.p>
+
+              {/* Bullet Points */}
+              <div className="space-y-4 text-left">
+                <motion.div {...fadeInUp} className="flex gap-3">
+                  <span className="text-primary font-bold text-xl">🚀</span>
+                  <div>
+                    <h4 className="font-bold text-foreground">Lanzamiento Directo en 1 Clic</h4>
+                    <p className="text-sm text-muted-foreground mt-1">Exporta tus anuncios y copies finales directamente al Administrador de Anuncios de Meta sin salir de Visbly.</p>
+                  </div>
+                </motion.div>
+                <motion.div {...fadeInUp} className="flex gap-3">
+                  <span className="text-primary font-bold text-xl">📈</span>
+                  <div>
+                    <h4 className="font-bold text-foreground">Optimización de Presupuesto</h4>
+                    <p className="text-sm text-muted-foreground mt-1">Monitorea el rendimiento 24/7 y redistribuye los fondos hacia los anuncios ganadores para maximizar el ROAS.</p>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+
+            {/* Column 2: Visual Phone Mockup */}
+            <div className="lg:col-span-5 flex justify-center">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9, y: 30 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8 }}
+                className="relative"
+              >
+                {/* Glow behind device */}
+                <div className="absolute -inset-10 bg-primary/20 rounded-full blur-[60px] opacity-50" />
+
+                {/* iPhone Pro Frame simulation */}
+                <div className="relative p-[9px] bg-gradient-to-b from-[#2b2b2d] via-[#1c1c1e] to-[#0c0c0d] rounded-[2.8rem] shadow-[0_20px_50px_rgba(0,0,0,0.8)] border border-black/40 w-[240px] sm:w-[260px]">
+                  <div className="absolute inset-[1px] rounded-[2.7rem] border border-white/5 pointer-events-none z-30" />
+
+                  {/* Screen Content */}
+                  <div className="relative z-10 rounded-[2.3rem] overflow-hidden aspect-[9/19.5] bg-[#050505] border-[3px] border-[#08080a]">
+                    <img
+                      src={screen3}
+                      alt="Meta Orchestrator App Screen"
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+
+                    {/* Top Island */}
+                    <div className="absolute top-[8px] left-1/2 -translate-x-1/2 w-[34%] h-[14px] bg-black rounded-full z-40 border border-white/5" />
+
+                    {/* Bottom Line */}
+                    <div className="absolute bottom-[6px] left-1/2 -translate-x-1/2 w-[36%] h-[3px] bg-white/20 rounded-full z-40" />
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
           </div>
         </div>
       </section>
