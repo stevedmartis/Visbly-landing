@@ -39,9 +39,9 @@ const heroSteps = [
 
 const perspectives: [number, number, number, number, number][] = [
   [0, 0, 0, 1.05, -8],       // Step 0: Perfectly centered and straight front view
-  [32, 0, 0, 1.16, -22],     // Step 1: Slide left, rotated Y inward (facing center), perfectly upright
-  [-32, 0, 0, 1.24, 10],     // Step 2: Slide right, rotated Y inward (facing center), perfectly upright
-  [-10, 0, 0, 1.36, -8],     // Step 3: Center, subtle Y angle for depth, perfectly upright
+  [32, 0, 0, 1.05, -22],     // Step 1: Slide left, rotated Y inward (facing center), perfectly upright
+  [-32, 0, 0, 1.05, 10],     // Step 2: Slide right, rotated Y inward (facing center), perfectly upright
+  [-10, 0, 0, 1.05, -8],     // Step 3: Center, subtle Y angle for depth, perfectly upright
 ];
 
 const N = heroSteps.length;
