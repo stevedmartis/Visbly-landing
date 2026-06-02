@@ -662,6 +662,63 @@ const LandingPage = () => {
         </div>
       </section>
 
+      {/* ═══ NOSOTROS ═══ */}
+      <section id="about" className="py-20 px-6 relative overflow-hidden border-t border-foreground/5 bg-foreground/[0.01]">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] aspect-square max-w-[800px] bg-gradient-to-tr from-primary/10 to-secondary/5 blur-[120px] rounded-full pointer-events-none" />
+
+        <div className="max-w-4xl mx-auto relative z-10 text-center">
+          <motion.div {...fadeInUp} className="mb-12">
+            <span className="text-secondary font-semibold text-sm uppercase tracking-widest">Nosotros</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mt-2 mb-4 font-display">
+              Quiénes Somos
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Somos un equipo apasionado de media buyers, diseñadores e ingenieros de IA. Creamos Visbly para democratizar el marketing de performance de élite, eliminando la fricción operativa de la producción creativa para que marcas de todo el mundo puedan escalar de forma rentable.
+            </p>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-8"
+          >
+            <div className="flex items-center gap-4 px-6 py-4 rounded-2xl bg-foreground/[0.02] border border-foreground/10 backdrop-blur-sm">
+              <span className="text-sm font-semibold text-muted-foreground mr-2">Síguenos en redes:</span>
+              <div className="flex items-center gap-4">
+                <a 
+                  href="https://instagram.com/visbly.ai" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-full bg-foreground/5 border border-foreground/10 flex items-center justify-center hover:border-primary/50 transition-colors group"
+                  title="Instagram"
+                >
+                  <img src="/ig.webp" alt="Instagram" className="w-4 h-4 object-contain opacity-75 group-hover:opacity-100 transition-opacity" />
+                </a>
+                <a 
+                  href="https://tiktok.com/@visbly.ai" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-full bg-foreground/5 border border-foreground/10 flex items-center justify-center hover:border-primary/50 transition-colors group"
+                  title="TikTok"
+                >
+                  <img src="/tiktok.webp" alt="TikTok" className="w-4 h-4 object-contain opacity-75 group-hover:opacity-100 transition-opacity" />
+                </a>
+                <a 
+                  href="https://www.linkedin.com/company/visbly/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-full bg-foreground/5 border border-foreground/10 flex items-center justify-center hover:border-primary/50 transition-colors group"
+                  title="LinkedIn"
+                >
+                  <img src="/linkedin.webp" alt="LinkedIn" className="w-4 h-4 object-contain opacity-75 group-hover:opacity-100 transition-opacity" />
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* ═══ PRICING ═══ */}
       <Pricing />
 

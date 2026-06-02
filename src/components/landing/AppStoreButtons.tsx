@@ -9,7 +9,9 @@ const AppStoreButtons = ({ className = "" }: { className?: string }) => {
   return (
     <div className={`flex flex-nowrap items-center gap-2 sm:gap-4 ${className}`}>
       <motion.a
-        href="#"
+        href="https://apps.apple.com/us/app/visbly/id6761484670"
+        target="_blank"
+        rel="noopener noreferrer"
         onClick={handleDownload}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}

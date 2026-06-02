@@ -16,13 +16,33 @@ const Footer = () => {
               El primer Director Creativo de IA diseñado para Media Buyers y fundadores que necesitan escalar su estrategia creativa.
             </p>
             <div className="flex gap-4">
-              {/* Espacio para redes sociales si las hay */}
-              <div className="w-8 h-8 rounded-full bg-foreground/5 border border-foreground/10 flex items-center justify-center hover:border-primary/50 transition-colors cursor-pointer">
-                <span className="text-xs">𝕏</span>
-              </div>
-              <div className="w-8 h-8 rounded-full bg-foreground/5 border border-foreground/10 flex items-center justify-center hover:border-primary/50 transition-colors cursor-pointer">
-                <span className="text-xs">in</span>
-              </div>
+              <a
+                href="https://instagram.com/visbly.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full bg-foreground/5 border border-foreground/10 flex items-center justify-center hover:border-primary/50 transition-colors group"
+                title="Instagram"
+              >
+                <img src="/ig.webp" alt="Instagram" className="w-4 h-4 object-contain opacity-75 group-hover:opacity-100 transition-opacity" />
+              </a>
+              <a
+                href="https://tiktok.com/@visbly.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full bg-foreground/5 border border-foreground/10 flex items-center justify-center hover:border-primary/50 transition-colors group"
+                title="TikTok"
+              >
+                <img src="/tiktok.webp" alt="TikTok" className="w-4 h-4 object-contain opacity-75 group-hover:opacity-100 transition-opacity" />
+              </a>
+              <a
+                href="https://www.linkedin.com/company/visbly/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full bg-foreground/5 border border-foreground/10 flex items-center justify-center hover:border-primary/50 transition-colors group"
+                title="LinkedIn"
+              >
+                <img src="/linkedin.webp" alt="LinkedIn" className="w-4 h-4 object-contain opacity-75 group-hover:opacity-100 transition-opacity" />
+              </a>
             </div>
           </div>
 
