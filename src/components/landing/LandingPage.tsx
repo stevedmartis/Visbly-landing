@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform, type Easing } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, useMemo } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { trackLead } from "@/lib/meta-pixel";
@@ -29,6 +29,15 @@ const LandingPage = () => {
   const { scrollYProgress } = useScroll({ target: pageRef });
 
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const storeLink = useMemo(() => {
+    if (typeof window === "undefined") return "https://play.google.com/store/apps/details?id=cl.freeily.visbly";
+    const userAgent = window.navigator.userAgent || window.navigator.vendor;
+    const isApple = /iPad|iPhone|iPod|Macintosh|Mac OS X/.test(userAgent);
+    return isApple
+      ? "https://apps.apple.com/us/app/visbly/id6761484670"
+      : "https://play.google.com/store/apps/details?id=cl.freeily.visbly";
+  }, []);
 
   const agents = [
     { emoji: "🧠", name: "Audit Agent", subtitle: "Brand Strategy", desc: "Analiza cualquier URL y redes para extraer y clonar el ADN de tu marca, asegurando consistencia total en cada anuncio.", gradient: "from-blue-500/20 to-purple-500/20" },
@@ -677,7 +686,7 @@ const LandingPage = () => {
             </p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -686,27 +695,27 @@ const LandingPage = () => {
             <div className="flex items-center gap-4 px-6 py-4 rounded-2xl bg-foreground/[0.02] border border-foreground/10 backdrop-blur-sm">
               <span className="text-sm font-semibold text-muted-foreground mr-2">Síguenos en redes:</span>
               <div className="flex items-center gap-4">
-                <a 
-                  href="https://instagram.com/visbly.ai" 
-                  target="_blank" 
+                <a
+                  href="https://instagram.com/visbly.ai"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="w-8 h-8 rounded-full bg-foreground/5 border border-foreground/10 flex items-center justify-center hover:border-primary/50 transition-colors group"
                   title="Instagram"
                 >
                   <img src="/ig.webp" alt="Instagram" className="w-4 h-4 object-contain opacity-75 group-hover:opacity-100 transition-opacity" />
                 </a>
-                <a 
-                  href="https://tiktok.com/@visbly.ai" 
-                  target="_blank" 
+                <a
+                  href="https://tiktok.com/@visbly.ai"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="w-8 h-8 rounded-full bg-foreground/5 border border-foreground/10 flex items-center justify-center hover:border-primary/50 transition-colors group"
                   title="TikTok"
                 >
                   <img src="/tiktok.webp" alt="TikTok" className="w-4 h-4 object-contain opacity-75 group-hover:opacity-100 transition-opacity" />
                 </a>
-                <a 
-                  href="https://www.linkedin.com/company/visbly/" 
-                  target="_blank" 
+                <a
+                  href="https://www.linkedin.com/company/visbly/"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="w-8 h-8 rounded-full bg-foreground/5 border border-foreground/10 flex items-center justify-center hover:border-primary/50 transition-colors group"
                   title="LinkedIn"
@@ -805,16 +814,32 @@ const LandingPage = () => {
               {/* Glow behind button */}
               <div className="absolute -inset-4 bg-primary/30 rounded-2xl blur-xl opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
 
-              {/* Rotating gradient border */}
-              <div className="absolute -inset-[2px] rounded-[14px] overflow-hidden">
-                <div
-                  className="w-[300%] h-[300%] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+              {/* Drawing SVG border */}
+              <svg className="absolute -inset-[1.2px] w-[calc(100%+2.4px)] h-[calc(100%+2.4px)] pointer-events-none rounded-[14px] z-10">
+                <rect
+                  x="0.6"
+                  y="0.6"
+                  width="calc(100% - 1.2px)"
+                  height="calc(100% - 1.2px)"
+                  rx="14"
+                  fill="transparent"
+                  stroke="url(#neon-grad)"
+                  strokeWidth="1.2"
+                  pathLength="100"
+                  className="cta-border-rect"
                   style={{
-                    background: 'conic-gradient(from 0deg, #6366F1, #818CF8, #3B82F6, #6366F1)',
-                    animation: 'border-spin 3s linear infinite',
+                    transform: 'scaleX(-1)',
+                    transformOrigin: 'center',
                   }}
                 />
-              </div>
+                <defs>
+                  <linearGradient id="neon-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#3B82F6" />
+                    <stop offset="50%" stopColor="#818CF8" />
+                    <stop offset="100%" stopColor="#ec4899" />
+                  </linearGradient>
+                </defs>
+              </svg>
 
               {/* Shimmer sweep overlay */}
               <div
@@ -824,21 +849,26 @@ const LandingPage = () => {
                   className="absolute inset-0 w-[50%] h-full"
                   style={{
                     background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)',
-                    animation: 'shimmer-sweep 3s ease-in-out infinite',
+                    animation: 'shimmer-sweep 4s ease-in-out infinite',
                   }}
                 />
               </div>
 
               {/* Button content */}
               <a
-                href="https://play.google.com/store/apps/details?id=cl.freeily.visbly"
+                href={storeLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleCtaClick}
-                className="relative z-10 inline-flex items-center gap-3 px-10 py-4 bg-[#0a0c14] text-white rounded-xl font-semibold text-lg transition-all duration-300 group-hover:bg-[#0f1120]"
+                className="relative z-10 inline-flex items-center gap-3 px-10 py-4 bg-[#0a0c14] text-white rounded-xl font-semibold text-lg transition-all duration-300 group-hover:bg-[#0f1120] overflow-hidden"
               >
-                Prueba Visbly Gratis
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                {/* Glowing gradient background overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#3B82F6]/20 via-[#818CF8]/25 to-[#ec4899]/20 opacity-0 pointer-events-none cta-bg-glow" />
+
+                <span className="relative z-10 flex items-center gap-3">
+                  Prueba Visbly Gratis
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                </span>
               </a>
             </div>
 

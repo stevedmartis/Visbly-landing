@@ -138,22 +138,82 @@
   }
 }
 
-@keyframes border-spin {
-  0% {
-    transform: rotate(0deg);
+.cta-border-rect {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: draw-border 4s ease-in-out infinite;
+}
+
+.cta-bg-glow {
+  animation: cta-bg-glow 4s ease-in-out infinite;
+}
+
+@keyframes cta-bg-glow {
+  0%, 38% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0.15;
+  }
+  75%, 80% {
+    opacity: 0.25;
+  }
+  85%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes draw-border {
+
+  0%,
+  38% {
+    stroke-dashoffset: 100;
+    opacity: 0;
   }
 
+  40% {
+    stroke-dashoffset: 100;
+    opacity: 1;
+  }
+
+  75% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+
+  80% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+
+  85%,
   100% {
-    transform: rotate(360deg);
+    stroke-dashoffset: 0;
+    opacity: 0;
   }
 }
 
 @keyframes shimmer-sweep {
   0% {
-    transform: translateX(-100%);
+    transform: translateX(-250%);
+  }
+
+  20% {
+    transform: translateX(250%);
+  }
+
+  20.01% {
+    transform: translateX(-250%);
+  }
+
+  40% {
+    transform: translateX(250%);
   }
 
   100% {
-    transform: translateX(100%);
+    transform: translateX(250%);
   }
 }

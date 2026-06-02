@@ -1,9 +1,10 @@
 import { useRef, useState, useMemo } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent, AnimatePresence, useSpring, type MotionValue } from "framer-motion";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { ArrowRight } from "lucide-react";
+import { trackLead } from "@/lib/meta-pixel";
 import StarField from "./StarField";
 import AdTemplateWall from "./AdTemplateWall";
-import AppStoreButtons from "./AppStoreButtons";
 // REEMPLAZA ESTOS ARCHIVOS EN src/assets/ CON TUS CAPTURAS REALES
 import screen1 from "@/assets/screen1.webp";
 import screen2 from "@/assets/screen2.webp";
@@ -13,25 +14,25 @@ import screen4 from "@/assets/screen4.webp";
 const heroSteps = [
   {
     subtitle: "Audit Agent",
-    title: "Clona tu ADN de Marca con Fidelidad del 100%",
+    title: "Clona tu ADN de Marca\nal 100%",
     mobileTitle: "Clona tu ADN de Marca",
     image: screen1
   },
   {
     subtitle: "UGC Script Planner",
-    title: "Tu Calendario de Contenido y Guiones UGC Semanales en 30s",
+    title: "Guiones y Calendario UGC\nen 30 Segundos",
     mobileTitle: "Planifica tu Semana de UGC",
     image: screen4
   },
   {
     subtitle: "Creative Agent",
-    title: "Anuncios Premium Listos para Vender",
+    title: "Anuncios Premium\nListos para Vender",
     mobileTitle: "Anuncios de Élite al instante",
     image: screen2
   },
   {
     subtitle: "Meta Orchestrator",
-    title: "Escala y Lanza tus Campañas en Piloto Automático",
+    title: "Escala tus Campañas\nen Piloto Automático",
     mobileTitle: "Escala tus Ads sin esfuerzo",
     image: screen3
   },
@@ -55,6 +56,19 @@ const ImmersiveHero = () => {
   });
 
   const [activeStep, setActiveStep] = useState(0);
+
+  const storeLink = useMemo(() => {
+    if (typeof window === "undefined") return "https://play.google.com/store/apps/details?id=cl.freeily.visbly";
+    const userAgent = window.navigator.userAgent || window.navigator.vendor;
+    const isApple = /iPad|iPhone|iPod|Macintosh|Mac OS X/.test(userAgent);
+    return isApple
+      ? "https://apps.apple.com/us/app/visbly/id6761484670"
+      : "https://play.google.com/store/apps/details?id=cl.freeily.visbly";
+  }, []);
+
+  const handleCtaClick = () => {
+    trackLead();
+  };
 
   useMotionValueEvent(scrollYProgress, "change", (v) => {
     const idx = Math.min(N - 1, Math.max(0, Math.floor(v * N)));
@@ -92,7 +106,7 @@ const ImmersiveHero = () => {
 
         <div className="relative z-10 w-full max-w-[1440px] mx-auto h-full flex flex-col md:flex-row items-center justify-start md:justify-between px-6 md:px-12 pointer-events-none pt-12 md:pt-0">
 
-          <div className="w-full md:w-[80%] flex-none md:flex-1 flex flex-col items-center md:items-start z-30 relative md:relative md:top-0 h-auto md:h-auto mb-0 md:mb-0">
+          <div className="w-full md:w-[65%] flex-none md:flex-[1.4] flex flex-col items-center md:items-start z-30 relative md:relative md:top-0 h-auto md:h-auto mb-0 md:mb-0">
             {/* Title Container with fixed min-height to prevent jumping */}
             <div className="w-full min-h-[90px] md:min-h-[180px] flex flex-col items-center md:items-start justify-center md:justify-start">
               <AnimatePresence initial={false} mode="wait">
@@ -113,7 +127,7 @@ const ImmersiveHero = () => {
                     {heroSteps[activeStep].subtitle}
                   </span>
                   <h1
-                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white mt-2 md:mt-8 font-display leading-tight drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] px-6 md:px-0 w-full whitespace-pre-line"
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold text-white mt-2 md:mt-8 font-display leading-tight drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] px-6 md:px-0 w-full whitespace-pre-line"
                   >
                     {isMobile ? heroSteps[activeStep].mobileTitle : heroSteps[activeStep].title}
                   </h1>
@@ -121,24 +135,116 @@ const ImmersiveHero = () => {
               </AnimatePresence>
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1, duration: 0.8 }}
-              style={{
-                scale: useTransform(scrollYProgress, [0, 0.1], [1, 0.95]),
-                opacity: useTransform(scrollYProgress, [0, 0.05, 0.9, 1], [1, 1, 1, 0]),
-              }}
-              className="mt-1 md:mt-2 flex flex-col items-center md:items-start gap-1 z-40 pointer-events-auto will-change-transform"
+            <div
+              className="mt-3 md:mt-8 flex flex-col items-center md:items-start gap-2.5 md:gap-4 z-40 pointer-events-auto"
             >
-              <span className="text-[10px] text-white/70 uppercase tracking-[0.4em] font-bold drop-shadow-[0_0_10px_rgba(255,255,255,0.2)]">
-                Descarga la Beta Pro
-              </span>
-              <AppStoreButtons className="scale-75 md:scale-90 origin-center md:origin-left" />
-            </motion.div>
+              <motion.div
+                style={{
+                  scale: useTransform(scrollYProgress, [0, 0.1], [1, 0.95]),
+                  opacity: useTransform(scrollYProgress, [0, 0.05, 0.9, 1], [1, 1, 1, 0]),
+                }}
+                className="flex flex-col items-center md:items-start gap-2.5 md:gap-4 w-full"
+              >
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.92 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 1, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative inline-flex group will-change-transform"
+                >
+                  {/* Glow behind button */}
+                  <div className="absolute -inset-4 bg-primary/30 rounded-2xl blur-xl opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+
+                  {/* Drawing SVG border */}
+                  <svg className="absolute -inset-[1.2px] w-[calc(100%+2.4px)] h-[calc(100%+2.4px)] pointer-events-none rounded-[14px] z-10">
+                    <rect
+                      x="0.6"
+                      y="0.6"
+                      width="calc(100% - 1.2px)"
+                      height="calc(100% - 1.2px)"
+                      rx="14"
+                      fill="transparent"
+                      stroke="url(#neon-grad-hero)"
+                      strokeWidth="1.2"
+                      pathLength="100"
+                      className="cta-border-rect"
+                      style={{
+                        transform: 'scaleX(-1)',
+                        transformOrigin: 'center',
+                      }}
+                    />
+                    <defs>
+                      <linearGradient id="neon-grad-hero" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="#3B82F6" />
+                        <stop offset="50%" stopColor="#818CF8" />
+                        <stop offset="100%" stopColor="#ec4899" />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+
+                  {/* Shimmer sweep overlay */}
+                  <div
+                    className="absolute inset-0 rounded-xl overflow-hidden pointer-events-none z-20"
+                  >
+                    <div
+                      className="absolute inset-0 w-[50%] h-full"
+                      style={{
+                        background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)',
+                        animation: 'shimmer-sweep 4s ease-in-out infinite',
+                      }}
+                    />
+                  </div>
+
+                  {/* Button content */}
+                  <a
+                    href={storeLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={handleCtaClick}
+                    className="relative z-10 inline-flex items-center justify-center gap-3 px-8 py-3.5 md:px-14 md:py-4.5 bg-[#0a0c14] text-white rounded-xl font-semibold text-base md:text-lg transition-all duration-300 group-hover:bg-[#0f1120] w-auto whitespace-nowrap overflow-hidden"
+                  >
+                    {/* Glowing gradient background overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#3B82F6]/20 via-[#818CF8]/25 to-[#ec4899]/20 opacity-0 pointer-events-none cta-bg-glow" />
+
+                    <span className="relative z-10 flex items-center gap-3">
+                      Prueba Visbly Gratis
+                      <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                    </span>
+                  </a>
+                </motion.div>
+
+                {/* Trust Badges */}
+                <div className="flex flex-col items-center md:items-start gap-1 sm:gap-1.5 opacity-60 hover:opacity-95 transition-opacity duration-300 mt-0.5 md:mt-1">
+                  <motion.span
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 1.2, duration: 0.5, ease: "easeOut" }}
+                    className="text-[10px] text-white/50 uppercase tracking-[0.2em] font-bold block"
+                  >
+                    Disponible en
+                  </motion.span>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.92 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 1.4, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                    className="flex items-center gap-2 h-5 sm:h-6 will-change-transform"
+                  >
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg"
+                      alt="App Store"
+                      className="h-full w-auto filter brightness-90 contrast-125"
+                    />
+                    <img
+                      src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+                      alt="Google Play"
+                      className="h-full w-auto filter brightness-90 contrast-125"
+                    />
+                  </motion.div>
+                </div>
+              </motion.div>
+            </div>
           </div>
 
-          <div className="w-full md:w-[20%] flex-none md:flex-1 flex items-center justify-center md:justify-center z-20 mt-20 md:mt-0 md:-ml-20">
+          <div className="w-full md:w-[35%] flex-none md:flex-[0.6] flex items-center justify-center md:justify-center z-20 mt-20 md:mt-0 md:-ml-20">
             {/* The Unified Phone Instance */}
             <motion.div
               style={{
