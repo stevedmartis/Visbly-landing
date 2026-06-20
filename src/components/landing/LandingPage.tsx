@@ -15,6 +15,7 @@ import screen1 from "@/assets/screen1.webp";
 import screen2 from "@/assets/screen2.webp";
 import screen3 from "@/assets/screen3.webp";
 import screen4 from "@/assets/screen4.webp";
+import screen0 from "@/assets/screen0.webp";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 40 },
@@ -41,7 +42,7 @@ const LandingPage = () => {
 
   const agents = [
     { emoji: "🧠", name: "Audit Agent", subtitle: "Brand Strategy", desc: "Analiza cualquier URL y redes para extraer y clonar el ADN de tu marca, asegurando consistencia total en cada anuncio.", gradient: "from-blue-500/20 to-purple-500/20" },
-    { emoji: "📝", name: "UGC Script Planner", subtitle: "Weekly Playbook", desc: "Planifica una semana completa de videos y redacta los guiones bajo arquetipos no lineales de alta retención como la Doble Caída.", gradient: "from-purple-500/20 to-pink-500/20" },
+    { emoji: "📝", name: "Content Creator", subtitle: "Mi Contenido", desc: "Planifica una semana completa de videos UGC bajo arquetipos no lineales, y diseña Carruseles persuasivos generados por IA en un solo clic.", gradient: "from-purple-500/20 to-pink-500/20" },
     { emoji: "🎨", name: "Creative Agent", subtitle: "Visual Studio", desc: "Diseña creativos de alto impacto con estética premium y layouts validados para maximizar tu CTR.", gradient: "from-pink-500/20 to-orange-500/20" },
     { emoji: "🚀", name: "Meta Orchestrator", subtitle: "Direct Execution", desc: "Tus agentes lanzan y escalan campañas a Meta directamente desde Visbly. Automatización de extremo a extremo.", gradient: "from-orange-500/20 to-red-500/20" },
   ];
@@ -109,8 +110,8 @@ const LandingPage = () => {
       a: "Visbly analiza tus fuentes digitales — website, LinkedIn, Instagram, Notion, GitHub — para entender tu voz, estética y posicionamiento. Luego, los agentes generan anuncios que suenan y se ven exactamente como tu marca, con 100% de fidelidad.",
     },
     {
-      q: "¿Cómo funciona el Planificador UGC Semanal y qué es el arquetipo de Doble Caída?",
-      a: "El Planificador UGC de Visbly genera un playbook de contenido de 7 días adaptando tu ADN de marca a guiones estructurados para retención (Atracción, Confianza, Conversión). El arquetipo de 'Doble Caída' es una fórmula basada en el efecto Zeigarnik que utiliza una interrupción de patrón en los primeros 3 segundos y una crisis inesperada en el segundo 15 para elevar drásticamente el tiempo de reproducción de tus videos.",
+      q: "¿Cómo funciona la herramienta Mi Contenido (UGC y Carruseles)?",
+      a: "La sección 'Mi Contenido' unifica tu estrategia. Visbly genera un playbook editorial de 7 días: por un lado, adapta tu ADN de marca a guiones UGC estructurados para retención (como el arquetipo de 'Doble Caída'); y por otro, crea Carruseles de imágenes generativas (estilo Meme Cartoon, News, etc.) para captar la atención de forma visual. Todo 100% fiel a los colores y voz de tu marca.",
     },
     {
       q: "¿Es compatible con mi modelo de negocio (E-commerce, SaaS, Servicios)?",
@@ -336,13 +337,13 @@ const LandingPage = () => {
                 {...fadeInUp}
                 className="text-secondary font-semibold text-sm uppercase tracking-widest"
               >
-                Paso 2: UGC Script Planner
+                Paso 2: Mi Contenido (Carruseles & UGC)
               </motion.span>
               <motion.h2
                 {...fadeInUp}
                 className="text-4xl md:text-5xl font-bold text-foreground mt-2 mb-6 font-display leading-tight"
               >
-                Planifica tu Playbook UGC
+                Planifica y Diseña tu Contenido
                 <br />
                 <span className="text-primary">Completo en Segundos</span>
               </motion.h2>
@@ -350,7 +351,7 @@ const LandingPage = () => {
                 {...fadeInUp}
                 className="text-lg text-muted-foreground leading-relaxed mb-8"
               >
-                Los anuncios exitosos no son casualidad; siguen una estructura psicológica. Visbly diseña un calendario editorial de 7 días adaptando dinámicamente tu ADN de marca en guiones listos para grabar, organizados por etapas de embudo para romper la ceguera publicitaria.
+                Los anuncios exitosos no son casualidad; siguen una estructura psicológica. Visbly diseña un calendario editorial de 7 días que arranca con Carruseles dinámicos generados por IA y se complementa con guiones de video UGC. Adaptamos tu ADN de marca para generar imágenes que rompen la ceguera publicitaria y textos listos para grabar tus propios Reels, TikToks o YouTube Shorts de alta retención.
               </motion.p>
 
               {/* Archetypes grid list */}
@@ -360,11 +361,37 @@ const LandingPage = () => {
                   className="p-5 rounded-2xl border border-foreground/10 bg-foreground/[0.02] backdrop-blur-sm"
                 >
                   <div className="flex items-center gap-3 mb-2">
-                    <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-red-500/10 text-red-500 font-bold text-sm">🪤</span>
-                    <h3 className="font-bold text-foreground">Doble Caída (Zeigarnik)</h3>
+                    <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-500/10 text-blue-500 font-bold text-sm">🎨</span>
+                    <h3 className="font-bold text-foreground">Carruseles: Meme Cartoon</h3>
                   </div>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Estructura no lineal de alta retención. Inicia con un pattern interrupt físico de alto impacto y genera un giro/crisis inesperado en el segundo 15 para mantener al espectador pegado a la pantalla.
+                    Diseños visuales ilustrados que cuentan una historia aspiracional, mostrando el alivio y la transformación que tu marca entrega a tu cliente ideal.
+                  </p>
+                </motion.div>
+
+                <motion.div
+                  {...fadeInUp}
+                  className="p-5 rounded-2xl border border-foreground/10 bg-foreground/[0.02] backdrop-blur-sm"
+                >
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-orange-500/10 text-orange-500 font-bold text-sm">📰</span>
+                    <h3 className="font-bold text-foreground">Carruseles: Editorial & Collage</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Desde portadas de noticias tipo editorial hasta layouts estilo "Visual Collage" y comparativas "Old vs New", generados directamente con inteligencia artificial.
+                  </p>
+                </motion.div>
+
+                <motion.div
+                  {...fadeInUp}
+                  className="p-5 rounded-2xl border border-foreground/10 bg-foreground/[0.02] backdrop-blur-sm"
+                >
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-red-500/10 text-red-500 font-bold text-sm">🪤</span>
+                    <h3 className="font-bold text-foreground">Guiones UGC: Doble Caída</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Guiones para Reels/TikTok con estructura no lineal. Inician con un pattern interrupt físico de alto impacto y generan una crisis inesperada en el segundo 15.
                   </p>
                 </motion.div>
 
@@ -374,36 +401,10 @@ const LandingPage = () => {
                 >
                   <div className="flex items-center gap-3 mb-2">
                     <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-purple-500/10 text-purple-500 font-bold text-sm">🧲</span>
-                    <h3 className="font-bold text-foreground">Atracción Viral</h3>
+                    <h3 className="font-bold text-foreground">Guiones UGC: Atracción Viral</h3>
                   </div>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Diseñado específicamente para audiencias frías. Utiliza anti-hooks disruptivos que cuestionan mitos comunes del sector para detener el scroll de forma inmediata.
-                  </p>
-                </motion.div>
-
-                <motion.div
-                  {...fadeInUp}
-                  className="p-5 rounded-2xl border border-foreground/10 bg-foreground/[0.02] backdrop-blur-sm"
-                >
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-green-500/10 text-green-500 font-bold text-sm">🛡️</span>
-                    <h3 className="font-bold text-foreground">Generación de Confianza</h3>
-                  </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Historias de vulnerabilidad del fundador o casos reales. Genera conexión y credibilidad sincera antes de empujar la venta directa.
-                  </p>
-                </motion.div>
-
-                <motion.div
-                  {...fadeInUp}
-                  className="p-5 rounded-2xl border border-foreground/10 bg-foreground/[0.02] backdrop-blur-sm"
-                >
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-orange-500/10 text-orange-500 font-bold text-sm">⚡</span>
-                    <h3 className="font-bold text-foreground">Conversión & Cierre</h3>
-                  </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Enfoque en los beneficios y transformación definitiva, respaldado por sellos de autoridad y testimonios reales con un llamado a la acción claro y urgente.
+                    Guiones diseñados específicamente para audiencias frías. Utilizan anti-hooks disruptivos que cuestionan mitos comunes del sector para detener el scroll.
                   </p>
                 </motion.div>
               </div>
@@ -428,8 +429,8 @@ const LandingPage = () => {
                   {/* Screen Content */}
                   <div className="relative z-10 rounded-[2.3rem] overflow-hidden aspect-[9/19.5] bg-[#050505] border-[3px] border-[#08080a]">
                     <img
-                      src={screen4}
-                      alt="UGC Script Planner App Screen"
+                      src={screen2}
+                      alt="Creative Agent App Screen"
                       className="w-full h-full object-cover"
                       loading="lazy"
                     />
@@ -474,8 +475,8 @@ const LandingPage = () => {
                   {/* Screen Content */}
                   <div className="relative z-10 rounded-[2.3rem] overflow-hidden aspect-[9/19.5] bg-[#050505] border-[3px] border-[#08080a]">
                     <img
-                      src={screen2}
-                      alt="Creative Agent App Screen"
+                      src={screen3}
+                      alt="UGC Planner App Screen"
                       className="w-full h-full object-cover"
                       loading="lazy"
                     />
@@ -604,7 +605,7 @@ const LandingPage = () => {
                   {/* Screen Content */}
                   <div className="relative z-10 rounded-[2.3rem] overflow-hidden aspect-[9/19.5] bg-[#050505] border-[3px] border-[#08080a]">
                     <img
-                      src={screen3}
+                      src={screen4}
                       alt="Meta Orchestrator App Screen"
                       className="w-full h-full object-cover"
                       loading="lazy"

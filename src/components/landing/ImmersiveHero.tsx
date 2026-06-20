@@ -10,6 +10,7 @@ import screen1 from "@/assets/screen1.webp";
 import screen2 from "@/assets/screen2.webp";
 import screen3 from "@/assets/screen3.webp";
 import screen4 from "@/assets/screen4.webp";
+import screen0 from "@/assets/screen0.webp";
 
 const heroSteps = [
   {
@@ -19,23 +20,23 @@ const heroSteps = [
     image: screen1
   },
   {
-    subtitle: "UGC Script Planner",
-    title: "Guiones y Calendario UGC\nen 30 Segundos",
-    mobileTitle: "Planifica tu Semana de UGC",
-    image: screen4
-  },
-  {
     subtitle: "Creative Agent",
     title: "Anuncios Premium\nListos para Vender",
     mobileTitle: "Anuncios de Élite al instante",
     image: screen2
   },
   {
+    subtitle: "Mi Contenido",
+    title: "Carruseles IA y Guiones\nUGC en 30 Segundos",
+    mobileTitle: "Carruseles y Guiones UGC",
+    image: screen3
+  },
+  {
     subtitle: "Meta Orchestrator",
     title: "Escala tus Campañas\nen Piloto Automático",
     mobileTitle: "Escala tus Ads sin esfuerzo",
-    image: screen3
-  },
+    image: screen4
+  }
 ];
 
 const perspectives: [number, number, number, number, number][] = [
